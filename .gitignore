@@ -1,0 +1,4 @@
+# Local source and generated data
+/data/**
+/미래에셋_데이터셋/**
+.DS_Store
