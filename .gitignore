@@ -1,4 +1,14 @@
-# Local source and generated data
+# dataset
 /data/**
 /미래에셋_데이터셋/**
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
 .DS_Store
