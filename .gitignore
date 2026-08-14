@@ -1,6 +1,7 @@
 # dataset
 /data/**
 /미래에셋_데이터셋/**
+/config/**
 
 # macOS
 .DS_Store
@@ -11,4 +12,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
+
+# Secrets
+.env
 .DS_Store

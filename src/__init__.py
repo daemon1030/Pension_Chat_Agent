@@ -1,1 +1,1 @@
-"""Pension consultation system source package."""
+"""연금 상담 에이전트의 애플리케이션 코드."""
