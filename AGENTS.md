@@ -1,5 +1,19 @@
 # AGENTS.md
 
+## 0. 현재 구현 컨텍스트 (2026-08-16)
+
+이 문서의 아키텍처는 프로젝트의 **목표 상태**를 포함한다. 현재 체크아웃은 그중 문서 전처리와 로컬 JSONL 기반 RAG CLI까지 구현한 MVP다.
+
+- 현재 사용자 진입점: `scripts/rag/chat.py`
+- 현재 런타임 흐름: 질문 범위 확인 → CLOVA 임베딩 검색 → 근거 구성 → HyperCLOVA X 답변 → Pydantic JSON 검증
+- 현재 저장소: `src/graph`, `src/rag`, `src/llm`
+- 부분 구현: `scripts/preprocessing`의 원본 변환·보강·검토·RAG/Fact 분기 도구
+- 아직 미구현: FastAPI, PostgreSQL/pgvector, Structured DB 조회, Rule Engine, 세션 복원, 완전한 Input/Output Guard
+- `data/**`와 `config/**`는 Git에서 제외되므로 README에 적힌 데이터 산출물이 현재 작업공간에 없을 수 있다. 코드 리뷰와 실행 전에 실제 디렉터리를 확인한다.
+- 현재 의존성 manifest가 없으므로 테스트 실행 가능 여부는 로컬 가상환경에 따라 달라진다.
+
+코드 리뷰를 시작할 때는 `docs/code_review_guide.html`을 진입점으로 사용한다. 사실 확인 우선순위는 **실제 파일과 import 경로 → 테스트 → README → 이 문서의 목표 설계** 순서로 둔다. 목표 구조를 현재 구현으로 간주하지 않는다.
+
 ## 1. 프로젝트 개요
 
 이 프로젝트는 **연금 관련 제공 문서와 구조화 데이터를 근거로 답변하는 AI 연금 상담 에이전트**를 구현하는 프로젝트다.

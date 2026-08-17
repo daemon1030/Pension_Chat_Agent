@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>연금 RAG MVP · 코드 리뷰 가이드</title>
+  <style>
+    :root {
+      --ink: #18251f;
+      --muted: #5c6c64;
+      --paper: #f4f0e8;
+      --panel: #fffdf8;
+      --line: #d8d2c6;
+      --green: #0b6b4b;
+      --green-soft: #dcefe6;
+      --orange: #c65b2b;
+      --orange-soft: #f7e3d8;
+      --blue: #315d7c;
+      --blue-soft: #e1edf4;
+      --gray-soft: #eceae4;
+      --shadow: 0 16px 40px rgba(24, 37, 31, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 82% 4%, rgba(198, 91, 43, .12), transparent 24rem),
+        radial-gradient(circle at 8% 22%, rgba(11, 107, 75, .10), transparent 26rem),
+        var(--paper);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--green); }
+    code, .mono { font-family: "SFMono-Regular", Consolas, monospace; }
+    .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); min-height: 100vh; }
+    aside {
+      position: sticky; top: 0; height: 100vh; padding: 28px 22px;
+      border-right: 1px solid var(--line); background: rgba(255, 253, 248, .78);
+      backdrop-filter: blur(14px); overflow-y: auto;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: white; font-weight: 800; }
+    .brand strong { display: block; font-size: 14px; }
+    .brand span { display: block; color: var(--muted); font-size: 11px; }
+    nav a { display: block; padding: 8px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 13px; }
+    nav a:hover { color: var(--green); background: var(--green-soft); }
+    .legend { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .legend p { margin: 7px 0; color: var(--muted); font-size: 11px; }
+    main { width: min(1180px, 100%); padding: 56px clamp(24px, 5vw, 72px) 100px; }
+    .eyebrow { color: var(--orange); font-weight: 800; font-size: 12px; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 850px; margin: 8px 0 18px; font-size: clamp(38px, 6vw, 72px); line-height: 1.03; letter-spacing: -.045em; }
+    h2 { margin: 84px 0 18px; font-size: clamp(27px, 3.4vw, 42px); letter-spacing: -.035em; }
+    h3 { margin: 0 0 10px; font-size: 18px; }
+    .lead { max-width: 800px; color: var(--muted); font-size: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 9px; margin: 28px 0 44px; }
+    .pill, .status { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; font-size: 11px; font-weight: 800; }
+    .pill { padding: 7px 11px; background: var(--panel); border: 1px solid var(--line); }
+    .status { padding: 4px 8px; }
+    .done { color: var(--green); background: var(--green-soft); }
+    .partial { color: #8b431f; background: var(--orange-soft); }
+    .planned { color: var(--blue); background: var(--blue-soft); }
+    .archive { color: #65635e; background: var(--gray-soft); }
+    .stats, .cards { display: grid; gap: 14px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card, .stat, .callout, .diagram, .table-wrap {
+      border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 253, 248, .92); box-shadow: var(--shadow);
+    }
+    .stat { padding: 18px; }
+    .stat b { display: block; font-size: 27px; line-height: 1.1; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .card { padding: 22px; }
+    .card p { color: var(--muted); margin: 8px 0; font-size: 14px; }
+    .card ul { margin: 10px 0 0; padding-left: 19px; font-size: 13px; }
+    .callout { padding: 20px 22px; border-left: 5px solid var(--orange); }
+    .callout strong { color: var(--orange); }
+    .diagram { overflow: hidden; padding: 12px; }
+    .diagram svg { width: 100%; height: auto; display: block; }
+    .diagram-caption { padding: 0 10px 10px; color: var(--muted); font-size: 12px; }
+    .toolbar { position: sticky; top: 10px; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; margin: 24px 0 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(244, 240, 232, .92); backdrop-filter: blur(12px); }
+    .toolbar input { min-width: 230px; flex: 1; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); }
+    button { padding: 9px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--ink); cursor: pointer; font-weight: 700; }
+    button.active { color: white; border-color: var(--green); background: var(--green); }
+    .table-wrap { overflow-x: auto; box-shadow: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 13px 15px; background: #ebe6dc; white-space: nowrap; }
+    td { padding: 14px 15px; border-top: 1px solid var(--line); vertical-align: top; }
+    tbody tr:hover { background: #fbf6ed; }
+    td code { color: var(--blue); font-size: 12px; }
+    .file-row.hidden { display: none; }
+    .tree { padding: 22px; border-radius: 14px; background: #17231e; color: #dfe8e3; overflow-x: auto; font: 13px/1.7 "SFMono-Regular", Consolas, monospace; }
+    .tree .focus { color: #73d6ad; }
+    .tree .future { color: #87b8d3; }
+    .tree .warn { color: #f0a77f; }
+    .sequence { display: grid; grid-template-columns: 42px 1fr; gap: 0 14px; }
+    .step-no { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: white; font-weight: 800; }
+    .step-no::after { content: ""; position: absolute; top: 34px; bottom: -50px; width: 2px; background: var(--line); }
+    .sequence > div:nth-last-child(-n+2) .step-no::after { display: none; }
+    .step-body { padding-bottom: 28px; }
+    .step-body p { margin: 3px 0; color: var(--muted); font-size: 13px; }
+    .priority { display: grid; grid-template-columns: 70px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .priority:last-child { border-bottom: 0; }
+    .tag { text-align: center; padding: 5px 8px; border-radius: 8px; color: white; font-size: 11px; font-weight: 800; }
+    .p0 { background: #9f3726; } .p1 { background: var(--orange); } .p2 { background: var(--blue); }
+    .foot { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    @media (max-width: 880px) {
+      .layout { display: block; }
+      aside { position: static; width: 100%; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      nav { display: flex; flex-wrap: wrap; }
+      nav a { padding: 6px 8px; }
+      .legend { display: none; }
+      main { padding-top: 36px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media print {
+      aside, .toolbar { display: none; }
+      .layout { display: block; }
+      main { width: 100%; padding: 20px; }
+      .card, .stat, .callout, .diagram, .table-wrap { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand"><div class="mark">P</div><div><strong>Pension RAG</strong><span>CODE REVIEW MAP · 2026-08-16</span></div></div>
+    <nav aria-label="문서 목차">
+      <a href="#summary">한눈에 보기</a>
+      <a href="#reality">실제와 목표 구분</a>
+      <a href="#tree">저장소 지도</a>
+      <a href="#preprocess">전처리 흐름</a>
+      <a href="#runtime">질문 처리 흐름</a>
+      <a href="#files">파일별 역할</a>
+      <a href="#review-order">리뷰 순서</a>
+      <a href="#tests">테스트 범위</a>
+      <a href="#risks">리뷰 포인트</a>
+    </nav>
+    <div class="legend">
+      <p><span class="status done">현재 구현</span> 코드가 존재하고 경로에 연결됨</p>
+      <p><span class="status partial">부분 구현</span> 코드가 있으나 데이터·운영 연결 미완성</p>
+      <p><span class="status planned">계획</span> AGENTS 목표에는 있으나 코드 없음</p>
+      <p><span class="status archive">보관</span> 현재 실행 경로에서 사용하지 않음</p>
+    </div>
+  </aside>
+
+  <main>
+    <header id="summary">
+      <div class="eyebrow">Repository field guide</div>
+      <h1>코드는 작고,<br>목표 구조는 크다.</h1>
+      <p class="lead">이 저장소는 현재 <b>로컬 JSONL 기반 연금 RAG CLI MVP</b>입니다. 문서 전처리와 CLOVA 임베딩·답변 생성은 구현되어 있지만, 목표 아키텍처의 FastAPI·PostgreSQL·pgvector·Rule Engine·세션 복원은 아직 연결되지 않았습니다.</p>
+      <div class="meta">
+        <span class="pill">Entry · <code>scripts/rag/chat.py</code></span>
+        <span class="pill">Workflow · <code>src/graph/workflow.py</code></span>
+        <span class="pill">Data · Git 제외</span>
+        <span class="pill">테스트 · 의존성 누락으로 수집 실패</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>3</b><span>런타임 모듈: graph / rag / llm</span></div>
+        <div class="stat"><b>15</b><span>발견된 테스트 케이스</span></div>
+        <div class="stat"><b>1 + 1</b><span>현재 raw PDF / processed JSON</span></div>
+        <div class="stat"><b>4</b><span>주요 미구현 축: API / DB / Rule / Session</span></div>
+      </div>
+    </header>
+
+    <section id="reality">
+      <h2>실제 체크아웃과 목표를 섞지 않기</h2>
+      <div class="cards">
+        <article class="card"><span class="status done">현재 구현</span><h3>RAG CLI 서비스</h3><p>질문 범위를 검사하고, CLOVA 임베딩으로 로컬 JSONL을 검색한 뒤, 검색 근거만 전달해 구조화 답변을 생성합니다.</p><ul><li>키워드 검색과 벡터 검색</li><li>LangGraph 3단계 흐름</li><li>CLOVA API Adapter</li><li>Pydantic JSON 검증·재요청</li></ul></article>
+        <article class="card"><span class="status partial">부분 구현</span><h3>문서 전처리 파이프라인</h3><p>PDF·DOCX·XLSX·PPTX 변환과 의미 검토 스크립트가 있으나, 현재 작업공간에는 README가 설명하는 중간 산출물 대부분이 없습니다.</p><ul><li>전처리 로직은 <code>scripts/preprocessing/</code></li><li>실제 데이터는 <code>raw/doc1.pdf</code>, <code>processed/doc1.json</code></li></ul></article>
+        <article class="card"><span class="status planned">목표 구조</span><h3>운영 상담 시스템</h3><p>AGENTS.md에 제시된 최종 방향입니다. 현재 코드리뷰에서 이미 구현됐다고 전제하면 안 됩니다.</p><ul><li>FastAPI <code>POST /chat</code></li><li>PostgreSQL + pgvector</li><li>정형 Fact DB + Rule Engine</li><li>Guardrails + 세션 상태 복원</li></ul></article>
+        <article class="card"><span class="status archive">보관 코드</span><h3>이전 실행 방식</h3><p><code>scripts/archive/</code>는 비교와 이력 보존용입니다. 현재 사용자 실행 경로는 이 파일들을 호출하지 않습니다.</p><ul><li><code>rag_chat.py</code></li><li><code>rag_embedding_chat.py</code></li><li><code>transform_service_data.py</code></li></ul></article>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>리뷰 기준점</strong><br>README는 의도와 사용법을 설명하지만, 현재 체크아웃의 사실은 파일 시스템과 import 경로가 우선합니다. 특히 <code>data/**</code>와 <code>config/**</code>는 Git에서 제외됩니다.</div>
+    </section>
+
+    <section id="tree">
+      <h2>저장소 지도</h2>
+      <pre class="tree">project/
+├── <span class="focus">scripts/rag/</span>                 # 실제 CLI 진입점
+│   ├── chat.py                  # 질문 실행
+│   └── build_embeddings.py      # 임베딩 생성·재개
+├── <span class="focus">src/</span>
+│   ├── graph/                   # 워크플로와 상태
+│   ├── rag/                     # Chunk 모델·검색·임베딩 API
+│   └── llm/                     # CLOVA Chat·프롬프트·응답 Schema
+├── scripts/preprocessing/       # 원본 → 지식 산출물 변환 도구
+├── scripts/archive/             # 현재 경로에서 미사용
+├── tests/                       # graph / rag / llm 단위 테스트
+├── data/                        # <span class="warn">Git 제외, 로컬 상태 가변</span>
+│   ├── raw/doc1.pdf             # 현재 확인됨
+│   └── processed/doc1.json      # 현재 확인됨
+├── docs/
+│   ├── current_project_structure.md
+│   └── <span class="focus">code_review_guide.html</span>  # 이 문서
+├── README.md                    # MVP 사용 설명
+├── AGENTS.md                    # 목표 아키텍처·개발 규칙
+└── <span class="warn">의존성 manifest 없음</span>        # pyproject/requirements 부재
+
+<span class="future">계획: src/api · src/database · src/rules · src/guardrails</span></pre>
+    </section>
+
+    <section id="preprocess">
+      <h2>전처리 데이터 흐름</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 1080 430" role="img" aria-labelledby="preTitle preDesc">
+          <title id="preTitle">문서 전처리 파이프라인</title><desc id="preDesc">원본 문서가 기본 변환, 보강, 의미 검토를 거쳐 RAG와 Fact 데이터로 분기되는 흐름</desc>
+          <defs><marker id="arrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#65756d"/></marker></defs>
+          <rect x="20" y="60" width="150" height="92" rx="18" fill="#dcefe6" stroke="#0b6b4b"/><text x="95" y="94" text-anchor="middle" font-weight="700" fill="#18251f">원본 문서</text><text x="95" y="120" text-anchor="middle" font-size="13" fill="#5c6c64">PDF · Office</text>
+          <path d="M170 106H220" stroke="#65756d" stroke-width="2" marker-end="url(#arrowA)"/>
+          <rect x="225" y="45" width="185" height="122" rx="18" fill="#fffdf8" stroke="#d8d2c6"/><text x="317" y="78" text-anchor="middle" font-weight="700">base_processed</text><text x="317" y="103" text-anchor="middle" font-size="12" fill="#5c6c64">페이지·표·이미지·원문</text><text x="317" y="130" text-anchor="middle" font-size="11" fill="#315d7c">build_base_processed.py</text>
+          <path d="M410 106H460" stroke="#65756d" stroke-width="2" marker-end="url(#arrowA)"/>
+          <rect x="465" y="30" width="190" height="152" rx="18" fill="#f7e3d8" stroke="#c65b2b"/><text x="560" y="64" text-anchor="middle" font-weight="700">보강·검증</text><text x="560" y="91" text-anchor="middle" font-size="12" fill="#5c6c64">메타데이터 · OCR</text><text x="560" y="114" text-anchor="middle" font-size="12" fill="#5c6c64">Fact 후보 · 원문 대조</text><text x="560" y="145" text-anchor="middle" font-size="11" fill="#8b431f">enrich / ocr / validate</text>
+          <path d="M655 106H705" stroke="#65756d" stroke-width="2" marker-end="url(#arrowA)"/>
+          <rect x="710" y="45" width="175" height="122" rx="18" fill="#fffdf8" stroke="#d8d2c6"/><text x="797" y="78" text-anchor="middle" font-weight="700">semantic_review</text><text x="797" y="103" text-anchor="middle" font-size="12" fill="#5c6c64">Section · Topic</text><text x="797" y="130" text-anchor="middle" font-size="11" fill="#315d7c">RAG / Fact 판정</text>
+          <path d="M885 106H950V70" stroke="#65756d" fill="none" stroke-width="2" marker-end="url(#arrowA)"/>
+          <path d="M885 106H950V185" stroke="#65756d" fill="none" stroke-width="2" marker-end="url(#arrowA)"/>
+          <rect x="932" y="15" width="130" height="72" rx="15" fill="#dcefe6" stroke="#0b6b4b"/><text x="997" y="47" text-anchor="middle" font-weight="700">rag_ready</text><text x="997" y="68" text-anchor="middle" font-size="11">검색 Chunk</text>
+          <rect x="932" y="165" width="130" height="72" rx="15" fill="#e1edf4" stroke="#315d7c"/><text x="997" y="197" text-anchor="middle" font-weight="700">facts</text><text x="997" y="218" text-anchor="middle" font-size="11">DB 후보</text>
+          <path d="M997 87V280" stroke="#65756d" stroke-width="2" marker-end="url(#arrowA)"/>
+          <rect x="895" y="285" width="202" height="100" rx="18" fill="#17231e"/><text x="996" y="318" text-anchor="middle" font-weight="700" fill="#fff">embedding JSONL</text><text x="996" y="343" text-anchor="middle" font-size="12" fill="#b9c9c0">CLOVA Embedding v2</text><text x="996" y="365" text-anchor="middle" font-size="11" fill="#73d6ad">현재 검색 저장소</text>
+          <text x="20" y="408" font-size="12" fill="#c65b2b">주의: 이 파이프라인 코드와 README 설명은 존재하지만, 현재 체크아웃에는 중간 디렉터리 대부분이 없습니다.</text>
+        </svg>
+        <div class="diagram-caption">구현 파일: <code>scripts/preprocessing/*.py</code>, <code>scripts/rag/build_embeddings.py</code></div>
+      </div>
+    </section>
+
+    <section id="runtime">
+      <h2>질문 한 건의 런타임 흐름</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 1080 500" role="img" aria-labelledby="runTitle runDesc">
+          <title id="runTitle">RAG 질문 처리 흐름</title><desc id="runDesc">CLI 질문이 범위 검사, 벡터 검색, CLOVA 답변 생성 및 Pydantic 검증을 거치는 흐름</desc>
+          <defs><marker id="arrowB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#65756d"/></marker></defs>
+          <rect x="25" y="195" width="140" height="82" rx="18" fill="#17231e"/><text x="95" y="228" text-anchor="middle" font-weight="700" fill="#fff">CLI 질문</text><text x="95" y="252" text-anchor="middle" font-size="11" fill="#b9c9c0">scripts/rag/chat.py</text>
+          <path d="M165 236H215" stroke="#65756d" stroke-width="2" marker-end="url(#arrowB)"/>
+          <polygon points="295,160 375,236 295,312 215,236" fill="#f7e3d8" stroke="#c65b2b"/><text x="295" y="229" text-anchor="middle" font-weight="700">연금 질문?</text><text x="295" y="251" text-anchor="middle" font-size="11">check_scope</text>
+          <path d="M295 160V85H455" stroke="#65756d" fill="none" stroke-width="2" marker-end="url(#arrowB)"/><text x="316" y="76" font-size="11" fill="#9f3726">NO</text>
+          <rect x="460" y="43" width="170" height="84" rx="18" fill="#eceae4" stroke="#65635e"/><text x="545" y="77" text-anchor="middle" font-weight="700">OUT_OF_SCOPE</text><text x="545" y="101" text-anchor="middle" font-size="11">외부 API 호출 없음</text>
+          <path d="M375 236H430" stroke="#65756d" stroke-width="2" marker-end="url(#arrowB)"/><text x="391" y="226" font-size="11" fill="#0b6b4b">YES</text>
+          <rect x="435" y="182" width="185" height="108" rx="18" fill="#dcefe6" stroke="#0b6b4b"/><text x="527" y="216" text-anchor="middle" font-weight="700">벡터 검색</text><text x="527" y="241" text-anchor="middle" font-size="12">질문 임베딩 → cosine</text><text x="527" y="264" text-anchor="middle" font-size="11" fill="#315d7c">Top-K · 섹션 중복 제거</text>
+          <path d="M620 236H675" stroke="#65756d" stroke-width="2" marker-end="url(#arrowB)"/>
+          <polygon points="755,160 835,236 755,312 675,236" fill="#fffdf8" stroke="#d8d2c6"/><text x="755" y="229" text-anchor="middle" font-weight="700">근거 있음?</text><text x="755" y="251" text-anchor="middle" font-size="11">retrieved_chunks</text>
+          <path d="M755 312V390H900" stroke="#65756d" fill="none" stroke-width="2" marker-end="url(#arrowB)"/><text x="769" y="381" font-size="11" fill="#9f3726">NO</text>
+          <rect x="905" y="350" width="155" height="82" rx="18" fill="#f7e3d8" stroke="#c65b2b"/><text x="982" y="382" text-anchor="middle" font-weight="700">NO_GROUNDED</text><text x="982" y="406" text-anchor="middle" font-size="11">답변 보류·재질문</text>
+          <path d="M835 236H875" stroke="#65756d" stroke-width="2" marker-end="url(#arrowB)"/><text x="843" y="226" font-size="11" fill="#0b6b4b">YES</text>
+          <rect x="880" y="174" width="180" height="124" rx="18" fill="#e1edf4" stroke="#315d7c"/><text x="970" y="207" text-anchor="middle" font-weight="700">CLOVA 답변</text><text x="970" y="232" text-anchor="middle" font-size="12">근거 + 질문만 전달</text><text x="970" y="255" text-anchor="middle" font-size="11">Pydantic JSON 검증</text><text x="970" y="277" text-anchor="middle" font-size="11" fill="#315d7c">ANSWER / NEED_MORE_INFO</text>
+          <text x="25" y="475" font-size="12" fill="#5c6c64">현재 CLI는 매 요청마다 워크플로와 임베딩 JSONL을 로드합니다. 세션 상태 복원과 API 계층은 아직 없습니다.</text>
+        </svg>
+        <div class="diagram-caption">핵심 호출: <code>chat.main → create_clova_rag_workflow → check_scope → retrieve → generate_clova_answer</code></div>
+      </div>
+    </section>
+
+    <section id="files">
+      <h2>파일별 역할과 리뷰 질문</h2>
+      <p>검색어나 상태 버튼으로 리뷰 대상을 좁힐 수 있습니다.</p>
+      <div class="toolbar">
+        <input id="fileSearch" type="search" placeholder="파일명·역할·리뷰 포인트 검색" aria-label="파일 검색">
+        <button class="filter active" data-filter="all">전체</button>
+        <button class="filter" data-filter="runtime">런타임</button>
+        <button class="filter" data-filter="preprocess">전처리</button>
+        <button class="filter" data-filter="test">테스트</button>
+        <button class="filter" data-filter="archive">보관</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>영역</th><th>파일</th><th>책임</th><th>코드 리뷰 질문</th></tr></thead>
+          <tbody id="fileRows">
+            <tr class="file-row" data-area="runtime"><td><span class="status done">진입점</span></td><td><code>scripts/rag/chat.py</code></td><td>CLI 인자 파싱, 워크플로 생성·실행, 응답 필드 출력</td><td>오류가 사용자 친화적으로 변환되는가? 매 요청 로딩 비용은 허용 가능한가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Graph</span></td><td><code>src/graph/workflow.py</code></td><td>검색 방식별 LangGraph 조립, 실제 CLOVA RAG 흐름 정의</td><td>의존성 주입 경계가 테스트와 운영 교체에 충분한가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Graph</span></td><td><code>src/graph/nodes.py</code></td><td>범위 검사, 검색, 근거·출처 구성, 답변 생성</td><td>단순 키워드 범위 검사가 오탐·미탐을 허용하는가? 검색 점수 임계값이 필요한가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">State</span></td><td><code>src/graph/state.py</code></td><td>현재 RAG 그래프 상태 TypedDict</td><td>status와 선택 필드의 조합 불변식이 충분히 표현되는가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">RAG</span></td><td><code>src/rag/retriever.py</code></td><td>RagChunk 모델과 한국어 문자 n-gram 키워드 검색</td><td>빈 디렉터리·손상 JSON 처리, private <code>_chunks</code> 접근을 개선해야 하는가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status partial">RAG</span></td><td><code>src/rag/vector_retriever.py</code></td><td>JSONL 벡터 전체 메모리 로딩, cosine Top-K 검색</td><td>차원·스키마 검증, 최소 유사도, 대용량 메모리 비용이 관리되는가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Adapter</span></td><td><code>src/rag/naver_embedding.py</code></td><td>환경변수 로딩과 CLOVA Embedding v2 호출</td><td>HTTP 상태·rate limit 판별이 API 계약 전체를 반영하는가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Adapter</span></td><td><code>src/llm/hyperclova.py</code></td><td>CLOVA Chat 호출, JSON 응답 교정 재시도</td><td>응답 크기·민감정보 로깅·예외 분류·재시도 정책이 적절한가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Contract</span></td><td><code>src/llm/schemas.py</code></td><td>ANSWER/NEED_MORE_INFO 계약과 모델 출력 정규화</td><td>관대한 alias·bullet 추출이 잘못된 응답을 정상으로 오인하지 않는가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status done">Policy</span></td><td><code>src/llm/prompts.py</code></td><td>근거 제한, 금융 안전 표현, 구조화 출력 지침</td><td>코드 Guard 없이 프롬프트에만 의존하는 정책은 무엇인가?</td></tr>
+            <tr class="file-row" data-area="runtime"><td><span class="status partial">Batch</span></td><td><code>scripts/rag/build_embeddings.py</code></td><td>Chunk 임베딩, 임시 파일 기반 재개, rate limit backoff</td><td>완료 파일에 신규 Chunk를 추가할 때 삭제된 Chunk와 변경된 본문은 어떻게 무효화하는가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">Parse</span></td><td><code>scripts/preprocessing/build_base_processed.py</code></td><td>PDF·DOCX·XLSX·PPTX를 원문 보존 JSON으로 변환</td><td>포맷별 parser 책임이 한 파일에 과도하게 모였는가? Schema가 코드로 검증되는가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">Enrich</span></td><td><code>scripts/preprocessing/enrich_base_processed.py</code></td><td>제목·주제·카테고리·Fact·예외·FAQ 후보 보강</td><td>문서 번호별 하드코딩과 범용 규칙의 경계가 명확한가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">Review</span></td><td><code>scripts/preprocessing/build_semantic_review.py</code></td><td>RAG/Fact 사용 여부를 검토하는 중간 형식 생성</td><td>검토 결정 근거와 사람 승인 상태를 역추적할 수 있는가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">Build</span></td><td><code>scripts/preprocessing/build_final_knowledge.py</code></td><td>검토 결과를 RAG Chunk와 Fact 후보로 분기</td><td>조건과 예외가 1,200자 분할 경계에서 분리되지 않는가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">OCR</span></td><td><code>scripts/preprocessing/ocr_pdf_images.py</code></td><td>이미지 PDF OCR 및 검토 표시</td><td>macOS 고정 Tesseract 경로가 Windows/CI에서 동작하는가?</td></tr>
+            <tr class="file-row" data-area="preprocess"><td><span class="status partial">검증</span></td><td><code>scripts/preprocessing/validate_base_processed.py</code></td><td>원본 재변환과 중간 JSON 대조</td><td>검증 실패가 CI에서 명확한 non-zero exit로 이어지는가?</td></tr>
+            <tr class="file-row" data-area="test"><td><span class="status partial">Tests</span></td><td><code>tests/graph/</code></td><td>범위 제한, 근거 응답, CLOVA 노드 응답 계약</td><td><code>src.graph.__init__</code>의 eager import로 단위 테스트 격리가 깨지지 않는가?</td></tr>
+            <tr class="file-row" data-area="test"><td><span class="status done">Tests</span></td><td><code>tests/rag/</code></td><td>키워드·벡터 검색과 임베딩 파일 오류</td><td>동점, 최소 점수, 중복, 손상 파일, 차원 불일치 경계가 충분한가?</td></tr>
+            <tr class="file-row" data-area="test"><td><span class="status done">Tests</span></td><td><code>tests/llm/</code></td><td>잘못된 JSON 응답의 교정 재시도</td><td>재시도 소진·API 오류·코드펜스 변형도 검증하는가?</td></tr>
+            <tr class="file-row" data-area="archive"><td><span class="status archive">보관</span></td><td><code>scripts/archive/</code></td><td>이전 검색·변환 실행기</td><td>현행 코드와 혼동되지 않도록 삭제 기준 또는 보존 이유가 기록됐는가?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="review-order">
+      <h2>추천 코드 리뷰 순서</h2>
+      <div class="sequence">
+        <div><div class="step-no">1</div></div><div class="step-body"><h3>계약부터 본다</h3><p><code>src/graph/state.py</code>와 <code>src/llm/schemas.py</code>에서 입력·출력 상태와 불변식을 파악합니다.</p></div>
+        <div><div class="step-no">2</div></div><div class="step-body"><h3>실행 경로를 따라간다</h3><p><code>scripts/rag/chat.py → workflow.py → nodes.py</code> 순서로 실제 호출 관계를 확인합니다.</p></div>
+        <div><div class="step-no">3</div></div><div class="step-body"><h3>외부 경계를 본다</h3><p><code>naver_embedding.py</code>와 <code>hyperclova.py</code>에서 비밀정보, timeout, 오류, 재시도를 검토합니다.</p></div>
+        <div><div class="step-no">4</div></div><div class="step-body"><h3>검색 품질과 근거 추적을 본다</h3><p><code>retriever.py</code>, <code>vector_retriever.py</code>, <code>build_grounded_context</code>를 함께 봅니다.</p></div>
+        <div><div class="step-no">5</div></div><div class="step-body"><h3>전처리의 원문 보존을 본다</h3><p>Parser → enrich → semantic review → final knowledge가 출처를 잃지 않는지 샘플 하나로 역추적합니다.</p></div>
+        <div><div class="step-no">6</div></div><div class="step-body"><h3>테스트와 문서의 약속을 대조한다</h3><p>테스트가 구현을 보호하는지, README가 실제 체크아웃 상태를 과장하지 않는지 확인합니다.</p></div>
+      </div>
+    </section>
+
+    <section id="tests">
+      <h2>현재 테스트가 다루는 범위</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>레이어</th><th>확인하는 동작</th><th>비어 있는 중요 영역</th></tr></thead>
+          <tbody>
+            <tr><td>Graph</td><td>연금 범위 판별, 외부 호출 조기 종료, 근거 없을 때 답변 보류</td><td>Prompt injection, 상태 지속, 노드 예외 복구</td></tr>
+            <tr><td>LLM</td><td>JSON 교정 재시도, 부족 필드 정규화, 최대 3개 역질문</td><td>Groundedness 검사, 세무·법률 표현 Output Guard</td></tr>
+            <tr><td>RAG</td><td>키워드 관련 Chunk, cosine 기반 검색, 임베딩 파일 누락 안내</td><td>실제 대표 질문 Top-K 평가, 최소 유사도, 대규모 성능</td></tr>
+            <tr><td>Preprocessing</td><td>현재 자동 테스트 없음</td><td>Parser, Section 분리, Metadata 보존, Schema Validation 전반</td></tr>
+            <tr><td>API / DB / Rule</td><td>구현 없음</td><td>목표 아키텍처 단계에서 신규 테스트 필요</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>2026-08-16 검증 결과</strong><br><code>.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider</code>는 테스트 수집 중 <code>ModuleNotFoundError: langgraph</code>로 중단되었습니다. 의존성 manifest도 없어 동일 환경 재현 절차가 현재 저장소에 없습니다.</div>
+    </section>
+
+    <section id="risks">
+      <h2>우선순위별 리뷰 포인트</h2>
+      <div class="card">
+        <div class="priority"><span class="tag p0">P0</span><div><b>재현 가능한 개발 환경이 없다</b><p>의존성 manifest가 없고 현재 가상환경에는 <code>langgraph</code>가 없습니다. CI와 신규 개발자 환경에서 테스트가 시작되지 않습니다.</p></div></div>
+        <div class="priority"><span class="tag p0">P0</span><div><b>문서·데이터 상태가 드리프트했다</b><p>README의 데이터 디렉터리 설명과 실제 체크아웃이 다릅니다. 데이터가 Git 제외이므로 “필수 입력/생성물/선택 산출물” 계약이 필요합니다.</p></div></div>
+        <div class="priority"><span class="tag p1">P1</span><div><b>벡터 검색에 최소 관련도 기준이 없다</b><p>임베딩 검색은 Top-K를 항상 반환합니다. 관련 없는 연금 질문에도 가장 가까운 문서를 근거로 답할 위험이 있습니다.</p></div></div>
+        <div class="priority"><span class="tag p1">P1</span><div><b>보안 흐름이 목표보다 얇다</b><p>현재 Input Guard는 연금 용어 포함 여부뿐입니다. Prompt injection, 데이터 탈취, 입력 길이 제한, Output Guard는 미구현입니다.</p></div></div>
+        <div class="priority"><span class="tag p1">P1</span><div><b>임베딩 갱신이 내용 변경을 감지하지 않는다</b><p><code>chunk_id</code> 완료 여부만 확인하므로 같은 ID의 본문 변경이나 삭제가 기존 JSONL에 남을 수 있습니다.</p></div></div>
+        <div class="priority"><span class="tag p2">P2</span><div><b>패키지 초기화가 단위 테스트 격리를 약화한다</b><p><code>src/graph/__init__.py</code>가 workflow를 eager import하여 단순 노드 import에도 LangGraph가 필요합니다.</p></div></div>
+        <div class="priority"><span class="tag p2">P2</span><div><b>플랫폼 의존 OCR 경로</b><p>Tesseract 경로가 macOS Homebrew 위치로 고정되어 현재 Windows 환경 및 CI에서 재사용하기 어렵습니다.</p></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">이 문서는 저장소의 2026-08-16 체크아웃을 기준으로 생성되었습니다. 데이터 파일은 Git에서 제외되므로 수치와 존재 여부는 환경마다 달라질 수 있습니다. 업데이트 시 실제 파일 시스템과 테스트 결과를 다시 확인하세요.</footer>
+  </main>
+</div>
+<script>
+  const search = document.querySelector('#fileSearch');
+  const rows = [...document.querySelectorAll('.file-row')];
+  const buttons = [...document.querySelectorAll('.filter')];
+  let activeArea = 'all';
+
+  function applyFilters() {
+    const query = search.value.trim().toLocaleLowerCase('ko');
+    rows.forEach(row => {
+      const areaMatches = activeArea === 'all' || row.dataset.area === activeArea;
+      const textMatches = !query || row.textContent.toLocaleLowerCase('ko').includes(query);
+      row.classList.toggle('hidden', !(areaMatches && textMatches));
+    });
+  }
+
+  search.addEventListener('input', applyFilters);
+  buttons.forEach(button => button.addEventListener('click', () => {
+    activeArea = button.dataset.filter;
+    buttons.forEach(item => item.classList.toggle('active', item === button));
+    applyFilters();
+  }));
+</script>
+</body>
+</html>
