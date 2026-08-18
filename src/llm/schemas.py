@@ -60,3 +60,4 @@ class RagAnswer(BaseModel):
             # 첫 역질문은 사용자가 부담 없이 답할 수 있는 범위로 제한한다.
             value["missing_fields"] = value["missing_fields"][:3]
         return value
+    

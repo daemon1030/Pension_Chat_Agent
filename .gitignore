@@ -16,3 +16,4 @@ __pycache__/
 # Secrets
 .env
 .DS_Store
+.obsidian/*

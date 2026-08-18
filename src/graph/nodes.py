@@ -1,4 +1,7 @@
-"""RAG 전용 LangGraph 노드."""
+"""
+RAG 전용 LangGraph 노드.
+각 단계가 실제로 하는 일을 모아 둔 파일
+"""
 
 from __future__ import annotations
 
@@ -25,6 +28,7 @@ def check_scope(state: RagGraphState) -> dict[str, str]:
 
 
 def scope_route(state: RagGraphState) -> str:
+    """check_scope() 이후 라우팅 용도의 함수"""
     return "retrieve" if state.get("scope") == "IN_SCOPE" else "out_of_scope"
 
 
@@ -33,7 +37,7 @@ def out_of_scope_response(_: RagGraphState) -> dict[str, Any]:
         "status": "OUT_OF_SCOPE",
         "answer": "현재 서비스는 연금 관련 질문만 안내할 수 있습니다.",
         "missing_fields": [],
-        "follow_up_question": "연금저축, IRP, 퇴직연금 중 궁금한 내용을 알려주세요.",
+        "follow_up_question": "연금저축, IRP, 퇴직연금 등 연금관련 궁금한 내용을 알려주세요.",
         "sources": [],
     }
 

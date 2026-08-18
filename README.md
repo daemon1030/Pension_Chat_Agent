@@ -1,15 +1,15 @@
-# 연금 문서 기반 RAG (현재 MVP)
+# 연금 문서 기반 RAG 챗봇
 
-연금 문서 원본을 페이지·섹션 단위로 보존해 전처리하고, 네이버 CLOVA Studio 임베딩으로 관련 근거를 검색한 뒤 HyperCLOVA X가 근거 기반 답변을 만드는 프로젝트입니다.
+연금 문서 원본을 페이지·섹션 단위로 보존해 전처리하고, 네이버 CLOVA Studio 임베딩으로 관련 근거를 검색한 뒤 HyperCLOVA X가 근거 기반 답변을 만드는 **RAG 전용 챗봇**입니다.
 
-현재 구현 범위는 **문서 전처리와 RAG 답변**입니다. PostgreSQL/pgvector 적재, 정형 Fact DB, Rule Engine, FastAPI는 아직 연결하지 않았습니다.
+정형 DB, Rule Engine, FastAPI 같은 별도 서비스 계층은 이 프로젝트 범위에 포함하지 않습니다.
 
 ## 동작 구조
 
 ```text
 data/raw
   → base_processed       원문을 문서·페이지·표·이미지 정보와 함께 보존
-  → semantic_review      섹션 제목·주제·RAG 포함 여부·Fact 후보를 검토
+  → semantic_review      섹션 제목·주제·RAG 포함 여부를 검토
   → rag_ready            RAG에 넣을 확정 Chunk 생성
   → embeddings           Chunk + CLOVA 임베딩 벡터(JSONL)
   → LangGraph            질문 범위 확인 → 벡터 검색 → CLOVA 답변 생성
@@ -23,10 +23,9 @@ data/raw
 data/
 ├── raw/                 # 원본 PDF·Office 문서 (수정하지 않음)
 ├── base_processed/      # 원문 보존형 중간 JSON
-├── semantic_review/     # Section/Topic/RAG·Fact 후보 검토 JSON
+├── semantic_review/     # Section/Topic/RAG 포함 여부 검토 JSON
 ├── rag_ready/           # RAG 검색용 확정 Chunk JSON
 ├── embeddings/          # Chunk와 임베딩 벡터를 담은 JSONL
-├── facts/               # 향후 정형 DB 적재용 Fact 후보
 └── raw_invest_recommand/# 별도 투자추천 원본 자료, 현재 흐름에서는 미사용
 
 src/
@@ -36,8 +35,7 @@ src/
 
 scripts/
 ├── rag/                 # 현재 사용하는 실행기
-├── preprocessing/       # 원본 전처리·검증·RAG Chunk 생성 도구
-└── archive/             # 현재 실행 흐름에서 사용하지 않는 이전 코드
+└── preprocessing/       # 원본 전처리·검증·RAG Chunk 생성 도구
 
 tests/
 ├── rag/                 # 검색기·임베딩 재개 처리 테스트
@@ -49,19 +47,19 @@ tests/
 
 ### `src/rag/`
 
-| 파일 | 역할 |
-|---|---|
-| `naver_embedding.py` | `.env`에서 API 키를 읽고 CLOVA Studio Embedding v2 API를 호출합니다. 요청 한도 초과 시 재시도에 사용할 대기 시간도 전달합니다. |
-| `retriever.py` | `rag_ready` JSON을 읽고, 임베딩 이전에 사용할 수 있는 단순 키워드 검색기와 공통 `RagChunk` 모델을 제공합니다. |
-| `vector_retriever.py` | 임베딩 JSONL을 메모리에 읽고, 질문을 임베딩한 뒤 코사인 유사도로 Top-K Chunk를 검색합니다. 같은 섹션이 중복 반환되지 않게 합니다. |
+| 파일                    | 역할                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `naver_embedding.py`  | `.env`에서 API 키를 읽고 CLOVA Studio Embedding v2 API를 호출합니다. 요청 한도 초과 시 재시도에 사용할 대기 시간도 전달합니다. |
+| `retriever.py`        | `rag_ready` JSON을 읽고, 임베딩 이전에 사용할 수 있는 단순 키워드 검색기와 공통 `RagChunk` 모델을 제공합니다.                |
+| `vector_retriever.py` | 임베딩 JSONL을 메모리에 읽고, 질문을 임베딩한 뒤 코사인 유사도로 Top-K Chunk를 검색합니다. 같은 섹션이 중복 반환되지 않게 합니다.         |
 
 ### `src/llm/`
 
-| 파일 | 역할 |
-|---|---|
+| 파일              | 역할                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------- |
 | `hyperclova.py` | HyperCLOVA X Chat Completions API 호출 Adapter입니다. 모델 응답이 JSON Schema에 맞지 않으면 JSON만 다시 요청합니다. |
-| `prompts.py` | 근거 밖의 내용을 추측하지 않기 위한 시스템 프롬프트와 JSON 재요청 프롬프트를 둡니다. |
-| `schemas.py` | 최종 응답 형식(`ANSWER` 또는 `NEED_MORE_INFO`)을 Pydantic으로 검증합니다. 부족 정보의 유사 필드명도 안전하게 정규화합니다. |
+| `prompts.py`    | 근거 밖의 내용을 추측하지 않기 위한 시스템 프롬프트와 JSON 재요청 프롬프트를 둡니다.                                          |
+| `schemas.py`    | 최종 응답 형식(`ANSWER` 또는 `NEED_MORE_INFO`)을 Pydantic으로 검증합니다. 부족 정보의 유사 필드명도 안전하게 정규화합니다.       |
 
 ### `src/graph/`
 
@@ -73,29 +71,25 @@ tests/
 
 ### `scripts/rag/` — 현재 실행 파일
 
-| 파일 | 역할 |
-|---|---|
+| 파일                    | 역할                                                                                                                                       |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `build_embeddings.py` | `rag_ready`의 Chunk를 CLOVA 임베딩으로 변환해 `data/embeddings/rag_embeddings.jsonl`에 저장합니다. 중단되면 완료한 Chunk를 건너뛰고 재개하며, API 속도 제한은 지수 대기 후 재시도합니다. |
-| `chat.py` | 현재 사용자 질문을 받아 LangGraph RAG를 실행하고 `status`, `answer`, `missing_fields`, `follow_up_question`, `sources` JSON을 출력합니다. |
+| `chat.py`             | 현재 사용자 질문을 받아 LangGraph RAG를 실행하고 `status`, `answer`, `missing_fields`, `follow_up_question`, `sources` JSON을 출력합니다.                     |
 
 ### `scripts/preprocessing/` — 전처리·검증 도구
 
-| 파일 | 역할 |
-|---|---|
-| `build_base_processed.py` | `raw`의 PDF/Office 원본을 문서·페이지·텍스트·표·이미지 정보가 있는 기본 JSON으로 변환합니다. |
-| `enrich_base_processed.py` | 기본 JSON에 문서별 검토·보강 내용을 추가합니다. |
-| `ocr_pdf_images.py` | 이미지가 포함된 PDF 페이지를 OCR해 이미지 텍스트를 보관합니다. OCR 결과는 검토 대상으로 표시합니다. |
-| `fill_scanned_documents.py` | 텍스트 레이어가 부족한 검토 대상 문서의 확인된 시각 텍스트를 보강합니다. |
-| `validate_base_processed.py` | 원본 재변환 결과와 `base_processed`를 대조해 텍스트·표·FAQ·Fact 근거 누락을 검사합니다. |
-| `build_semantic_review.py` | `base_processed`를 Section/Topic/RAG 사용 여부/Fact 후보를 검토할 수 있는 형식으로 만듭니다. |
-| `apply_review_batch_011_023.py` | DOC 011~023의 검토 결과를 반영합니다. |
-| `apply_review_batch_text_documents.py` | 텍스트 레이어가 있는 나머지 문서의 검토 결과를 반영합니다. |
-| `apply_remaining_semantic_review.py` | 남은 문서의 의미 검토 결과를 반영합니다. |
-| `extract_missing_facts_011_022.py` | DOC 011~022에서 원문에 명시된 핵심 수치 Fact를 보강합니다. |
-| `extract_clear_facts_core_documents.py` | 핵심 문서에서 명확히 확인되는 수치 Fact를 보강합니다. |
-| `build_final_knowledge.py` | 검토 JSON에서 RAG Chunk와 향후 정형 DB용 Fact 후보를 각각 `rag_ready`, `facts`로 생성합니다. |
-
-`scripts/archive/`의 파일은 이전 검색·변환 방식입니다. 현재 채팅 서비스는 호출하지 않으며, 삭제 대신 이력 보관합니다.
+| 파일                                     | 역할                                                             |
+| -------------------------------------- | -------------------------------------------------------------- |
+| `build_base_processed.py`              | `raw`의 PDF/Office 원본을 문서·페이지·텍스트·표·이미지 정보가 있는 기본 JSON으로 변환합니다. |
+| `enrich_base_processed.py`             | 기본 JSON에 문서별 검토·보강 내용을 추가합니다.                                  |
+| `ocr_pdf_images.py`                    | 이미지가 포함된 PDF 페이지를 OCR해 이미지 텍스트를 보관합니다. OCR 결과는 검토 대상으로 표시합니다.  |
+| `fill_scanned_documents.py`            | 텍스트 레이어가 부족한 검토 대상 문서의 확인된 시각 텍스트를 보강합니다.                      |
+| `validate_base_processed.py`           | 원본 재변환 결과와 `base_processed`를 대조해 텍스트·표·FAQ·보강 메타데이터 누락을 검사합니다. |
+| `build_semantic_review.py`             | `base_processed`를 Section/Topic/RAG 사용 여부를 검토할 수 있는 형식으로 만듭니다. |
+| `apply_review_batch_011_023.py`        | DOC 011~023의 검토 결과를 반영합니다.                                     |
+| `apply_review_batch_text_documents.py` | 텍스트 레이어가 있는 나머지 문서의 검토 결과를 반영합니다.                              |
+| `apply_remaining_semantic_review.py`   | 남은 문서의 의미 검토 결과를 반영합니다.                                        |
+| `build_final_knowledge.py`             | 검토 JSON에서 RAG 검색용 확정 Chunk를 `rag_ready`에 생성합니다.                |
 
 ## 실행 방법
 
@@ -159,7 +153,10 @@ CLOVASTUDIO_JSON_RETRY_COUNT=1
 
 ## 현재 한계와 다음 단계
 
-- 벡터는 현재 로컬 JSONL을 메모리에 읽어 검색합니다. 운영 규모에서는 `pgvector` 검색기로 교체합니다.
-- `data/facts`는 생성돼 있지만 PostgreSQL과 Rule Engine에는 아직 적재·연결하지 않았습니다.
-- FastAPI `/chat`, 대화 세션 복원, 정형 DB 조회, 금융 판단 Rule Engine은 아직 구현 대상이 아닙니다.
+- 벡터는 현재 로컬 JSONL을 메모리에 읽어 검색합니다. 문서가 매우 커지면 별도 벡터 저장소 도입을 검토할 수 있습니다.
+- 현재 인터페이스는 터미널 CLI입니다. HTTP API와 대화 세션 복원은 제공하지 않습니다.
 - OCR과 수기 보강 텍스트는 검토 표시가 남아 있으므로, 운영 반영 전 원문 대조가 필요합니다.
+
+## 추가해야하는 점
+
+- 연금 추천 질문에서 근거가 부족하다고 클로바에서 NEED_MORE_INFO를 보냄 -> 질문 후 사용자가 준 조건을 추출해서 클로바에게 넘기는 형식으로 만들어야할듯함.
