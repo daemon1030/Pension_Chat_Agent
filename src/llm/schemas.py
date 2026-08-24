@@ -63,11 +63,7 @@ class RagAnswer(BaseModel):
 
 
 class QueryAnalysis(BaseModel):
-    """질문 유형과 사용자 조건을 담는 확장 전용 분석 결과 틀.
+    """질문 유형과 사용자가 직접 밝힌 고객 조건."""
 
-    intent의 허용값과 user_conditions의 세부 키는 추천 정책을 정한 뒤
-    별도 Schema로 구체화한다.
-    """
-
-    intent: str | None = None
+    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"]
     user_conditions: dict[str, Any] = Field(default_factory=dict)

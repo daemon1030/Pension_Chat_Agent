@@ -49,13 +49,22 @@ class EmbeddedJsonRagRetriever:
         denominator = math.sqrt(sum(value * value for value in left)) * math.sqrt(sum(value * value for value in right))
         return sum(a * b for a, b in zip(left, right)) / denominator if denominator else 0.0
 
-    def search(self, query: str, *, top_k: int = 3) -> list[RagChunk]:
+    def search(
+        self,
+        query: str,
+        *,
+        top_k: int = 3,
+        allowed_product_ids: set[str] | None = None,
+    ) -> list[RagChunk]:
         if not query.strip() or top_k < 1:
+            return []
+        if allowed_product_ids is not None and not allowed_product_ids:
             return []
         query_vector = self._client.embed(query)
         scored = [
             RagChunk(**{**chunk.__dict__, "score": self._cosine(query_vector, vector)})
             for chunk, vector in self._entries
+            if allowed_product_ids is None or chunk.product_id in allowed_product_ids
         ]
         result: list[RagChunk] = []
         seen_sections: set[tuple[str, str, int | None]] = set()

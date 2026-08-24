@@ -15,9 +15,10 @@ class RagGraphState(TypedDict, total=False):
     top_k: int
 
     # 싱글 턴에서만 쓰고 응답 후 저장하지 않는 사용자 분석 결과.
-    # 세부 조건 키와 intent 값은 추천 정책을 정한 뒤 구체화한다.
-    intent: str | None
+    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"]
     user_conditions: dict[str, Any]
+    candidate_product_ids: list[str]
+    candidate_products: list[dict[str, Any]]
 
     scope: Literal["IN_SCOPE", "OUT_OF_SCOPE"]
     retrieved_chunks: list[dict]
@@ -26,4 +27,4 @@ class RagGraphState(TypedDict, total=False):
     missing_fields: list[str]
     follow_up_question: str | None
     sources: list[dict]
-    status: Literal["ANSWER", "NEED_MORE_INFO", "NO_GROUNDED_CONTEXT", "OUT_OF_SCOPE"]
+    status: Literal["ANSWER", "NEED_MORE_INFO", "NO_GROUNDED_CONTEXT", "NO_MATCHING_PRODUCT", "OUT_OF_SCOPE"]

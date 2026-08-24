@@ -19,3 +19,28 @@ def test_vector_retriever_uses_embedding_similarity(tmp_path):
     result = EmbeddedJsonRagRetriever.from_jsonl(path, FakeEmbeddingClient()).search("연금 언제 받나요?", top_k=1)
 
     assert result[0].chunk_id == "A"
+    assert "product_id" not in result[0].to_dict()
+
+
+def test_vector_retriever_preserves_optional_product_id(tmp_path):
+    path = tmp_path / "product_embeddings.jsonl"
+    record = {
+        "chunk_id": "PRODUCT_001_OVERVIEW_CHUNK001",
+        "document_id": "PRODUCT_001",
+        "document_title": "예시 안정형 연금상품 안내서",
+        "section_id": "OVERVIEW",
+        "section_title": "상품 개요",
+        "topic": "안정형 연금상품 특징",
+        "content": "예시용 상품 설명입니다.",
+        "page_start": 1,
+        "page_end": 1,
+        "validation_status": "PASS",
+        "product_id": "PENSION_PRODUCT_DEMO_001",
+        "embedding": [1.0, 0.0],
+    }
+    path.write_text(json.dumps(record, ensure_ascii=False), encoding="utf-8")
+
+    result = EmbeddedJsonRagRetriever.from_jsonl(path, FakeEmbeddingClient()).search("연금상품", top_k=1)
+
+    assert result[0].product_id == "PENSION_PRODUCT_DEMO_001"
+    assert result[0].to_dict()["product_id"] == "PENSION_PRODUCT_DEMO_001"

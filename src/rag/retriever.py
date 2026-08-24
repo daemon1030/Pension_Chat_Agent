@@ -27,6 +27,7 @@ class RagChunk:
     page_start: int | None
     page_end: int | None
     validation_status: str
+    product_id: str | None = None
     score: float = 0.0
 
     @classmethod
@@ -42,10 +43,11 @@ class RagChunk:
             page_start=value.get("page_start"),
             page_end=value.get("page_end"),
             validation_status=value.get("validation_status", "NEEDS_REVIEW"),
+            product_id=value.get("product_id"),
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "chunk_id": self.chunk_id,
             "document_id": self.document_id,
             "document_title": self.document_title,
@@ -58,6 +60,9 @@ class RagChunk:
             "validation_status": self.validation_status,
             "score": self.score,
         }
+        if self.product_id is not None:
+            result["product_id"] = self.product_id
+        return result
 
 
 class JsonRagRetriever:

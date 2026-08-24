@@ -5,11 +5,13 @@ RAG 전용 LangGraph 노드.
 
 from __future__ import annotations
 
+import json
 from typing import Any
 
 from src.llm.hyperclova import ClovaChatClient
 from src.llm.prompts import QUERY_ANALYSIS_SYSTEM_PROMPT, RAG_SYSTEM_PROMPT
 from src.rag.retriever import JsonRagRetriever
+from src.products.catalog import filter_products, missing_recommendation_fields
 
 from .state import RagGraphState
 
@@ -55,10 +57,67 @@ def analyze_query(state: RagGraphState, client: ClovaChatClient) -> dict[str, An
     }
 
 
-def retrieve(state: RagGraphState, retriever: JsonRagRetriever) -> dict[str, Any]:
+def intent_route(state: RagGraphState) -> str:
+    """연금 설명 질문과 개인화 추천 질문을 서로 다른 검색 경로로 보낸다."""
+    return "recommendation" if state.get("intent") == "PENSION_RECOMMENDATION" else "information"
+
+
+def check_recommendation_requirements(state: RagGraphState) -> dict[str, Any]:
+    """상품을 좁히기 전, 데모 정책의 필수 조건이 모두 있는지 확인한다."""
+    return {"missing_fields": missing_recommendation_fields(state.get("user_conditions", {}))}
+
+
+def recommendation_requirement_route(state: RagGraphState) -> str:
+    return "need_more_info" if state.get("missing_fields") else "filter_products"
+
+
+def recommendation_follow_up(state: RagGraphState) -> dict[str, Any]:
+    missing_fields = state.get("missing_fields", [])
+    return {
+        "status": "NEED_MORE_INFO",
+        "answer": "상품 후보를 확인하려면 사용자 조건이 더 필요합니다.",
+        "missing_fields": missing_fields,
+        "follow_up_question": f"다음 정보를 알려주세요: {', '.join(missing_fields)}.",
+        "sources": [],
+    }
+
+
+def filter_candidate_products(state: RagGraphState, products: list[dict[str, Any]]) -> dict[str, Any]:
+    """정확한 상품 조건으로 후보를 먼저 좁혀 product_id를 State에 보관한다."""
+    candidates = filter_products(products, state.get("user_conditions", {}))
+    return {
+        "candidate_product_ids": [str(product["product_id"]) for product in candidates],
+        "candidate_products": candidates,
+    }
+
+
+def candidate_product_route(state: RagGraphState) -> str:
+    return "retrieve_product" if state.get("candidate_product_ids") else "no_matching_product"
+
+
+def no_matching_product(_: RagGraphState) -> dict[str, Any]:
+    return {
+        "status": "NO_MATCHING_PRODUCT",
+        "answer": "현재 등록된 상품 조건에서 일치하는 후보를 찾지 못했습니다.",
+        "missing_fields": [],
+        "follow_up_question": "다른 위험 선호나 연금 준비 목적도 함께 알려주시면 다시 확인할 수 있습니다.",
+        "sources": [],
+    }
+
+
+def retrieve(
+    state: RagGraphState,
+    retriever: Any,
+    *,
+    allowed_product_ids: set[str] | None = None,
+) -> dict[str, Any]:
     """질문과 가장 가까운 RAG Chunk만 검색한다."""
     top_k = int(state.get("top_k", 3))
-    chunks = retriever.search(state.get("query", ""), top_k=top_k)
+    chunks = retriever.search(
+        state.get("query", ""),
+        top_k=top_k,
+        allowed_product_ids=allowed_product_ids,
+    ) if allowed_product_ids is not None else retriever.search(state.get("query", ""), top_k=top_k)
     return {"retrieved_chunks": [chunk.to_dict() for chunk in chunks]}
 
 
@@ -104,7 +163,19 @@ def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict
     if not chunks:
         return no_grounded_context()
     context, sources = build_grounded_context(chunks)
-    user_prompt = f"[사용자 질문]\n{state.get('query', '')}\n\n[검색 근거]\n{context}\n"
+    analysis_context = json.dumps(
+        {
+            "intent": state.get("intent"),
+            "user_conditions": state.get("user_conditions", {}),
+            "candidate_products": state.get("candidate_products", []),
+        },
+        ensure_ascii=False,
+    )
+    user_prompt = (
+        f"[사용자 질문]\n{state.get('query', '')}\n\n"
+        f"[질문 분석 및 후보 결과]\n{analysis_context}\n\n"
+        f"[검색 근거]\n{context}\n"
+    )
     response = client.generate_rag_answer(system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt)
     return {
         "status": response.status,

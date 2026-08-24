@@ -28,13 +28,27 @@ class FailingChatClient:
 
 def test_workflow_ends_before_external_calls_for_out_of_scope_question(tmp_path):
     path = tmp_path / "embeddings.jsonl"
+    product_path = tmp_path / "product_embeddings.jsonl"
+    catalog_path = tmp_path / "products.json"
     path.write_text(json.dumps({
         "chunk_id": "C1", "document_id": "DOC_001", "document_title": "연금", "section_id": "SEC_001",
         "section_title": "연금", "topic": "연금", "content": "연금 안내", "page_start": 1,
         "page_end": 1, "validation_status": "PASS", "embedding": [1.0],
     }, ensure_ascii=False) + "\n", encoding="utf-8")
+    product_path.write_text(json.dumps({
+        "chunk_id": "P1", "document_id": "PRODUCT_001", "document_title": "데모 상품", "section_id": "SEC_001",
+        "section_title": "개요", "topic": "상품", "content": "데모 상품", "page_start": 1,
+        "page_end": 1, "validation_status": "PASS", "product_id": "PENSION_PRODUCT_DEMO_001", "embedding": [1.0],
+    }, ensure_ascii=False) + "\n", encoding="utf-8")
+    catalog_path.write_text('{"products": []}', encoding="utf-8")
 
-    workflow = create_clova_rag_workflow(path, FailingClient(), FailingChatClient())
+    workflow = create_clova_rag_workflow(
+        path,
+        FailingClient(),
+        FailingChatClient(),
+        product_embedding_path=product_path,
+        product_catalog_path=catalog_path,
+    )
     result = workflow.invoke({"query": "오늘 저녁밥 추천해줘"})
 
     assert result["status"] == "OUT_OF_SCOPE"

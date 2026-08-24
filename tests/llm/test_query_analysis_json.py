@@ -12,15 +12,15 @@ class QueryAnalysisClient(ClovaChatClient):
         return self.responses.pop(0)
 
 
-def test_query_analysis_retries_then_returns_an_unconstrained_condition_object():
+def test_query_analysis_retries_then_returns_a_supported_intent_and_condition_object():
     client = QueryAnalysisClient([
         "분석 결과입니다.",
-        '{"intent":"추천 질문","user_conditions":{"age":20}}',
+        '{"intent":"PENSION_RECOMMENDATION","user_conditions":{"age":20}}',
     ])
 
     result = client.generate_query_analysis(system_prompt="원래 분석 지시", user_prompt="원래 질문")
 
-    assert result.intent == "추천 질문"
+    assert result.intent == "PENSION_RECOMMENDATION"
     assert result.user_conditions == {"age": 20}
     assert len(client.prompts) == 2
     assert "질문 분석 JSON Schema" in client.prompts[1][0]
