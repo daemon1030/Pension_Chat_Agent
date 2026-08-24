@@ -11,7 +11,7 @@ from src.rag.naver_embedding import ClovaEmbeddingClient
 from src.rag.vector_retriever import EmbeddedJsonRagRetriever
 from src.llm.hyperclova import ClovaChatClient
 
-from .nodes import check_scope, generate_clova_answer, grounded_response, out_of_scope_response, retrieve, scope_route
+from .nodes import analyze_query, check_scope, generate_clova_answer, grounded_response, out_of_scope_response, retrieve, scope_route
 from .state import RagGraphState
 
 
@@ -55,11 +55,17 @@ def create_clova_rag_workflow(
     graph = StateGraph(RagGraphState)
     graph.add_node("check_scope", check_scope)
     graph.add_node("out_of_scope", out_of_scope_response)
+    graph.add_node("analyze_query", lambda state: analyze_query(state, client))
     graph.add_node("retrieve", lambda state: retrieve(state, retriever))
     graph.add_node("generate_answer", lambda state: generate_clova_answer(state, client))
     graph.add_edge(START, "check_scope")
-    graph.add_conditional_edges("check_scope", scope_route, {"retrieve": "retrieve", "out_of_scope": "out_of_scope"})
+    graph.add_conditional_edges(
+        "check_scope",
+        scope_route,
+        {"analyze_query": "analyze_query", "out_of_scope": "out_of_scope"},
+    )
     graph.add_edge("out_of_scope", END)
+    graph.add_edge("analyze_query", "retrieve")
     graph.add_edge("retrieve", "generate_answer")
     graph.add_edge("generate_answer", END)
     return graph.compile()

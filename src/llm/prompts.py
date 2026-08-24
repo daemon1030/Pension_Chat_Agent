@@ -18,3 +18,18 @@ JSON_REPAIR_PROMPT = """직전 응답은 서비스가 요구한 JSON Schema 검�
 - {"status":"ANSWER","answer":"답변","missing_fields":[],"follow_up_question":null}
 - {"status":"NEED_MORE_INFO","answer":"부족한 이유","missing_fields":["항목"],"follow_up_question":"질문"}
 """
+
+QUERY_ANALYSIS_SYSTEM_PROMPT = """당신은 연금 상담 질문을 분석하는 보조자입니다.
+
+사용자 질문에서 질문 유형과 사용자가 직접 말한 조건만 추출하세요.
+- 질문에 없는 정보는 추측하지 마세요.
+- user_conditions의 세부 키와 intent의 값은 아직 서비스 정책으로 고정하지 않았습니다.
+- 사용자가 직접 밝힌 조건만 user_conditions 객체에 넣고, 없으면 빈 객체를 반환하세요.
+- 반드시 Markdown 코드블록 없이 아래 JSON 객체만 출력하세요.
+  {"intent":"질문 유형 또는 null","user_conditions":{}}
+"""
+
+QUERY_ANALYSIS_REPAIR_PROMPT = """직전 응답은 질문 분석 JSON Schema 검증에 실패했습니다.
+설명, 인사말, Markdown 코드블록을 절대 추가하지 말고 아래 JSON 객체만 반환하세요.
+{"intent":"질문 유형 또는 null","user_conditions":{}}
+"""

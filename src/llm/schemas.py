@@ -60,4 +60,14 @@ class RagAnswer(BaseModel):
             # 첫 역질문은 사용자가 부담 없이 답할 수 있는 범위로 제한한다.
             value["missing_fields"] = value["missing_fields"][:3]
         return value
-    
+
+
+class QueryAnalysis(BaseModel):
+    """질문 유형과 사용자 조건을 담는 확장 전용 분석 결과 틀.
+
+    intent의 허용값과 user_conditions의 세부 키는 추천 정책을 정한 뒤
+    별도 Schema로 구체화한다.
+    """
+
+    intent: str | None = None
+    user_conditions: dict[str, Any] = Field(default_factory=dict)

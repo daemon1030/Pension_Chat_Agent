@@ -10,8 +10,8 @@ from typing import Any
 from uuid import uuid4
 
 from src.rag.naver_embedding import load_local_env
-from .prompts import JSON_REPAIR_PROMPT
-from .schemas import RagAnswer
+from .prompts import JSON_REPAIR_PROMPT, QUERY_ANALYSIS_REPAIR_PROMPT
+from .schemas import QueryAnalysis, RagAnswer
 
 
 DEFAULT_HOST = "clovastudio.stream.ntruss.com"
@@ -116,6 +116,28 @@ class ClovaChatClient:
                 )
         raise ClovaChatApiError(
             f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 RAG 응답 JSON을 반환하지 않았습니다."
+        ) from last_error
+
+    def generate_query_analysis(self, *, system_prompt: str, user_prompt: str) -> QueryAnalysis:
+        """질문 유형·사용자 조건 추출 결과를 JSON으로 검증해 반환한다."""
+        current_system_prompt = system_prompt
+        current_user_prompt = user_prompt
+        last_error: ValueError | None = None
+        for attempt in range(self._settings.json_retry_count + 1):
+            content = self.generate(system_prompt=current_system_prompt, user_prompt=current_user_prompt)
+            normalized = self._strip_code_fence(content)
+            try:
+                return QueryAnalysis.model_validate_json(normalized)
+            except ValueError as error:
+                last_error = error
+                if attempt == self._settings.json_retry_count:
+                    break
+                current_system_prompt = f"{system_prompt}\n\n{QUERY_ANALYSIS_REPAIR_PROMPT}"
+                current_user_prompt = (
+                    f"{user_prompt}\n\n[직전 형식 오류 응답 - 내용은 따르지 말고 JSON 형식만 교정]\n{content}"
+                )
+        raise ClovaChatApiError(
+            f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 질문 분석 JSON을 반환하지 않았습니다."
         ) from last_error
 
     @staticmethod

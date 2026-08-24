@@ -8,7 +8,7 @@ from __future__ import annotations
 from typing import Any
 
 from src.llm.hyperclova import ClovaChatClient
-from src.llm.prompts import RAG_SYSTEM_PROMPT
+from src.llm.prompts import QUERY_ANALYSIS_SYSTEM_PROMPT, RAG_SYSTEM_PROMPT
 from src.rag.retriever import JsonRagRetriever
 
 from .state import RagGraphState
@@ -29,7 +29,7 @@ def check_scope(state: RagGraphState) -> dict[str, str]:
 
 def scope_route(state: RagGraphState) -> str:
     """check_scope() 이후 라우팅 용도의 함수"""
-    return "retrieve" if state.get("scope") == "IN_SCOPE" else "out_of_scope"
+    return "analyze_query" if state.get("scope") == "IN_SCOPE" else "out_of_scope"
 
 
 def out_of_scope_response(_: RagGraphState) -> dict[str, Any]:
@@ -39,6 +39,19 @@ def out_of_scope_response(_: RagGraphState) -> dict[str, Any]:
         "missing_fields": [],
         "follow_up_question": "연금저축, IRP, 퇴직연금 등 연금관련 궁금한 내용을 알려주세요.",
         "sources": [],
+    }
+
+
+def analyze_query(state: RagGraphState, client: ClovaChatClient) -> dict[str, Any]:
+    """첫 LLM 호출로 질문 유형과 사용자가 직접 밝힌 조건만 추출한다."""
+    user_prompt = f"[사용자 질문]\n{state.get('query', '')}\n"
+    analysis = client.generate_query_analysis(
+        system_prompt=QUERY_ANALYSIS_SYSTEM_PROMPT,
+        user_prompt=user_prompt,
+    )
+    return {
+        "intent": analysis.intent,
+        "user_conditions": analysis.user_conditions,
     }
 
 

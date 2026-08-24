@@ -5,7 +5,7 @@ RAG 이외 추가로 필요한 LangGraph State 정의.
 최종 답변, 추가로 필요한 정보, 사용자에게 할 추가 정보, 답변에 사용할 문서 출처, 처리 결과
 """
 
-from typing import Literal, TypedDict
+from typing import Any, Literal, TypedDict
 
 
 class RagGraphState(TypedDict, total=False):
@@ -14,16 +14,10 @@ class RagGraphState(TypedDict, total=False):
     query: str
     top_k: int
 
-    # 향후 사용자 조건 추출을 도입할 때 활성화할 필드.
-    # 싱글 턴 RAG에서는 현재 질문을 처리하는 동안만 사용하고 저장하지 않는다.
-    # age: int | None
-    # monthly_income: int | None
-    # income_type: str | None
-    # employment_status: str | None
-    # risk_preference: str | None
-    # existing_pension: str | None
-    # goal: str | None
-    # user_conditions: dict[str, str | int | None]
+    # 싱글 턴에서만 쓰고 응답 후 저장하지 않는 사용자 분석 결과.
+    # 세부 조건 키와 intent 값은 추천 정책을 정한 뒤 구체화한다.
+    intent: str | None
+    user_conditions: dict[str, Any]
 
     scope: Literal["IN_SCOPE", "OUT_OF_SCOPE"]
     retrieved_chunks: list[dict]
