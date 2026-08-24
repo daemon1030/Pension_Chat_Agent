@@ -16,7 +16,7 @@ from .state import RagGraphState
 
 
 def create_rag_workflow(rag_directory: Path | str = "data/rag_ready"):
-    """검색 → 근거 기반 응답 순서의 컴파일된 LangGraph를 만든다."""
+
     retriever = JsonRagRetriever.from_directory(rag_directory)
     graph = StateGraph(RagGraphState)
     graph.add_node("retrieve", lambda state: retrieve(state, retriever))
@@ -31,8 +31,12 @@ def create_embedding_rag_workflow(
     embedding_path: Path | str = "data/embeddings/rag_embeddings.jsonl",
     client: ClovaEmbeddingClient | None = None,
 ):
-    """CLOVA 임베딩 벡터 검색을 사용하는 RAG 전용 LangGraph를 만든다."""
-    retriever = EmbeddedJsonRagRetriever.from_jsonl(embedding_path, client or ClovaEmbeddingClient.from_env())
+    """사용자 질문이 들어오면 질문을 임베딩하고, 
+    RAG 저장소에서 의미적으로 가장 유사한 문서 청크 3개를 가져오는 
+    컴파일된 LangGraph를 만든다."""
+    retriever = EmbeddedJsonRagRetriever.from_jsonl(
+        embedding_path, client or ClovaEmbeddingClient.from_env()
+    )
     graph = StateGraph(RagGraphState)
     graph.add_node("retrieve", lambda state: retrieve(state, retriever))
     graph.add_node("grounded_response", grounded_response)
