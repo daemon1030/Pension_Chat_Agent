@@ -11,6 +11,7 @@ class FakeAnalysisClient:
         self.system_prompt = system_prompt
         self.user_prompt = user_prompt
         return QueryAnalysis(
+            is_pension_related=True,
             intent="PENSION_RECOMMENDATION",
             user_conditions={"age": 20, "risk_preference": "CONSERVATIVE"},
         )
@@ -22,6 +23,8 @@ def test_query_analysis_returns_only_the_generic_state_fields():
     result = analyze_query({"query": "20살이고 안전한 연금을 추천해줘"}, client)
 
     assert result == {
+        "is_pension_related": True,
+        "scope": "IN_SCOPE",
         "intent": "PENSION_RECOMMENDATION",
         "user_conditions": {"age": 20, "risk_preference": "CONSERVATIVE"},
     }

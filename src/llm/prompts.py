@@ -24,6 +24,13 @@ JSON_REPAIR_PROMPT = """직전 응답은 서비스가 요구한 JSON Schema 검�
 QUERY_ANALYSIS_SYSTEM_PROMPT = """당신은 연금 상담 질문을 분석하는 보조자입니다.
 
 사용자 질문에서 질문 유형과 사용자가 직접 말한 조건만 추출하세요.
+
+이 호출은 키워드 1차 필터를 통과한 질문에 대한 2차 의미 검증입니다.
+- 먼저 질문의 전체 문맥이 실제 연금 상담(연금계좌·퇴직연금·연금상품·가입·운용·세제·수령·인출 등)에 관한 것인지 판단하세요.
+- 질문에 연금 관련 단어가 포함되어도, 단순 뉴스·문장·코드·제목의 인용처럼 연금 상담을 요청하는 것이 아니라면 연금 상담 질문으로 성급하게 해석하지 마세요.
+- 반대로 사용자가 연금이라는 단어를 정확히 쓰지 않아도, 노후 준비·퇴직금 처리·절세 계좌처럼 문맥상 연금 상담을 요청하면 연금 관련 질문으로 해석하세요.
+- 실제 연금 상담 질문이면 is_pension_related는 true로 설정하고, 아래 기준으로 intent를 설정하세요.
+- 실제 연금 상담 질문이 아니면 is_pension_related는 false로 설정하고, intent는 반드시 null, user_conditions는 반드시 빈 객체로 설정하세요.
 - 상품 추천·비교·개인에게 맞는 상품 또는 운용 방향 판단 요청이면 intent는 PENSION_RECOMMENDATION입니다.
 - 연금 제도·규정·용어·일반 절차 설명 요청이면 intent는 PENSION_INFO입니다.
 - 질문에 없는 정보는 추측하지 마세요.
@@ -35,10 +42,12 @@ QUERY_ANALYSIS_SYSTEM_PROMPT = """당신은 연금 상담 질문을 분석하는
   - risk_preference: CONSERVATIVE, BALANCED, AGGRESSIVE 중 하나
   - goal: RETIREMENT_PREPARATION 등 사용자가 말한 목적
 - 반드시 Markdown 코드블록 없이 아래 JSON 객체만 출력하세요.
-  {"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}
+  - 연금 관련: {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}
+  - 연금 무관: {"is_pension_related":false,"intent":null,"user_conditions":{}}
 """
 
 QUERY_ANALYSIS_REPAIR_PROMPT = """직전 응답은 질문 분석 JSON Schema 검증에 실패했습니다.
 설명, 인사말, Markdown 코드블록을 절대 추가하지 말고 아래 JSON 객체만 반환하세요.
-{"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}
+연금 관련 질문이면 {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}를,
+연금 무관 질문이면 {"is_pension_related":false,"intent":null,"user_conditions":{}}를 반환하세요.
 """

@@ -13,7 +13,7 @@ from typing import Any
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.graph.workflow import create_clova_rag_workflow, create_postgres_clova_rag_workflow
+from src.graph.workflow import create_postgres_clova_rag_workflow
 
 
 def load_cases(path: Path) -> list[dict[str, Any]]:
@@ -26,12 +26,11 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "data/evaluation/chat_test_results.jsonl")
     parser.add_argument("--top-k", type=int, default=3)
     parser.add_argument("--delay-seconds", type=float, default=1.0)
-    parser.add_argument("--storage", choices=("postgres", "jsonl"), default="postgres")
     args = parser.parse_args()
 
     cases = load_cases(args.input)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    workflow = create_postgres_clova_rag_workflow() if args.storage == "postgres" else create_clova_rag_workflow()
+    workflow = create_postgres_clova_rag_workflow()
 
     with args.output.open("w", encoding="utf-8") as output:
         for index, case in enumerate(cases, 1):

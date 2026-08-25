@@ -10,8 +10,7 @@ from typing import Any
 
 from src.llm.hyperclova import ClovaChatClient
 from src.llm.prompts import QUERY_ANALYSIS_SYSTEM_PROMPT, RAG_SYSTEM_PROMPT
-from src.rag.retriever import JsonRagRetriever
-from src.products.catalog import filter_products, missing_recommendation_fields
+from src.products.catalog import missing_recommendation_fields
 
 from .state import RagGraphState
 
@@ -52,9 +51,18 @@ def analyze_query(state: RagGraphState, client: ClovaChatClient) -> dict[str, An
         user_prompt=user_prompt,
     )
     return {
+        "is_pension_related": analysis.is_pension_related,
+        "scope": "IN_SCOPE" if analysis.is_pension_related else "OUT_OF_SCOPE",
         "intent": analysis.intent,
         "user_conditions": analysis.user_conditions,
     }
+
+
+def analysis_scope_route(state: RagGraphState) -> str:
+    """LLM의 2차 연금 관련성 판정 후 종료 또는 검색 경로를 고른다."""
+    if not state.get("is_pension_related"):
+        return "out_of_scope"
+    return intent_route(state)
 
 
 def intent_route(state: RagGraphState) -> str:
@@ -80,11 +88,6 @@ def recommendation_follow_up(state: RagGraphState) -> dict[str, Any]:
         "follow_up_question": f"다음 정보를 알려주세요: {', '.join(missing_fields)}.",
         "sources": [],
     }
-
-
-def filter_candidate_products(state: RagGraphState, products: list[dict[str, Any]]) -> dict[str, Any]:
-    """정확한 상품 조건으로 후보를 먼저 좁혀 product_id를 State에 보관한다."""
-    return store_candidate_products(filter_products(products, state.get("user_conditions", {})))
 
 
 def store_candidate_products(candidates: list[dict[str, Any]]) -> dict[str, Any]:
@@ -123,19 +126,6 @@ def retrieve(
         allowed_product_ids=allowed_product_ids,
     ) if allowed_product_ids is not None else retriever.search(state.get("query", ""), top_k=top_k)
     return {"retrieved_chunks": [chunk.to_dict() for chunk in chunks]}
-
-
-def grounded_response(state: RagGraphState) -> dict[str, Any]:
-    """검색된 원문만 출력하고, 근거가 없으면 답변을 보류한다.
-
-    LLM을 아직 연결하지 않았으므로 문장을 새로 해석하거나 요약하지 않는다.
-    """
-    chunks = state.get("retrieved_chunks", [])
-    if not chunks:
-        return no_grounded_context()
-
-    context, sources = build_grounded_context(chunks)
-    return {"status": "ANSWER", "answer": "검색된 문서 근거입니다. 아래 원문 범위에서만 확인해 주세요.\n\n" + context, "sources": sources}
 
 
 def build_grounded_context(chunks: list[dict]) -> tuple[str, list[dict]]:
@@ -182,6 +172,7 @@ def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict
     )
     response = client.generate_rag_answer(system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt)
     return {
+        "answer_generation_prompt": user_prompt,
         "status": response.status,
         "answer": response.answer,
         "missing_fields": response.missing_fields,

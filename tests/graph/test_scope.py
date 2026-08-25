@@ -1,7 +1,6 @@
-import json
-
 from src.graph.nodes import check_scope, out_of_scope_response
-from src.graph.workflow import create_clova_rag_workflow
+from src.graph.workflow import create_postgres_clova_rag_workflow
+from src.llm.schemas import QueryAnalysis
 
 
 def test_non_pension_question_is_out_of_scope():
@@ -16,39 +15,43 @@ def test_pension_question_is_in_scope():
     assert check_scope({"query": "IRP 중도인출 조건이 뭐야?"}) == {"scope": "IN_SCOPE"}
 
 
-class FailingClient:
+class FailingEmbeddingClient:
     def embed(self, text: str) -> list[float]:
         raise AssertionError("범위 밖 질문은 임베딩 API를 호출하면 안 됩니다.")
 
 
 class FailingChatClient:
     def generate_rag_answer(self, **kwargs):
-        raise AssertionError("범위 밖 질문은 Chat API를 호출하면 안 됩니다.")
+        raise AssertionError("범위 밖 질문은 최종 답변 API를 호출하면 안 됩니다.")
 
 
-def test_workflow_ends_before_external_calls_for_out_of_scope_question(tmp_path):
-    path = tmp_path / "embeddings.jsonl"
-    product_path = tmp_path / "product_embeddings.jsonl"
-    catalog_path = tmp_path / "products.json"
-    path.write_text(json.dumps({
-        "chunk_id": "C1", "document_id": "DOC_001", "document_title": "연금", "section_id": "SEC_001",
-        "section_title": "연금", "topic": "연금", "content": "연금 안내", "page_start": 1,
-        "page_end": 1, "validation_status": "PASS", "embedding": [1.0],
-    }, ensure_ascii=False) + "\n", encoding="utf-8")
-    product_path.write_text(json.dumps({
-        "chunk_id": "P1", "document_id": "PRODUCT_001", "document_title": "데모 상품", "section_id": "SEC_001",
-        "section_title": "개요", "topic": "상품", "content": "데모 상품", "page_start": 1,
-        "page_end": 1, "validation_status": "PASS", "product_id": "PENSION_PRODUCT_DEMO_001", "embedding": [1.0],
-    }, ensure_ascii=False) + "\n", encoding="utf-8")
-    catalog_path.write_text('{"products": []}', encoding="utf-8")
+class LlmRejectingChatClient(FailingChatClient):
+    def generate_query_analysis(self, **kwargs) -> QueryAnalysis:
+        return QueryAnalysis(is_pension_related=False, intent=None)
 
-    workflow = create_clova_rag_workflow(
-        path,
-        FailingClient(),
-        FailingChatClient(),
-        product_embedding_path=product_path,
-        product_catalog_path=catalog_path,
+
+class UnusedRepository:
+    """범위 종료 테스트에서는 DB 조회가 일어나면 안 된다."""
+
+
+def make_workflow(chat_client):
+    return create_postgres_clova_rag_workflow(
+        embedding_client=FailingEmbeddingClient(),
+        chat_client=chat_client,
+        repository=UnusedRepository(),
     )
-    result = workflow.invoke({"query": "오늘 저녁밥 추천해줘"})
+
+
+def test_workflow_ends_before_external_calls_for_keyword_out_of_scope_question():
+    result = make_workflow(FailingChatClient()).invoke({"query": "오늘 저녁밥 추천해줘"})
 
     assert result["status"] == "OUT_OF_SCOPE"
+
+
+def test_workflow_ends_when_llm_rejects_keyword_matched_question():
+    result = make_workflow(LlmRejectingChatClient()).invoke(
+        {"query": "연금이라는 단어가 포함된 뉴스 제목만 고쳐줘"}
+    )
+
+    assert result["status"] == "OUT_OF_SCOPE"
+    assert result["is_pension_related"] is False

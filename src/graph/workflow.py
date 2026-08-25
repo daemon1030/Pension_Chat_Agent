@@ -2,29 +2,23 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any, Callable
 
 from langgraph.graph import END, START, StateGraph
 
-from src.rag.retriever import JsonRagRetriever
 from src.rag.naver_embedding import ClovaEmbeddingClient
 from src.rag.postgres_retriever import PostgresRagRetriever
-from src.rag.vector_retriever import EmbeddedJsonRagRetriever
 from src.database.connection import connect_from_env
 from src.database.repository import PostgresPensionRepository
 from src.llm.hyperclova import ClovaChatClient
-from src.products.catalog import load_products
 
 from .nodes import (
+    analysis_scope_route,
     analyze_query,
     candidate_product_route,
     check_recommendation_requirements,
     check_scope,
-    filter_candidate_products,
     generate_clova_answer,
-    grounded_response,
-    intent_route,
     no_matching_product,
     out_of_scope_response,
     recommendation_follow_up,
@@ -34,58 +28,6 @@ from .nodes import (
     store_candidate_products,
 )
 from .state import RagGraphState
-
-
-def create_rag_workflow(rag_directory: Path | str = "data/rag_ready"):
-
-    retriever = JsonRagRetriever.from_directory(rag_directory)
-    graph = StateGraph(RagGraphState)
-    graph.add_node("retrieve", lambda state: retrieve(state, retriever))
-    graph.add_node("grounded_response", grounded_response)
-    graph.add_edge(START, "retrieve")
-    graph.add_edge("retrieve", "grounded_response")
-    graph.add_edge("grounded_response", END)
-    return graph.compile()
-
-
-def create_embedding_rag_workflow(
-    embedding_path: Path | str = "data/embeddings/rag_embeddings.jsonl",
-    client: ClovaEmbeddingClient | None = None,
-):
-    """사용자 질문이 들어오면 질문을 임베딩하고, 
-    RAG 저장소에서 의미적으로 가장 유사한 문서 청크 3개를 가져오는 
-    컴파일된 LangGraph를 만든다."""
-    retriever = EmbeddedJsonRagRetriever.from_jsonl(
-        embedding_path, client or ClovaEmbeddingClient.from_env()
-    )
-    graph = StateGraph(RagGraphState)
-    graph.add_node("retrieve", lambda state: retrieve(state, retriever))
-    graph.add_node("grounded_response", grounded_response)
-    graph.add_edge(START, "retrieve")
-    graph.add_edge("retrieve", "grounded_response")
-    graph.add_edge("grounded_response", END)
-    return graph.compile()
-
-
-def create_clova_rag_workflow(
-    embedding_path: Path | str = "data/embeddings/rag_embeddings.jsonl",
-    embedding_client: ClovaEmbeddingClient | None = None,
-    chat_client: ClovaChatClient | None = None,
-    product_embedding_path: Path | str = "data/embeddings/product_embeddings.jsonl",
-    product_catalog_path: Path | str = "data/products.json",
-):
-    """질문 유형에 따라 규정 RAG 또는 조건 필터된 상품 RAG를 연결한다."""
-    client_for_embedding = embedding_client or ClovaEmbeddingClient.from_env()
-    policy_retriever = EmbeddedJsonRagRetriever.from_jsonl(embedding_path, client_for_embedding)
-    product_retriever = EmbeddedJsonRagRetriever.from_jsonl(product_embedding_path, client_for_embedding)
-    products = load_products(product_catalog_path)
-    client = chat_client or ClovaChatClient.from_env()
-    return _compile_clova_rag_workflow(
-        policy_retriever=policy_retriever,
-        product_retriever=product_retriever,
-        select_candidates=lambda state: filter_candidate_products(state, products),
-        chat_client=client,
-    )
 
 
 def create_postgres_clova_rag_workflow(
@@ -144,8 +86,12 @@ def _compile_clova_rag_workflow(
     graph.add_edge("out_of_scope", END)
     graph.add_conditional_edges(
         "analyze_query",
-        intent_route,
-        {"information": "retrieve_policy", "recommendation": "check_recommendation_requirements"},
+        analysis_scope_route,
+        {
+            "out_of_scope": "out_of_scope",
+            "information": "retrieve_policy",
+            "recommendation": "check_recommendation_requirements",
+        },
     )
     graph.add_conditional_edges(
         "check_recommendation_requirements",

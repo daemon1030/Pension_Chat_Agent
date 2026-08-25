@@ -12,7 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.rag.naver_embedding import ClovaEmbeddingClient, EmbeddingRateLimitError
-from src.rag.retriever import JsonRagRetriever
+from src.rag.retriever import load_rag_chunks
 
 
 def main() -> None:
@@ -24,7 +24,7 @@ def main() -> None:
     args = parser.parse_args()
 
     client = ClovaEmbeddingClient.from_env()
-    chunks = JsonRagRetriever.from_directory(args.input_dir)._chunks
+    chunks = load_rag_chunks(args.input_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary_path = args.output.with_suffix(args.output.suffix + ".tmp")
     progress_path = temporary_path if temporary_path.exists() else args.output

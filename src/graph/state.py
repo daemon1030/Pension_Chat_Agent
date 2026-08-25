@@ -15,7 +15,8 @@ class RagGraphState(TypedDict, total=False):
     top_k: int
 
     # 싱글 턴에서만 쓰고 응답 후 저장하지 않는 사용자 분석 결과.
-    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"]
+    is_pension_related: bool
+    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
     user_conditions: dict[str, Any]
     candidate_product_ids: list[str]
     candidate_products: list[dict[str, Any]]
@@ -23,6 +24,8 @@ class RagGraphState(TypedDict, total=False):
     scope: Literal["IN_SCOPE", "OUT_OF_SCOPE"]
     retrieved_chunks: list[dict]
     grounded_context: str
+    # RAG 근거와 질문을 조합해 최종 답변 LLM에 전달한 사용자 메시지.
+    answer_generation_prompt: str
     answer: str
     missing_fields: list[str]
     follow_up_question: str | None

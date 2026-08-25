@@ -51,6 +51,7 @@ def test_postgres_recommendation_workflow_filters_products_before_product_vector
     workflow = create_postgres_clova_rag_workflow(
         embedding_client=FakeEmbeddingClient(),
         chat_client=FakeChatClient(QueryAnalysis(
+            is_pension_related=True,
             intent="PENSION_RECOMMENDATION",
             user_conditions={
                 "age": 20,
@@ -74,7 +75,7 @@ def test_postgres_information_workflow_searches_only_policy_vectors():
     repository = FakeRepository()
     workflow = create_postgres_clova_rag_workflow(
         embedding_client=FakeEmbeddingClient(),
-        chat_client=FakeChatClient(QueryAnalysis(intent="PENSION_INFO")),
+        chat_client=FakeChatClient(QueryAnalysis(is_pension_related=True, intent="PENSION_INFO")),
         repository=repository,
     )
 

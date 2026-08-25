@@ -1,6 +1,5 @@
-"""RAG 검색 컴포넌트."""
+"""RAG 데이터 모델과 PostgreSQL 검색 컴포넌트."""
 
-from .retriever import JsonRagRetriever, RagChunk
-from .vector_retriever import EmbeddedJsonRagRetriever
+from .retriever import RagChunk, load_rag_chunks
 
-__all__ = ["EmbeddedJsonRagRetriever", "JsonRagRetriever", "RagChunk"]
+__all__ = ["RagChunk", "load_rag_chunks"]

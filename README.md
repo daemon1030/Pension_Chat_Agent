@@ -1,135 +1,154 @@
-# 연금 문서 기반 RAG 챗봇
+# 연금 상담 RAG 챗봇
 
-연금 문서 원본을 페이지·섹션 단위로 보존해 전처리하고, 네이버 CLOVA Studio 임베딩으로 관련 근거를 검색한 뒤 HyperCLOVA X가 근거 기반 답변을 만드는 **RAG 전용 챗봇**입니다.
+연금 제도 문서와 상품 데이터를 근거로 답하는 챗봇입니다. 질문을 받으면 HyperCLOVA가 질문의 뜻과 사용자가 직접 말한 조건을 먼저 정리하고, 코드가 필요한 데이터를 PostgreSQL과 pgvector에서 조회한 뒤 근거 기반 답변을 생성합니다.
 
-정형 DB, Rule Engine, FastAPI 같은 별도 서비스 계층은 이 프로젝트 범위에 포함하지 않습니다.
-
-## 동작 구조
+## 현재 동작 흐름
 
 ```text
-data/raw
-  → base_processed       원문을 문서·페이지·표·이미지 정보와 함께 보존
-  → semantic_review      섹션 제목·주제·RAG 포함 여부를 검토
-  → rag_ready            RAG에 넣을 확정 Chunk 생성
-  → embeddings           Chunk + CLOVA 임베딩 벡터(JSONL)
-  → LangGraph            질문 범위 확인 → 벡터 검색 → CLOVA 답변 생성
+사용자 질문
+  ↓
+1차 키워드 확인
+  ├─ 연금 관련 단어가 없음 → 안내 후 종료
+  └─ 연금 관련 가능성 있음
+       ↓
+2차 LLM 질문 분석
+  ├─ 실제 연금 상담 질문인지 확인
+  ├─ 추천 질문인지 / 제도·규정 질문인지 구분
+  └─ 사용자가 말한 나이·고용 형태·위험 선호·목적 등 조건 추출
+       ↓
+코드가 필요한 정보가 충분한지 확인
+  ├─ 부족함 → 필요한 정보만 역질문
+  └─ 충분함
+       ↓
+질문 유형에 맞는 데이터 조회
+  ├─ 제도·세제·수령·중도인출 질문 → Policy RAG 검색
+  └─ 상품 추천 질문 → 상품 DB 조건 필터 → 후보 상품 Product RAG 검색
+       ↓
+검색 근거 + 질문 + 사용자 조건
+  ↓
+HyperCLOVA 최종 답변 생성
+  ↓
+답변·출처·처리 로그 저장
 ```
 
-현재 채팅 실행기는 `data/embeddings/rag_embeddings.jsonl`만 직접 읽습니다. 원본에서 다시 만들 때는 위 순서대로 전처리 단계를 실행합니다.
+핵심 원칙은 다음과 같습니다.
 
-## 디렉터리 구조
+```text
+LLM  → 질문 이해, 사용자 조건 추출, 답변 설명
+DB   → 상품 조건을 정확하게 비교·필터링
+RAG  → 제도·상품 문서에서 답변 근거 검색
+코드 → 정보 부족 판단과 흐름 제어
+```
+
+## 데이터 흐름
+
+```text
+원본 문서
+  → base_processed       원문·페이지·표·이미지 보존
+  → semantic_review      섹션과 RAG 포함 여부 검토
+  → rag_ready            검색용 Chunk 생성
+  → embeddings           CLOVA 임베딩 JSONL 생성
+  → PostgreSQL / pgvector 적재
+  → 챗봇 검색에 사용
+```
+
+임베딩 JSONL은 DB 적재를 위한 중간 산출물입니다. 채팅 실행 시에는 로컬 JSONL을 직접 검색하지 않고 PostgreSQL + pgvector만 사용합니다.
+
+## 주요 디렉터리
 
 ```text
 data/
-├── raw/                 # 원본 PDF·Office 문서 (수정하지 않음)
+├── raw/                 # 원본 PDF·Office 문서
 ├── base_processed/      # 원문 보존형 중간 JSON
-├── semantic_review/     # Section/Topic/RAG 포함 여부 검토 JSON
-├── rag_ready/           # RAG 검색용 확정 Chunk JSON
-├── embeddings/          # Chunk와 임베딩 벡터를 담은 JSONL
-└── raw_invest_recommand/# 별도 투자추천 원본 자료, 현재 흐름에서는 미사용
+├── semantic_review/     # RAG 포함 여부 검토 JSON
+├── rag_ready/           # 확정된 RAG Chunk JSON
+├── embeddings/          # DB 적재용 임베딩 JSONL
+├── products.json        # 상품 조건 DB 적재용 데이터
+└── evaluation/          # 대표 질문·평가 결과
+
+database/
+└── init.sql             # PostgreSQL·pgvector 테이블 정의
 
 src/
-├── rag/                 # 임베딩 생성과 벡터 검색
-├── llm/                 # HyperCLOVA X 호출·JSON 검증
-└── graph/               # RAG LangGraph 흐름
+├── database/            # 상품 DB와 벡터 검색 Repository
+├── graph/               # LangGraph 질문 처리 흐름
+├── llm/                 # HyperCLOVA 호출·프롬프트·JSON 검증
+├── observability/       # 요청·분석·검색·답변 로그
+├── products/            # 추천에 필요한 필수 사용자 조건 정의
+└── rag/                 # RAG Chunk 모델·임베딩 API·PostgreSQL Retriever
 
 scripts/
-├── rag/                 # 현재 사용하는 실행기
-└── preprocessing/       # 원본 전처리·검증·RAG Chunk 생성 도구
-
-tests/
-├── rag/                 # 검색기·임베딩 재개 처리 테스트
-├── llm/                 # CLOVA JSON 재시도·정규화 테스트
-└── graph/               # 범위 제한·RAG 워크플로 테스트
+├── database/            # DB 초기화·데이터 적재
+├── evaluation/          # 대표 질문 일괄 평가
+├── preprocessing/       # 원본 전처리·검토·Chunk 생성
+└── rag/                 # 임베딩 생성·챗봇 실행
 ```
 
-## 코드별 역할
+## 주요 코드 역할
 
-### `src/rag/`
-
-| 파일                    | 역할                                                                                         |
-| --------------------- | ------------------------------------------------------------------------------------------ |
-| `naver_embedding.py`  | `.env`에서 API 키를 읽고 CLOVA Studio Embedding v2 API를 호출합니다. 요청 한도 초과 시 재시도에 사용할 대기 시간도 전달합니다. |
-| `retriever.py`        | `rag_ready` JSON을 읽고, 임베딩 이전에 사용할 수 있는 단순 키워드 검색기와 공통 `RagChunk` 모델을 제공합니다.                |
-| `vector_retriever.py` | 임베딩 JSONL을 메모리에 읽고, 질문을 임베딩한 뒤 코사인 유사도로 Top-K Chunk를 검색합니다. 같은 섹션이 중복 반환되지 않게 합니다.         |
-
-### `src/llm/`
-
-| 파일              | 역할                                                                                          |
-| --------------- | ------------------------------------------------------------------------------------------- |
-| `hyperclova.py` | HyperCLOVA X Chat Completions API 호출 Adapter입니다. 모델 응답이 JSON Schema에 맞지 않으면 JSON만 다시 요청합니다. |
-| `prompts.py`    | 근거 밖의 내용을 추측하지 않기 위한 시스템 프롬프트와 JSON 재요청 프롬프트를 둡니다.                                          |
-| `schemas.py`    | 최종 응답 형식(`ANSWER` 또는 `NEED_MORE_INFO`)을 Pydantic으로 검증합니다. 부족 정보의 유사 필드명도 안전하게 정규화합니다.       |
-
-### `src/graph/`
-
-| 파일 | 역할 |
+| 위치 | 역할 |
 |---|---|
-| `state.py` | 질문, 검색 결과, 답변, 출처, 부족 정보 등 LangGraph가 전달하는 상태를 정의합니다. |
-| `nodes.py` | 연금 질문인지 확인하고, 검색 결과를 근거 문맥과 출처로 만들며, CLOVA 최종 답변을 생성하는 노드입니다. 연금 외 질문은 API 호출 없이 종료합니다. |
-| `workflow.py` | `범위 확인 → 벡터 검색 → CLOVA 답변` 순서의 현재 워크플로를 조립합니다. 키워드 검색용·임베딩 검색용 워크플로도 테스트/비교용으로 제공합니다. |
-
-### `scripts/rag/` — 현재 실행 파일
-
-| 파일                    | 역할                                                                                                                                       |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `build_embeddings.py` | `rag_ready`의 Chunk를 CLOVA 임베딩으로 변환해 `data/embeddings/rag_embeddings.jsonl`에 저장합니다. 중단되면 완료한 Chunk를 건너뛰고 재개하며, API 속도 제한은 지수 대기 후 재시도합니다. |
-| `chat.py`             | 현재 사용자 질문을 받아 LangGraph RAG를 실행하고 `status`, `answer`, `missing_fields`, `follow_up_question`, `sources` JSON을 출력합니다.                     |
-
-### `scripts/preprocessing/` — 전처리·검증 도구
-
-| 파일                                     | 역할                                                             |
-| -------------------------------------- | -------------------------------------------------------------- |
-| `build_base_processed.py`              | `raw`의 PDF/Office 원본을 문서·페이지·텍스트·표·이미지 정보가 있는 기본 JSON으로 변환합니다. |
-| `enrich_base_processed.py`             | 기본 JSON에 문서별 검토·보강 내용을 추가합니다.                                  |
-| `ocr_pdf_images.py`                    | 이미지가 포함된 PDF 페이지를 OCR해 이미지 텍스트를 보관합니다. OCR 결과는 검토 대상으로 표시합니다.  |
-| `fill_scanned_documents.py`            | 텍스트 레이어가 부족한 검토 대상 문서의 확인된 시각 텍스트를 보강합니다.                      |
-| `validate_base_processed.py`           | 원본 재변환 결과와 `base_processed`를 대조해 텍스트·표·FAQ·보강 메타데이터 누락을 검사합니다. |
-| `build_semantic_review.py`             | `base_processed`를 Section/Topic/RAG 사용 여부를 검토할 수 있는 형식으로 만듭니다. |
-| `apply_review_batch_011_023.py`        | DOC 011~023의 검토 결과를 반영합니다.                                     |
-| `apply_review_batch_text_documents.py` | 텍스트 레이어가 있는 나머지 문서의 검토 결과를 반영합니다.                              |
-| `apply_remaining_semantic_review.py`   | 남은 문서의 의미 검토 결과를 반영합니다.                                        |
-| `build_final_knowledge.py`             | 검토 JSON에서 RAG 검색용 확정 Chunk를 `rag_ready`에 생성합니다.                |
+| `scripts/rag/chat.py` | PostgreSQL 기반 챗봇 실행 진입점입니다. |
+| `src/graph/workflow.py` | 질문 분석, DB 필터, RAG 검색, 답변 생성을 연결합니다. |
+| `src/graph/nodes.py` | 질문 범위 확인, LLM 분석, 정보 부족 판단, 근거 구성 역할을 수행합니다. |
+| `src/database/repository.py` | 상품 조건 필터와 pgvector 검색 SQL을 실행합니다. |
+| `src/rag/postgres_retriever.py` | 질문을 임베딩하고 PostgreSQL에서 Policy/Product 문서를 검색합니다. |
+| `src/llm/hyperclova.py` | HyperCLOVA API 호출과 JSON 형식 재시도를 담당합니다. |
+| `src/observability/chat_log.py` | 분석 단계와 최종 답변 단계를 JSONL 로그로 남깁니다. |
 
 ## 실행 방법
 
-명령은 프로젝트 루트에서 실행합니다. 현재 저장소는 기존 `.venv`를 사용합니다.
+프로젝트 루트에서 실행합니다. Python 가상환경과 Docker가 준비되어 있어야 합니다.
 
 ### 1. 환경 변수 설정
 
-프로젝트 루트에 `.env` 파일을 만들고 키를 넣습니다. `.env`는 Git에 올리지 않습니다.
+`.env.example`을 참고해 프로젝트 루트에 `.env`를 만듭니다. 실제 API 키와 운영용 DB 비밀번호는 Git에 올리지 않습니다.
 
 ```dotenv
 CLOVASTUDIO_API_KEY=Bearer 발급받은_API_키
-# 선택: 기본값은 HCX-DASH-002
 CLOVASTUDIO_CHAT_MODEL=HCX-DASH-002
-# 선택: 잘못된 JSON 응답을 다시 요청하는 횟수, 기본값 1
 CLOVASTUDIO_JSON_RETRY_COUNT=1
+
+POSTGRES_DB=pension_agent
+POSTGRES_USER=pension_app
+POSTGRES_PASSWORD=로컬_개발용_비밀번호
+POSTGRES_PORT=5433
+PENSION_DATABASE_DSN=postgresql://pension_app:로컬_개발용_비밀번호@127.0.0.1:5433/pension_agent
 ```
 
-### 2. 임베딩 생성 또는 재개
+### 2. PostgreSQL + pgvector 실행
 
-`data/rag_ready`가 새로 생성·변경된 경우에만 실행합니다.
+```bash
+docker compose -p pension-agent up -d
+```
+
+### 3. 문서 전처리와 임베딩 생성
+
+원본 문서를 새로 추가하거나 수정한 경우에만 실행합니다.
 
 ```bash
 .venv/bin/python3 scripts/rag/build_embeddings.py
 ```
 
-속도 제한이 발생하면 자동으로 대기 후 재시도합니다. 작업 도중 중단되어도 같은 명령을 실행하면 기존 완료분을 유지하고 이어서 처리합니다.
-
-### 3. RAG 채팅 실행
+상품 문서는 같은 형식의 상품용 임베딩 JSONL을 준비합니다. 이후 규정 임베딩, 상품 임베딩, 상품 조건 데이터를 DB에 넣습니다.
 
 ```bash
-.venv/bin/python3 scripts/rag/chat.py "연금저축은 언제부터 받을 수 있나요?"
+.venv/bin/python3 scripts/database/seed_local_data.py
 ```
 
-검색할 Chunk 수를 바꾸려면 다음처럼 실행합니다.
+### 4. 챗봇 실행
 
 ```bash
-.venv/bin/python3 scripts/rag/chat.py "IRP 세액공제 한도는?" --top-k 5
+.venv/bin/python3 scripts/rag/chat.py "IRP는 어떤 제도야?"
 ```
 
-출력 예시는 다음과 같습니다.
+추천 질문 예시입니다.
+
+```bash
+.venv/bin/python3 scripts/rag/chat.py "20살이고 재직 중이며 안전한 투자를 선호해. 노후 준비용 연금상품을 추천해줘"
+```
+
+출력에는 처리 상태, 답변, 부족한 정보, 후속 질문, 출처가 포함됩니다.
 
 ```json
 {
@@ -137,26 +156,46 @@ CLOVASTUDIO_JSON_RETRY_COUNT=1
   "answer": "검색 근거에 기반한 답변",
   "missing_fields": [],
   "follow_up_question": null,
-  "sources": [
-    {"document_id": "DOC_001", "document_name": "문서명", "page": 1}
-  ]
+  "sources": []
 }
 ```
 
-개인 조건이 필요한 질문에는 `NEED_MORE_INFO`와 함께 필요한 정보 및 역질문을 반환합니다. 연금과 무관한 질문에는 `OUT_OF_SCOPE`를 반환합니다.
+## 로그
 
-### 4. 테스트
+`data/logs/chat_interactions.jsonl`에는 요청 하나당 같은 `request_id`를 가진 두 행이 저장됩니다.
+
+1. `QUERY_ANALYSIS`: 원 질문, 연금 관련성, 질문 유형, 추출한 사용자 조건
+2. `FINAL_RESPONSE`: RAG 근거를 포함한 최종 LLM 입력, 선택된 문서, 최종 답변
+
+로그에는 사용자가 말한 개인정보가 들어갈 수 있으므로 `data/`는 Git에 포함하지 않습니다.
+
+## 테스트와 평가
 
 ```bash
 .venv/bin/python3 -m pytest -q
 ```
 
-## 현재 한계와 다음 단계
+대표 질문 묶음을 실제 챗봇에 실행하려면 다음 명령을 사용합니다.
 
-- 벡터는 현재 로컬 JSONL을 메모리에 읽어 검색합니다. 문서가 매우 커지면 별도 벡터 저장소 도입을 검토할 수 있습니다.
-- 현재 인터페이스는 터미널 CLI입니다. HTTP API와 대화 세션 복원은 제공하지 않습니다.
-- OCR과 수기 보강 텍스트는 검토 표시가 남아 있으므로, 운영 반영 전 원문 대조가 필요합니다.
+```bash
+.venv/bin/python3 scripts/evaluation/run_chat_cases.py
+```
 
-## 추가해야하는 점
+## 현재 범위와 다음 확장
 
-- 연금 추천 질문에서 근거가 부족하다고 클로바에서 NEED_MORE_INFO를 보냄 -> 질문 후 사용자가 준 조건을 추출해서 클로바에게 넘기는 형식으로 만들어야할듯함.
+현재는 다음을 구현했습니다.
+
+- PostgreSQL 상품 조건 필터
+- pgvector 기반 Policy RAG / Product RAG
+- 1차 키워드 확인 + 2차 LLM 연금 관련성 확인
+- 추천 질문의 사용자 조건 부족 역질문
+- HyperCLOVA 근거 기반 답변과 출처 반환
+- 요청·분석·검색 결과·답변 로그
+
+다음 확장 후보입니다.
+
+- 상품 설명·상품 비교 질문에서 상품명으로 `product_id`를 찾는 기능
+- 세제·수령·중도인출 같은 세부 질문 유형별 필수 정보 규칙
+- LLM이 `PRODUCT_DB`, `POLICY_RAG`, `PRODUCT_RAG` 중 필요한 데이터원을 선택하는 조회 계획
+- FastAPI API와 세션 기반 사용자 정보 유지
+- Rule Engine, 출력 안전성 검증, 대표 질문 평가 개선

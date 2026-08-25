@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from threading import Lock
 from typing import Any
+from uuid import uuid4
 
 
 _WRITE_LOCK = Lock()
@@ -36,25 +37,47 @@ def append_chat_log(
     source: str,
     path: Path | str = "data/logs/chat_interactions.jsonl",
 ) -> None:
-    """한 요청의 질문·응답 또는 오류를 한 JSONL 행으로 기록한다.
-
-    로그에는 사용자가 입력한 내용이 포함될 수 있으므로 기본 경로는 Git에서
-    제외된 data 디렉터리 아래로 둔다.
-    """
-    record = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "source": source,
-        "query": query,
-        "status": result.get("status") if result else "ERROR",
-        "answer": result.get("answer") if result else None,
-        "missing_fields": result.get("missing_fields", []) if result else [],
-        "follow_up_question": result.get("follow_up_question") if result else None,
-        "sources": result.get("sources", []) if result else [],
-        "retrieved_chunks": _retrieval_log_entries(result),
-        "error": f"{type(error).__name__}: {error}" if error else None,
-    }
+    """한 요청을 분석 단계와 최종 응답 단계의 두 JSONL 행으로 기록한다."""
+    request_id = str(uuid4())
+    timestamp = datetime.now(timezone.utc).isoformat()
+    error_message = f"{type(error).__name__}: {error}" if error else None
+    records = [
+        {
+            "timestamp": timestamp,
+            "request_id": request_id,
+            "stage": "QUERY_ANALYSIS",
+            "source": source,
+            "input": {"query": query},
+            "output": {
+                "scope": result.get("scope") if result else None,
+                "is_pension_related": result.get("is_pension_related") if result else None,
+                "intent": result.get("intent") if result else None,
+                "user_conditions": result.get("user_conditions", {}) if result else {},
+            },
+            "error": error_message,
+        },
+        {
+            "timestamp": timestamp,
+            "request_id": request_id,
+            "stage": "FINAL_RESPONSE",
+            "source": source,
+            "input": {
+                "answer_generation_prompt": result.get("answer_generation_prompt") if result else None,
+                "retrieved_chunks": _retrieval_log_entries(result),
+            },
+            "output": {
+                "status": result.get("status") if result else "ERROR",
+                "answer": result.get("answer") if result else None,
+                "missing_fields": result.get("missing_fields", []) if result else [],
+                "follow_up_question": result.get("follow_up_question") if result else None,
+                "sources": result.get("sources", []) if result else [],
+            },
+            "error": error_message,
+        },
+    ]
     log_path = Path(path)
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with _WRITE_LOCK, log_path.open("a", encoding="utf-8") as output:
-        output.write(json.dumps(record, ensure_ascii=False) + "\n")
+        for record in records:
+            output.write(json.dumps(record, ensure_ascii=False) + "\n")
         output.flush()

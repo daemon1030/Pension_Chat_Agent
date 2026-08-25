@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko" style="color-scheme: dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>연금 챗봇이 답하는 순서</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #000; color: #fff; }
+    main { max-width: 1320px; margin: auto; padding: 32px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .muted { color: #a0a0a0; }
+    .summary, .panel { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 18px; }
+    .summary { margin: 20px 0; color: #d8b4fe; line-height: 1.6; }
+    .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); gap: 16px; }
+    .diagram { min-height: 600px; overflow: auto; padding: 24px; background: #050505; border: 1px solid #2a2a2a; border-radius: 12px; }
+    .diagram svg { min-width: 980px; }
+    .panel { line-height: 1.6; }
+    .panel h2 { margin-top: 0; color: #c084fc; }
+    code { color: #c084fc; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; background: #000; border: 1px solid #2a2a2a; border-radius: 8px; font-size: 12px; }
+    .file { color: #c084fc; font-size: 13px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; color: #a0a0a0; font-size: 13px; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+    .node { cursor: pointer; }
+    @media (max-width: 900px) { main { padding: 16px; } .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>연금 챗봇이 답하는 순서</h1>
+    <p class="muted">현재 챗봇이 질문 하나를 받아 답변을 만들 때 거치는 실제 순서입니다.</p>
+    <section class="summary"><strong>한눈에 보기</strong><br>챗봇은 먼저 연금 질문인지 확인합니다. 제도 설명 질문이면 관련 문서를 찾고, 추천 질문이면 먼저 조건에 맞는 상품을 고른 뒤 상품 설명을 찾습니다. 필요한 정보가 없거나 찾을 수 있는 근거가 없으면, 아는 척 답하지 않고 추가 질문 또는 안내를 합니다.</section>
+    <div class="layout">
+      <section class="diagram"><div class="mermaid" id="diagram">
+flowchart TD
+  question["사용자 질문"]
+  subgraph validation["질문 이해하기"]
+    checkScope["연금 질문인지 1차 확인"]
+    analyzeQuery["AI가 질문 뜻 파악"]
+    checkRequirements["정보가 충분한지 확인"]
+  end
+  subgraph retrieval["필요한 정보 찾기"]
+    policyRag["연금 제도 문서 찾기"]
+    productDb["조건에 맞는 상품 고르기"]
+    productRag["후보 상품 설명 찾기"]
+  end
+  subgraph response["답변하기"]
+    earlyEnd["안내 또는 추가 질문"]
+    generateAnswer["AI가 근거로 답변 만들기"]
+    finalAnswer["답변과 출처 보여주기"]
+  end
+  question --> checkScope
+  checkScope -->|"관련 단어가 있음"| analyzeQuery
+  checkScope -->|"관련 단어가 없음"| earlyEnd
+  analyzeQuery -->|"연금 상담이 아님"| earlyEnd
+  analyzeQuery -->|"제도·규정 질문"| policyRag
+  analyzeQuery -->|"상품 추천 질문"| checkRequirements
+  checkRequirements -->|"정보가 부족함"| earlyEnd
+  checkRequirements -->|"정보가 충분함"| productDb
+  productDb -->|"후보 상품"| productRag
+  productDb -->|"맞는 상품 없음"| earlyEnd
+  policyRag --> generateAnswer
+  productRag --> generateAnswer
+  generateAnswer --> finalAnswer
+  classDef event fill:#d8b4fe,stroke:#e9d5ff,color:#000
+  classDef utility fill:#6d28d9,stroke:#8b5cf6,color:#fff
+  classDef external fill:#525252,stroke:#737373,color:#fff
+  classDef data fill:#9333ea,stroke:#a855f7,color:#fff
+  class question event
+  class checkScope,checkRequirements utility
+  class analyzeQuery,generateAnswer external
+  class policyRag,productRag,productDb data
+  class earlyEnd,finalAnswer utility
+  click question showNode "View details"
+  click checkScope showNode "View details"
+  click analyzeQuery showNode "View details"
+  click checkRequirements showNode "View details"
+  click policyRag showNode "View details"
+  click productDb showNode "View details"
+  click productRag showNode "View details"
+  click earlyEnd showNode "View details"
+  click generateAnswer showNode "View details"
+  click finalAnswer showNode "View details"
+      </div></section>
+      <aside class="panel" id="detail"><h2>상자를 눌러 보세요</h2><p class="muted">각 단계에서 챗봇이 무엇을 하는지 쉽게 설명해 드립니다. 아래 코드 위치는 개발할 때만 참고하면 됩니다.</p></aside>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:#d8b4fe"></i>입력</span>
+      <span><i class="dot" style="background:#6d28d9"></i>코드 판단</span>
+      <span><i class="dot" style="background:#9333ea"></i>DB / RAG 데이터</span>
+      <span><i class="dot" style="background:#525252"></i>CLOVA 호출</span>
+    </div>
+  </main>
+  <script>
+    const nodes = {
+      question: { title: '사용자 질문', file: 'scripts/rag/chat.py', text: '사용자가 연금에 관해 궁금한 점을 입력하는 시작 단계입니다.', code: 'result = workflow.invoke({"query": args.query, "top_k": args.top_k})' },
+      checkScope: { title: '연금 질문인지 1차 확인', file: 'src/graph/nodes.py:25', text: '질문 안에 연금 관련 단어가 있는지 빠르게 봅니다. 전혀 관련이 없으면 비용이 드는 AI와 문서 검색을 하지 않고 안내합니다.', code: 'query = state.get("query", "").lower().replace(" ", "")\nreturn {"scope": "IN_SCOPE" if any(term in query for term in PENSION_DOMAIN_TERMS) else "OUT_OF_SCOPE"}' },
+      analyzeQuery: { title: 'AI가 질문 뜻 파악', file: 'src/graph/nodes.py:46', text: 'AI가 질문이 정말 연금 상담인지 한 번 더 확인합니다. 또한 추천이 필요한지와 사용자가 말한 나이·투자 성향 같은 조건을 정리합니다.', code: 'analysis = client.generate_query_analysis(\n    system_prompt=QUERY_ANALYSIS_SYSTEM_PROMPT,\n    user_prompt=user_prompt,\n)' },
+      checkRequirements: { title: '정보가 충분한지 확인', file: 'src/graph/nodes.py:81', text: '상품을 추천하려면 필요한 정보가 모두 있는지 확인합니다. 정보가 모자라면 임의로 추측하지 않고 사용자에게 필요한 것만 물어봅니다.', code: 'return {"missing_fields": missing_recommendation_fields(\n    state.get("user_conditions", {})\n)}' },
+      policyRag: { title: '연금 제도 문서 찾기', file: 'src/graph/workflow.py:78', text: '연금 제도, 세금, 수령, 중도인출처럼 규정이 필요한 질문에 알맞은 문서 부분을 찾습니다.', code: 'graph.add_node("retrieve_policy",\n    lambda state: retrieve(state, policy_retriever))' },
+      productDb: { title: '조건에 맞는 상품 고르기', file: 'src/database/repository.py:64', text: '나이, 재직 상태, 위험 선호, 목적처럼 명확한 조건으로 맞지 않는 상품을 먼저 제외합니다.', code: 'def filter_products(self, user_conditions: dict[str, Any]) -> list[dict[str, Any]]:\n    """추천 후보를 벡터 검색 전에 SQL 조건으로 정확히 줄인다."""' },
+      productRag: { title: '후보 상품 설명 찾기', file: 'src/graph/workflow.py:73', text: '앞 단계에서 남은 상품에 대해서만 설명서의 특징과 유의사항을 찾습니다.', code: 'lambda state: retrieve(\n    state, product_retriever,\n    allowed_product_ids=set(state.get("candidate_product_ids", [])),\n)' },
+      earlyEnd: { title: '안내 또는 추가 질문', file: 'src/graph/nodes.py', text: '연금과 무관한 질문, 정보가 부족한 질문, 맞는 상품이 없는 경우에 여기서 멈춥니다. 챗봇은 근거 없이 답을 만들지 않습니다.', code: 'return {"status": "OUT_OF_SCOPE",\n        "answer": "현재 서비스는 연금 관련 질문만 안내할 수 있습니다."}' },
+      generateAnswer: { title: 'AI가 근거로 답변 만들기', file: 'src/graph/nodes.py:172', text: '찾은 문서와 정리된 조건만 바탕으로 AI가 답변을 만듭니다. 문서에 없는 사실은 덧붙이지 않도록 지시합니다.', code: 'response = client.generate_rag_answer(\n    system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt\n)' },
+      finalAnswer: { title: '답변과 출처 보여주기', file: 'scripts/rag/chat.py', text: '사용자는 답변과 함께 어떤 문서를 근거로 했는지 확인할 수 있습니다. 처리 과정은 로그에도 남습니다.', code: 'response = {key: result[key] for key in\n    ("status", "answer", "missing_fields", "follow_up_question", "sources")}' },
+    };
+    window.showNode = (id) => {
+      const node = nodes[id];
+      document.getElementById('detail').innerHTML = `<h2>${node.title}</h2><p>${node.text}</p><p class="file">${node.file}</p><pre>${node.code.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</pre>`;
+    };
+    mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose', flowchart: { useMaxWidth: false, htmlLabels: true } });
+    mermaid.run({ nodes: [document.getElementById('diagram')] });
+  </script>
+</body>
+</html>

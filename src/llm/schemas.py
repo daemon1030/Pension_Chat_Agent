@@ -65,5 +65,14 @@ class RagAnswer(BaseModel):
 class QueryAnalysis(BaseModel):
     """질문 유형과 사용자가 직접 밝힌 고객 조건."""
 
-    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"]
+    is_pension_related: bool
+    intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
     user_conditions: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def validate_pension_scope(self) -> "QueryAnalysis":
+        if self.is_pension_related and self.intent is None:
+            raise ValueError("연금 관련 질문에는 intent가 필요합니다.")
+        if not self.is_pension_related and self.intent is not None:
+            raise ValueError("연금 무관 질문의 intent는 null이어야 합니다.")
+        return self
