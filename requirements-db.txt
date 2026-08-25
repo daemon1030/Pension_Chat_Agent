@@ -1,0 +1,2 @@
+# PostgreSQL 연결 Adapter. 기존 가상환경에 아래 명령으로 설치한다.
+psycopg[binary]>=3.2,<4

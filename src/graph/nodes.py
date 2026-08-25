@@ -84,7 +84,11 @@ def recommendation_follow_up(state: RagGraphState) -> dict[str, Any]:
 
 def filter_candidate_products(state: RagGraphState, products: list[dict[str, Any]]) -> dict[str, Any]:
     """정확한 상품 조건으로 후보를 먼저 좁혀 product_id를 State에 보관한다."""
-    candidates = filter_products(products, state.get("user_conditions", {}))
+    return store_candidate_products(filter_products(products, state.get("user_conditions", {})))
+
+
+def store_candidate_products(candidates: list[dict[str, Any]]) -> dict[str, Any]:
+    """JSON·PostgreSQL 어느 저장소에서 온 후보든 같은 State 형식으로 저장한다."""
     return {
         "candidate_product_ids": [str(product["product_id"]) for product in candidates],
         "candidate_products": candidates,
