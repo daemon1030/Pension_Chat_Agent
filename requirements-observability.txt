@@ -1,0 +1,2 @@
+# Langfuse: LLM 호출, DB 필터, RAG 검색 과정을 추적하는 선택 의존성
+langfuse>=3.3.1,<5

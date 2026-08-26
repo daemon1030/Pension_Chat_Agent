@@ -10,15 +10,16 @@ from typing import Any
 
 from src.llm.hyperclova import ClovaChatClient
 from src.llm.prompts import QUERY_ANALYSIS_SYSTEM_PROMPT, RAG_SYSTEM_PROMPT
+from src.observability import observe, update_observation
 from src.products.catalog import missing_recommendation_fields
 
 from .state import RagGraphState
 
 
 PENSION_DOMAIN_TERMS = frozenset({
-    "연금", "연금저축", "개인연금", "퇴직연금", "퇴직금", "퇴직소득", "퇴직급여",
-    "irp", "개인형irp", "db형", "dc형", "세액공제", "소득공제", "중도인출",
-    "연금수령", "연금개시", "노후", "은퇴", "금융소득", "연금계좌", "tdf",
+    "연금", "연금저축", "개인연금", "퇴직연금", "퇴직금", "퇴직소득", "퇴직급여", "irp", "개인형irp", "db형", "dc형", "세액공제", "소득공제", "중도인출", "연금수령",
+    "연금개시", "노후", "은퇴", "금융소득", "연금계좌", "tdf", "펀드", "주식형", "채권형", "혼합형", "총보수", "수수료", "클래스", "수익률",
+    "납입", "해지", "계좌이전", "연금소득세", "기타소득세", "과세이연", "절세", "연말정산", "위험자산", "위험성향", "원금보장", "장기투자", "포트폴리오", "투자설명서"
 })
 
 
@@ -46,15 +47,25 @@ def out_of_scope_response(_: RagGraphState) -> dict[str, Any]:
 def analyze_query(state: RagGraphState, client: ClovaChatClient) -> dict[str, Any]:
     """첫 LLM 호출로 질문 유형과 사용자가 직접 밝힌 조건만 추출한다."""
     user_prompt = f"[사용자 질문]\n{state.get('query', '')}\n"
-    analysis = client.generate_query_analysis(
-        system_prompt=QUERY_ANALYSIS_SYSTEM_PROMPT,
-        user_prompt=user_prompt,
-    )
+    with observe(
+        "query-analysis",
+        as_type="generation",
+        input={"query": state.get("query", "")},
+        metadata={"model_provider": "hyperclova"},
+    ) as generation:
+        analysis = client.generate_query_analysis(
+            system_prompt=QUERY_ANALYSIS_SYSTEM_PROMPT,
+            user_prompt=user_prompt,
+        )
+        update_observation(generation, output=analysis.model_dump(mode="json"))
     return {
         "is_pension_related": analysis.is_pension_related,
         "scope": "IN_SCOPE" if analysis.is_pension_related else "OUT_OF_SCOPE",
         "intent": analysis.intent,
-        "user_conditions": analysis.user_conditions,
+        "retrieval_sources": analysis.retrieval_sources,
+        "user_conditions": analysis.user_conditions.model_dump(
+            exclude_none=True, exclude_defaults=True
+        ),
     }
 
 
@@ -99,7 +110,7 @@ def store_candidate_products(candidates: list[dict[str, Any]]) -> dict[str, Any]
 
 
 def candidate_product_route(state: RagGraphState) -> str:
-    return "retrieve_product" if state.get("candidate_product_ids") else "no_matching_product"
+    return "retrieve_sources" if state.get("candidate_product_ids") else "no_matching_product"
 
 
 def no_matching_product(_: RagGraphState) -> dict[str, Any]:
@@ -112,20 +123,33 @@ def no_matching_product(_: RagGraphState) -> dict[str, Any]:
     }
 
 
-def retrieve(
+def retrieve_selected_sources(
     state: RagGraphState,
-    retriever: Any,
-    *,
-    allowed_product_ids: set[str] | None = None,
+    policy_retriever: Any,
+    product_retriever: Any,
 ) -> dict[str, Any]:
-    """질문과 가장 가까운 RAG Chunk만 검색한다."""
+    """첫 LLM이 선택한 Policy/Product RAG에서 근거를 모은다."""
     top_k = int(state.get("top_k", 3))
-    chunks = retriever.search(
-        state.get("query", ""),
-        top_k=top_k,
-        allowed_product_ids=allowed_product_ids,
-    ) if allowed_product_ids is not None else retriever.search(state.get("query", ""), top_k=top_k)
-    return {"retrieved_chunks": [chunk.to_dict() for chunk in chunks]}
+    selected = set(state.get("retrieval_sources", []))
+    chunks = []
+    if "POLICY_RAG" in selected:
+        chunks.extend(policy_retriever.search(state.get("query", ""), top_k=top_k))
+    if "PRODUCT_RAG" in selected:
+        candidate_ids = state.get("candidate_product_ids", [])
+        allowed_product_ids = set(candidate_ids) if candidate_ids else None
+        chunks.extend(product_retriever.search(
+            state.get("query", ""), top_k=top_k, allowed_product_ids=allowed_product_ids
+        ))
+
+    result = []
+    seen_chunk_ids: set[str] = set()
+    for chunk in sorted(chunks, key=lambda item: item.score, reverse=True):
+        if chunk.chunk_id not in seen_chunk_ids:
+            result.append(chunk)
+            seen_chunk_ids.add(chunk.chunk_id)
+        if len(result) == top_k:
+            break
+    return {"retrieved_chunks": [chunk.to_dict() for chunk in result]}
 
 
 def build_grounded_context(chunks: list[dict]) -> tuple[str, list[dict]]:
@@ -160,6 +184,7 @@ def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict
     analysis_context = json.dumps(
         {
             "intent": state.get("intent"),
+            "retrieval_sources": state.get("retrieval_sources", []),
             "user_conditions": state.get("user_conditions", {}),
             "candidate_products": state.get("candidate_products", []),
         },
@@ -170,7 +195,14 @@ def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict
         f"[질문 분석 및 후보 결과]\n{analysis_context}\n\n"
         f"[검색 근거]\n{context}\n"
     )
-    response = client.generate_rag_answer(system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt)
+    with observe(
+        "answer-generation",
+        as_type="generation",
+        input={"system_prompt": RAG_SYSTEM_PROMPT, "user_prompt": user_prompt},
+        metadata={"model_provider": "hyperclova"},
+    ) as generation:
+        response = client.generate_rag_answer(system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt)
+        update_observation(generation, output=response.model_dump(mode="json"))
     return {
         "answer_generation_prompt": user_prompt,
         "status": response.status,

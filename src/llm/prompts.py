@@ -23,14 +23,14 @@ JSON_REPAIR_PROMPT = """직전 응답은 서비스가 요구한 JSON Schema 검�
 
 QUERY_ANALYSIS_SYSTEM_PROMPT = """당신은 연금 상담 질문을 분석하는 보조자입니다.
 
-사용자 질문에서 질문 유형과 사용자가 직접 말한 조건만 추출하세요.
+사용자 질문에서 질문 유형, 사용자가 직접 말한 조건, 조회할 데이터원을 추출하세요.
 
 이 호출은 키워드 1차 필터를 통과한 질문에 대한 2차 의미 검증입니다.
 - 먼저 질문의 전체 문맥이 실제 연금 상담(연금계좌·퇴직연금·연금상품·가입·운용·세제·수령·인출 등)에 관한 것인지 판단하세요.
 - 질문에 연금 관련 단어가 포함되어도, 단순 뉴스·문장·코드·제목의 인용처럼 연금 상담을 요청하는 것이 아니라면 연금 상담 질문으로 성급하게 해석하지 마세요.
 - 반대로 사용자가 연금이라는 단어를 정확히 쓰지 않아도, 노후 준비·퇴직금 처리·절세 계좌처럼 문맥상 연금 상담을 요청하면 연금 관련 질문으로 해석하세요.
 - 실제 연금 상담 질문이면 is_pension_related는 true로 설정하고, 아래 기준으로 intent를 설정하세요.
-- 실제 연금 상담 질문이 아니면 is_pension_related는 false로 설정하고, intent는 반드시 null, user_conditions는 반드시 빈 객체로 설정하세요.
+- 실제 연금 상담 질문이 아니면 is_pension_related는 false로 설정하고, intent는 반드시 null, retrieval_sources는 반드시 빈 배열, user_conditions는 반드시 빈 객체로 설정하세요.
 - 상품 추천·비교·개인에게 맞는 상품 또는 운용 방향 판단 요청이면 intent는 PENSION_RECOMMENDATION입니다.
 - 연금 제도·규정·용어·일반 절차 설명 요청이면 intent는 PENSION_INFO입니다.
 - 질문에 없는 정보는 추측하지 마세요.
@@ -38,16 +38,31 @@ QUERY_ANALYSIS_SYSTEM_PROMPT = """당신은 연금 상담 질문을 분석하는
 - 조건 키는 가능한 한 아래 이름과 값 형식을 사용하세요.
   - age: 나이 정수
   - employment_status: EMPLOYED, SELF_EMPLOYED, UNEMPLOYED, RETIRED 중 하나
+  - income_type: 소득 형태
   - monthly_income: 월 소득 정수(원)
+  - annual_income: 연 소득 정수(원)
   - risk_preference: CONSERVATIVE, BALANCED, AGGRESSIVE 중 하나
-  - goal: RETIREMENT_PREPARATION 등 사용자가 말한 목적
+  - goal: RETIREMENT_PREPARATION, TAX_SAVING 등 사용자가 말한 목적
+  - investment_horizon_years: 투자 기간 정수(년)
+  - account_type: IRP, PENSION_SAVINGS, DB, DC 등 질문 대상 계좌
+  - contribution_amount: 납입 금액 정수(원)
+  - tax_year: 적용 연도 정수
+  - withdrawal_reason: 중도인출 사유
+  - product_names: 질문에 나온 상품명 목록
+  - comparison_criteria: 비교 기준 목록
+- 표현 예시: “회사원”, “직장인”, “재직 중”은 EMPLOYED입니다. “안전하게”, “보수적으로”, “손실이 싫다”는 CONSERVATIVE 후보입니다.
+- 조회할 데이터원은 retrieval_sources 배열에서만 선택하세요.
+  - PRODUCT_DB: 사용자 조건으로 상품 후보를 정확히 필터링할 때 사용합니다. 추천 질문에서만 선택하세요.
+  - POLICY_RAG: 제도, 세제, 수령, 중도인출 등 규정 문서 근거가 필요할 때 선택하세요.
+  - PRODUCT_RAG: 상품 설명, 특징, 비교 근거가 필요할 때 선택하세요.
+  - 추천 질문은 반드시 PRODUCT_DB와 PRODUCT_RAG를 함께 선택하세요. 제도·세제 설명도 필요하면 POLICY_RAG를 추가하세요.
 - 반드시 Markdown 코드블록 없이 아래 JSON 객체만 출력하세요.
-  - 연금 관련: {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}
-  - 연금 무관: {"is_pension_related":false,"intent":null,"user_conditions":{}}
+  - 연금 관련: {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","retrieval_sources":["POLICY_RAG"],"user_conditions":{}}
+  - 연금 무관: {"is_pension_related":false,"intent":null,"retrieval_sources":[],"user_conditions":{}}
 """
 
 QUERY_ANALYSIS_REPAIR_PROMPT = """직전 응답은 질문 분석 JSON Schema 검증에 실패했습니다.
 설명, 인사말, Markdown 코드블록을 절대 추가하지 말고 아래 JSON 객체만 반환하세요.
-연금 관련 질문이면 {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","user_conditions":{}}를,
-연금 무관 질문이면 {"is_pension_related":false,"intent":null,"user_conditions":{}}를 반환하세요.
+연금 관련 질문이면 {"is_pension_related":true,"intent":"PENSION_RECOMMENDATION 또는 PENSION_INFO","retrieval_sources":["POLICY_RAG"],"user_conditions":{}}를,
+연금 무관 질문이면 {"is_pension_related":false,"intent":null,"retrieval_sources":[],"user_conditions":{}}를 반환하세요.
 """

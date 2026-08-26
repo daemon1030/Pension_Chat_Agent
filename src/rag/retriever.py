@@ -39,6 +39,7 @@ class RagChunk:
             page_end=value.get("page_end"),
             validation_status=value.get("validation_status", "NEEDS_REVIEW"),
             product_id=value.get("product_id"),
+            score=float(value.get("score", 0.0)),
         )
 
     def to_dict(self) -> dict[str, Any]:

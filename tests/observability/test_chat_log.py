@@ -12,6 +12,7 @@ def test_chat_log_records_query_and_answer(tmp_path):
             "scope": "IN_SCOPE",
             "is_pension_related": True,
             "intent": "PENSION_INFO",
+            "retrieval_sources": ["POLICY_RAG"],
             "user_conditions": {"age": 20},
             "answer_generation_prompt": "[사용자 질문]\\nIRP가 뭐야?\\n\\n[검색 근거]\\n...",
             "status": "ANSWER",
@@ -40,6 +41,7 @@ def test_chat_log_records_query_and_answer(tmp_path):
         "scope": "IN_SCOPE",
         "is_pension_related": True,
         "intent": "PENSION_INFO",
+        "retrieval_sources": ["POLICY_RAG"],
         "user_conditions": {"age": 20},
     }
     assert analysis["request_id"] == final_response["request_id"]

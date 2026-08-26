@@ -53,6 +53,7 @@ def test_postgres_recommendation_workflow_filters_products_before_product_vector
         chat_client=FakeChatClient(QueryAnalysis(
             is_pension_related=True,
             intent="PENSION_RECOMMENDATION",
+            retrieval_sources=["PRODUCT_DB", "PRODUCT_RAG"],
             user_conditions={
                 "age": 20,
                 "employment_status": "EMPLOYED",
@@ -75,7 +76,11 @@ def test_postgres_information_workflow_searches_only_policy_vectors():
     repository = FakeRepository()
     workflow = create_postgres_clova_rag_workflow(
         embedding_client=FakeEmbeddingClient(),
-        chat_client=FakeChatClient(QueryAnalysis(is_pension_related=True, intent="PENSION_INFO")),
+        chat_client=FakeChatClient(QueryAnalysis(
+            is_pension_related=True,
+            intent="PENSION_INFO",
+            retrieval_sources=["POLICY_RAG"],
+        )),
         repository=repository,
     )
 
@@ -83,4 +88,23 @@ def test_postgres_information_workflow_searches_only_policy_vectors():
 
     assert result["sources"][0]["document_id"] == "POLICY_001"
     assert repository.search_calls[0]["knowledge_type"] == "POLICY"
+    assert repository.search_calls[0]["allowed_product_ids"] is None
+
+
+def test_information_workflow_uses_the_product_rag_selected_by_llm():
+    repository = FakeRepository()
+    workflow = create_postgres_clova_rag_workflow(
+        embedding_client=FakeEmbeddingClient(),
+        chat_client=FakeChatClient(QueryAnalysis(
+            is_pension_related=True,
+            intent="PENSION_INFO",
+            retrieval_sources=["PRODUCT_RAG"],
+        )),
+        repository=repository,
+    )
+
+    result = workflow.invoke({"query": "안정형 연금상품의 특징은?"})
+
+    assert result["sources"][0]["document_id"] == "PRODUCT_001"
+    assert repository.search_calls[0]["knowledge_type"] == "PRODUCT"
     assert repository.search_calls[0]["allowed_product_ids"] is None

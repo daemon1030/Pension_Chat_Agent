@@ -17,6 +17,7 @@ class RagGraphState(TypedDict, total=False):
     # 싱글 턴에서만 쓰고 응답 후 저장하지 않는 사용자 분석 결과.
     is_pension_related: bool
     intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
+    retrieval_sources: list[Literal["PRODUCT_DB", "POLICY_RAG", "PRODUCT_RAG"]]
     user_conditions: dict[str, Any]
     candidate_product_ids: list[str]
     candidate_products: list[dict[str, Any]]

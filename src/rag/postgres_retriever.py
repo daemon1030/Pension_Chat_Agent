@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from src.database.repository import PostgresPensionRepository
+from src.observability import observe, update_observation
 
 from .naver_embedding import ClovaEmbeddingClient
 from .retriever import RagChunk
@@ -35,12 +36,29 @@ class PostgresRagRetriever:
     ) -> list[RagChunk]:
         if not query.strip() or top_k < 1:
             return []
-        if self._knowledge_type == "PRODUCT" and not allowed_product_ids:
+        if self._knowledge_type == "PRODUCT" and allowed_product_ids is not None and not allowed_product_ids:
             return []
-        rows: list[dict[str, Any]] = self._repository.search_chunks(
-            self._client.embed(query),
-            knowledge_type=self._knowledge_type,
-            top_k=top_k,
-            allowed_product_ids=sorted(allowed_product_ids) if allowed_product_ids is not None else None,
-        )
+        allowed_ids = sorted(allowed_product_ids) if allowed_product_ids is not None else None
+        with observe(
+            f"{self._knowledge_type.lower()}-rag-retrieval",
+            as_type="retriever",
+            input={"query": query, "top_k": top_k, "allowed_product_ids": allowed_ids},
+            metadata={"knowledge_type": self._knowledge_type, "store": "pgvector"},
+        ) as retrieval:
+            rows: list[dict[str, Any]] = self._repository.search_chunks(
+                self._client.embed(query),
+                knowledge_type=self._knowledge_type,
+                top_k=top_k,
+                allowed_product_ids=allowed_ids,
+            )
+            update_observation(
+                retrieval,
+                output={
+                    "result_count": len(rows),
+                    "chunks": [
+                        {"chunk_id": row["chunk_id"], "document_id": row["document_id"], "score": row["score"]}
+                        for row in rows
+                    ],
+                },
+            )
         return [RagChunk.from_dict(row) for row in rows]

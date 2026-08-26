@@ -52,6 +52,7 @@ def append_chat_log(
                 "scope": result.get("scope") if result else None,
                 "is_pension_related": result.get("is_pension_related") if result else None,
                 "intent": result.get("intent") if result else None,
+                "retrieval_sources": result.get("retrieval_sources", []) if result else [],
                 "user_conditions": result.get("user_conditions", {}) if result else {},
             },
             "error": error_message,

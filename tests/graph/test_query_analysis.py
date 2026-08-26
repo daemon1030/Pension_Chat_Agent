@@ -13,6 +13,7 @@ class FakeAnalysisClient:
         return QueryAnalysis(
             is_pension_related=True,
             intent="PENSION_RECOMMENDATION",
+            retrieval_sources=["PRODUCT_DB", "PRODUCT_RAG"],
             user_conditions={"age": 20, "risk_preference": "CONSERVATIVE"},
         )
 
@@ -26,6 +27,7 @@ def test_query_analysis_returns_only_the_generic_state_fields():
         "is_pension_related": True,
         "scope": "IN_SCOPE",
         "intent": "PENSION_RECOMMENDATION",
+        "retrieval_sources": ["PRODUCT_DB", "PRODUCT_RAG"],
         "user_conditions": {"age": 20, "risk_preference": "CONSERVATIVE"},
     }
     assert "[사용자 질문]" in client.user_prompt

@@ -1,6 +1,6 @@
 # 연금 상담 RAG 챗봇
 
-연금 제도 문서와 상품 데이터를 근거로 답하는 챗봇입니다. 질문을 받으면 HyperCLOVA가 질문의 뜻과 사용자가 직접 말한 조건을 먼저 정리하고, 코드가 필요한 데이터를 PostgreSQL과 pgvector에서 조회한 뒤 근거 기반 답변을 생성합니다.
+연금 제도 문서와 상품 데이터를 근거로 답하는 챗봇입니다. 질문을 받으면 HyperCLOVA가 질문의 뜻, 사용자가 직접 말한 조건, 필요한 데이터원을 먼저 정리하고, 코드가 PostgreSQL과 pgvector에서 해당 정보를 조회한 뒤 근거 기반 답변을 생성합니다.
 
 ## 현재 동작 흐름
 
@@ -15,14 +15,16 @@
   ├─ 실제 연금 상담 질문인지 확인
   ├─ 추천 질문인지 / 제도·규정 질문인지 구분
   └─ 사용자가 말한 나이·고용 형태·위험 선호·목적 등 조건 추출
+  └─ PRODUCT_DB / POLICY_RAG / PRODUCT_RAG 중 조회할 데이터원 선택
        ↓
 코드가 필요한 정보가 충분한지 확인
   ├─ 부족함 → 필요한 정보만 역질문
   └─ 충분함
        ↓
-질문 유형에 맞는 데이터 조회
-  ├─ 제도·세제·수령·중도인출 질문 → Policy RAG 검색
-  └─ 상품 추천 질문 → 상품 DB 조건 필터 → 후보 상품 Product RAG 검색
+LLM이 선택한 데이터원 조회
+  ├─ POLICY_RAG → 제도·세제·수령·중도인출 문서 검색
+  ├─ PRODUCT_RAG → 상품 설명·특징 문서 검색
+  └─ PRODUCT_DB → 추천 질문에서 조건에 맞는 후보 상품 필터
        ↓
 검색 근거 + 질문 + 사용자 조건
   ↓
@@ -34,7 +36,7 @@ HyperCLOVA 최종 답변 생성
 핵심 원칙은 다음과 같습니다.
 
 ```text
-LLM  → 질문 이해, 사용자 조건 추출, 답변 설명
+LLM  → 질문 이해, 사용자 조건 추출, 필요한 데이터원 선택, 답변 설명
 DB   → 상품 조건을 정확하게 비교·필터링
 RAG  → 제도·상품 문서에서 답변 근거 검색
 코드 → 정보 부족 판단과 흐름 제어
@@ -168,6 +170,32 @@ docker compose -p pension-agent up -d
 2. `FINAL_RESPONSE`: RAG 근거를 포함한 최종 LLM 입력, 선택된 문서, 최종 답변
 
 로그에는 사용자가 말한 개인정보가 들어갈 수 있으므로 `data/`는 Git에 포함하지 않습니다.
+
+## Langfuse 실행 추적
+
+Langfuse를 설정하면 한 질문을 하나의 추적으로 보고, 그 안에서 다음 순서를 확인할 수 있습니다.
+
+```text
+사용자 질문
+  → 질문 분석을 위한 HyperCLOVA 호출
+  → 상품 DB 후보 필터(추천 질문일 때)
+  → Policy / Product RAG 검색과 선택된 Chunk
+  → 최종 답변을 위한 HyperCLOVA 호출
+```
+
+먼저 선택 의존성을 설치하고, `.env`에 Langfuse 프로젝트 키를 넣습니다.
+
+```bash
+.venv/bin/python3 -m pip install -r requirements-observability.txt
+```
+
+```dotenv
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_BASE_URL=https://cloud.langfuse.com
+```
+
+설정 후 기존과 같은 챗봇 명령을 실행하면 Langfuse 대시보드에서 추적을 볼 수 있습니다. Langfuse에는 질문, LLM 프롬프트·응답, 추출한 사용자 조건, 선택된 문서 ID가 전송되므로 실제 서비스에서는 개인정보 처리 방침과 접근 권한을 먼저 확인해야 합니다. 키 또는 패키지가 없으면 Langfuse는 비활성화되고 로컬 `data/logs/chat_interactions.jsonl` 로그만 남습니다.
 
 ## 테스트와 평가
 

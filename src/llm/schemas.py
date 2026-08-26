@@ -6,6 +6,9 @@ from typing import Any, Literal
 from pydantic import AliasChoices, BaseModel, Field, model_validator
 
 
+RetrievalSource = Literal["PRODUCT_DB", "POLICY_RAG", "PRODUCT_RAG"]
+
+
 class RagAnswer(BaseModel):
     status: Literal["ANSWER", "NEED_MORE_INFO"]
     answer: str = Field(min_length=1)
@@ -62,17 +65,45 @@ class RagAnswer(BaseModel):
         return value
 
 
+class UserConditions(BaseModel):
+    """첫 질문에서 추출하는 사용자 기본 조건과 이번 질문의 상황 정보."""
+
+    age: int | None = None
+    employment_status: Literal["EMPLOYED", "SELF_EMPLOYED", "UNEMPLOYED", "RETIRED"] | None = None
+    income_type: str | None = None
+    monthly_income: int | None = None
+    annual_income: int | None = None
+    risk_preference: Literal["CONSERVATIVE", "BALANCED", "AGGRESSIVE"] | None = None
+    goal: str | None = None
+    investment_horizon_years: int | None = None
+    account_type: str | None = None
+    contribution_amount: int | None = None
+    tax_year: int | None = None
+    withdrawal_reason: str | None = None
+    product_names: list[str] = Field(default_factory=list)
+    comparison_criteria: list[str] = Field(default_factory=list)
+
+
 class QueryAnalysis(BaseModel):
-    """질문 유형과 사용자가 직접 밝힌 고객 조건."""
+    """질문 범위·유형·사용자 조건·조회할 데이터원을 담는 첫 분석 결과."""
 
     is_pension_related: bool
     intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
-    user_conditions: dict[str, Any] = Field(default_factory=dict)
+    retrieval_sources: list[RetrievalSource] = Field(default_factory=list)
+    user_conditions: UserConditions = Field(default_factory=UserConditions)
 
     @model_validator(mode="after")
     def validate_pension_scope(self) -> "QueryAnalysis":
         if self.is_pension_related and self.intent is None:
             raise ValueError("연금 관련 질문에는 intent가 필요합니다.")
+        if self.is_pension_related and not self.retrieval_sources:
+            raise ValueError("연금 관련 질문에는 조회할 데이터원이 필요합니다.")
+        if self.intent == "PENSION_RECOMMENDATION" and not {"PRODUCT_DB", "PRODUCT_RAG"}.issubset(self.retrieval_sources):
+            raise ValueError("추천 질문에는 PRODUCT_DB와 PRODUCT_RAG가 필요합니다.")
+        if self.intent == "PENSION_INFO" and "PRODUCT_DB" in self.retrieval_sources:
+            raise ValueError("일반 정보 질문에는 PRODUCT_DB를 선택하지 않습니다.")
         if not self.is_pension_related and self.intent is not None:
             raise ValueError("연금 무관 질문의 intent는 null이어야 합니다.")
+        if not self.is_pension_related and self.retrieval_sources:
+            raise ValueError("연금 무관 질문의 retrieval_sources는 빈 목록이어야 합니다.")
         return self
