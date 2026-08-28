@@ -54,7 +54,7 @@ def create_postgres_clova_rag_workflow(
             input={"user_conditions": user_conditions},
             metadata={"store": "postgresql"},
         ) as database_filter:
-            candidates = database_repository.filter_products(user_conditions)
+            candidates = database_repository.filter_product_classes(user_conditions)
             update_observation(
                 database_filter,
                 output={
@@ -62,7 +62,7 @@ def create_postgres_clova_rag_workflow(
                     "candidate_product_ids": [product["product_id"] for product in candidates],
                 },
             )
-        return store_candidate_products(candidates)
+        return store_candidate_products(candidates, user_conditions)
 
     return _compile_clova_rag_workflow(
         policy_retriever=policy_retriever,

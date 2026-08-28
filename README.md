@@ -69,7 +69,8 @@ data/
 └── evaluation/          # 대표 질문·평가 결과
 
 database/
-└── init.sql             # PostgreSQL·pgvector 테이블 정의
+├── init.sql             # 새 PostgreSQL·pgvector 테이블 정의
+└── migrations/          # 이미 만든 로컬 DB용 마이그레이션
 
 src/
 ├── database/            # 상품 DB와 벡터 검색 Repository
@@ -124,6 +125,12 @@ PENSION_DATABASE_DSN=postgresql://pension_app:로컬_개발용_비밀번호@127.
 docker compose -p pension-agent up -d
 ```
 
+이미 만든 PostgreSQL 볼륨을 사용 중이라면, 클래스 기반 상품 필터 테이블을 추가합니다.
+
+```bash
+docker compose -p pension-agent exec -T postgres psql -U pension_app -d pension_agent < database/migrations/001_product_classes.sql
+```
+
 ### 3. 문서 전처리와 임베딩 생성
 
 원본 문서를 새로 추가하거나 수정한 경우에만 실행합니다.
@@ -132,7 +139,12 @@ docker compose -p pension-agent up -d
 .venv/bin/python3 scripts/rag/build_embeddings.py
 ```
 
-상품 문서는 같은 형식의 상품용 임베딩 JSONL을 준비합니다. 이후 규정 임베딩, 상품 임베딩, 상품 조건 데이터를 DB에 넣습니다.
+상품 전처리 결과는 두 가지로 나뉩니다.
+
+- `data/product_db_ready/product_classes.json`: 추천 후보를 정확히 거르는 상품 클래스 데이터
+- `data/embeddings/product_embeddings_from_preprocessing.jsonl`: 후보 상품의 설명을 검색하는 Product RAG 임베딩
+
+아래 명령은 규정 RAG, 상품 RAG, 상품 클래스 데이터를 **한 PostgreSQL DB**에 함께 적재합니다. 기본 경로가 위 생성 파일들로 설정되어 있습니다.
 
 ```bash
 .venv/bin/python3 scripts/database/seed_local_data.py
@@ -147,7 +159,7 @@ docker compose -p pension-agent up -d
 추천 질문 예시입니다.
 
 ```bash
-.venv/bin/python3 scripts/rag/chat.py "20살이고 재직 중이며 안전한 투자를 선호해. 노후 준비용 연금상품을 추천해줘"
+.venv/bin/python3 scripts/rag/chat.py "IRP에서 안전하게 10년 동안 노후 준비용 연금상품을 추천해줘"
 ```
 
 출력에는 처리 상태, 답변, 부족한 정보, 후속 질문, 출처가 포함됩니다.

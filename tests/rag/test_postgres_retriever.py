@@ -44,3 +44,18 @@ def test_postgres_product_retriever_skips_embedding_when_no_candidate_exists():
     assert retriever.search("안전한 상품", allowed_product_ids=set()) == []
     assert client.calls == []
     assert repository.calls == []
+
+
+def test_postgres_product_retriever_passes_per_product_evidence_limit():
+    repository = FakeRepository()
+    client = FakeEmbeddingClient()
+    retriever = PostgresRagRetriever(repository, client, knowledge_type="PRODUCT")
+
+    retriever.search(
+        "안전한 상품",
+        top_k=40,
+        allowed_product_ids={"PENSION_PRODUCT_DEMO_001"},
+        per_product_limit=2,
+    )
+
+    assert repository.calls[0][1]["per_product_limit"] == 2

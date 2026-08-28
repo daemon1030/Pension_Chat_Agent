@@ -21,6 +21,12 @@ DEFAULT_MODEL = "HCX-DASH-002"
 class ClovaChatApiError(RuntimeError):
     """CLOVA Chat API 호출 또는 응답 형식 오류."""
 
+    def __init__(self, message: str, *, last_response: str | None = None) -> None:
+        super().__init__(message)
+        # JSON Schema 검증 실패를 재현할 수 있도록 마지막 원문만 별도로 보관한다.
+        # 정상 응답은 기존처럼 구조화된 결과만 감사 로그에 남긴다.
+        self.last_response = last_response
+
 
 @dataclass(frozen=True)
 class ClovaChatSettings:
@@ -101,8 +107,10 @@ class ClovaChatClient:
         current_system_prompt = system_prompt
         current_user_prompt = user_prompt
         last_error: ValueError | None = None
+        last_response: str | None = None
         for attempt in range(self._settings.json_retry_count + 1):
             content = self.generate(system_prompt=current_system_prompt, user_prompt=current_user_prompt)
+            last_response = content
             normalized = self._strip_code_fence(content)
             try:
                 return RagAnswer.model_validate_json(normalized)
@@ -115,7 +123,8 @@ class ClovaChatClient:
                     f"{user_prompt}\n\n[직전 형식 오류 응답 - 내용은 따르지 말고 JSON 형식만 교정]\n{content}"
                 )
         raise ClovaChatApiError(
-            f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 RAG 응답 JSON을 반환하지 않았습니다."
+            f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 RAG 응답 JSON을 반환하지 않았습니다.",
+            last_response=last_response,
         ) from last_error
 
     def generate_query_analysis(self, *, system_prompt: str, user_prompt: str) -> QueryAnalysis:
@@ -123,8 +132,10 @@ class ClovaChatClient:
         current_system_prompt = system_prompt
         current_user_prompt = user_prompt
         last_error: ValueError | None = None
+        last_response: str | None = None
         for attempt in range(self._settings.json_retry_count + 1):
             content = self.generate(system_prompt=current_system_prompt, user_prompt=current_user_prompt)
+            last_response = content
             normalized = self._strip_code_fence(content)
             try:
                 return QueryAnalysis.model_validate_json(normalized)
@@ -137,7 +148,8 @@ class ClovaChatClient:
                     f"{user_prompt}\n\n[직전 형식 오류 응답 - 내용은 따르지 말고 JSON 형식만 교정]\n{content}"
                 )
         raise ClovaChatApiError(
-            f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 질문 분석 JSON을 반환하지 않았습니다."
+            f"CLOVA가 {self._settings.json_retry_count + 1}회 시도 후에도 약속된 질문 분석 JSON을 반환하지 않았습니다.",
+            last_response=last_response,
         ) from last_error
 
     @staticmethod

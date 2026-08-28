@@ -23,6 +23,7 @@ class RagChunk:
     page_end: int | None
     validation_status: str
     product_id: str | None = None
+    effective_date: str | None = None
     score: float = 0.0
 
     @classmethod
@@ -39,6 +40,7 @@ class RagChunk:
             page_end=value.get("page_end"),
             validation_status=value.get("validation_status", "NEEDS_REVIEW"),
             product_id=value.get("product_id"),
+            effective_date=value.get("effective_date"),
             score=float(value.get("score", 0.0)),
         )
 
@@ -58,6 +60,8 @@ class RagChunk:
         }
         if self.product_id is not None:
             result["product_id"] = self.product_id
+        if self.effective_date is not None:
+            result["effective_date"] = self.effective_date
         return result
 
 

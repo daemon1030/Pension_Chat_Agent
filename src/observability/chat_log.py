@@ -41,6 +41,7 @@ def append_chat_log(
     request_id = str(uuid4())
     timestamp = datetime.now(timezone.utc).isoformat()
     error_message = f"{type(error).__name__}: {error}" if error else None
+    raw_llm_response = getattr(error, "last_response", None) if error else None
     records = [
         {
             "timestamp": timestamp,
@@ -56,6 +57,7 @@ def append_chat_log(
                 "user_conditions": result.get("user_conditions", {}) if result else {},
             },
             "error": error_message,
+            "raw_llm_response": raw_llm_response,
         },
         {
             "timestamp": timestamp,
@@ -74,6 +76,7 @@ def append_chat_log(
                 "sources": result.get("sources", []) if result else [],
             },
             "error": error_message,
+            "raw_llm_response": raw_llm_response,
         },
     ]
     log_path = Path(path)

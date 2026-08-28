@@ -9,9 +9,13 @@ import json
 from typing import Any
 
 from src.llm.hyperclova import ClovaChatClient
-from src.llm.prompts import QUERY_ANALYSIS_SYSTEM_PROMPT, RAG_SYSTEM_PROMPT
+from src.llm.prompts import (
+    INFORMATION_RAG_SYSTEM_PROMPT,
+    QUERY_ANALYSIS_SYSTEM_PROMPT,
+    RECOMMENDATION_RAG_SYSTEM_PROMPT,
+)
 from src.observability import observe, update_observation
-from src.products.catalog import missing_recommendation_fields
+from src.products.catalog import enrich_candidate_classes, missing_recommendation_fields
 
 from .state import RagGraphState
 
@@ -21,6 +25,10 @@ PENSION_DOMAIN_TERMS = frozenset({
     "연금개시", "노후", "은퇴", "금융소득", "연금계좌", "tdf", "펀드", "주식형", "채권형", "혼합형", "총보수", "수수료", "클래스", "수익률",
     "납입", "해지", "계좌이전", "연금소득세", "기타소득세", "과세이연", "절세", "연말정산", "위험자산", "위험성향", "원금보장", "장기투자", "포트폴리오", "투자설명서"
 })
+
+MAX_DB_CANDIDATE_PRODUCTS = 20
+MAX_RECOMMENDED_PRODUCTS = 5
+MAX_EVIDENCE_CHUNKS_PER_PRODUCT = 2
 
 
 def check_scope(state: RagGraphState) -> dict[str, str]:
@@ -94,18 +102,32 @@ def recommendation_follow_up(state: RagGraphState) -> dict[str, Any]:
     missing_fields = state.get("missing_fields", [])
     return {
         "status": "NEED_MORE_INFO",
-        "answer": "상품 후보를 확인하려면 사용자 조건이 더 필요합니다.",
+        "answer": "상품 후보를 확인하려면 계좌 유형과 투자 위험 선호가 필요합니다.",
         "missing_fields": missing_fields,
-        "follow_up_question": f"다음 정보를 알려주세요: {', '.join(missing_fields)}.",
+        "follow_up_question": (
+            "어느 계좌에서 운용할 예정인지와 "
+            "안정성·수익성 중 선호하는 방향을 알려주세요."
+        ),
         "sources": [],
     }
 
 
-def store_candidate_products(candidates: list[dict[str, Any]]) -> dict[str, Any]:
-    """JSON·PostgreSQL 어느 저장소에서 온 후보든 같은 State 형식으로 저장한다."""
+def store_candidate_products(
+    candidates: list[dict[str, Any]], user_conditions: dict[str, Any]
+) -> dict[str, Any]:
+    """클래스 후보와 Product RAG 필터용 고유 상품 ID를 State에 저장한다."""
+    enriched_candidates = enrich_candidate_classes(candidates, user_conditions)
+    # DB 결과는 클래스 단위일 수 있다. 추천 검색 대상은 같은 상품을 중복시키지
+    # 않고, 먼저 등장한 20개의 고유 상품으로 제한한다.
+    candidate_product_ids = list(dict.fromkeys(
+        str(product["product_id"]) for product in enriched_candidates
+    ))[:MAX_DB_CANDIDATE_PRODUCTS]
     return {
-        "candidate_product_ids": [str(product["product_id"]) for product in candidates],
-        "candidate_products": candidates,
+        "candidate_product_ids": candidate_product_ids,
+        "candidate_products": [
+            product for product in enriched_candidates
+            if str(product["product_id"]) in candidate_product_ids
+        ],
     }
 
 
@@ -131,25 +153,79 @@ def retrieve_selected_sources(
     """첫 LLM이 선택한 Policy/Product RAG에서 근거를 모은다."""
     top_k = int(state.get("top_k", 3))
     selected = set(state.get("retrieval_sources", []))
-    chunks = []
+    policy_chunks = []
+    product_chunks = []
     if "POLICY_RAG" in selected:
-        chunks.extend(policy_retriever.search(state.get("query", ""), top_k=top_k))
-    if "PRODUCT_RAG" in selected:
+        policy_chunks = policy_retriever.search(state.get("query", ""), top_k=top_k)
+    is_recommendation = state.get("intent") == "PENSION_RECOMMENDATION"
+    if "PRODUCT_RAG" in selected or is_recommendation:
         candidate_ids = state.get("candidate_product_ids", [])
         allowed_product_ids = set(candidate_ids) if candidate_ids else None
-        chunks.extend(product_retriever.search(
-            state.get("query", ""), top_k=top_k, allowed_product_ids=allowed_product_ids
-        ))
+        if is_recommendation:
+            product_chunks = product_retriever.search(
+                state.get("query", ""),
+                top_k=len(candidate_ids) * MAX_EVIDENCE_CHUNKS_PER_PRODUCT,
+                allowed_product_ids=allowed_product_ids,
+                per_product_limit=MAX_EVIDENCE_CHUNKS_PER_PRODUCT,
+            )
+        else:
+            product_chunks = product_retriever.search(
+                state.get("query", ""), top_k=top_k, allowed_product_ids=allowed_product_ids
+            )
+
+    if is_recommendation:
+        recommended_products, evidence_chunks = rank_recommended_products(
+            state.get("candidate_products", []), product_chunks
+        )
+        return {
+            "recommended_products": recommended_products,
+            "retrieved_chunks": [chunk.to_dict() for chunk in policy_chunks + evidence_chunks],
+        }
 
     result = []
     seen_chunk_ids: set[str] = set()
-    for chunk in sorted(chunks, key=lambda item: item.score, reverse=True):
+    for chunk in sorted(policy_chunks + product_chunks, key=lambda item: item.score, reverse=True):
         if chunk.chunk_id not in seen_chunk_ids:
             result.append(chunk)
             seen_chunk_ids.add(chunk.chunk_id)
         if len(result) == top_k:
             break
     return {"retrieved_chunks": [chunk.to_dict() for chunk in result]}
+
+
+def rank_recommended_products(
+    candidates: list[dict[str, Any]], chunks: list[Any]
+) -> tuple[list[dict[str, Any]], list[Any]]:
+    """상품별 상위 근거 1~2개로 점수화하고 중복 없는 추천 목록을 만든다."""
+    candidates_by_product: dict[str, list[dict[str, Any]]] = {}
+    for candidate in candidates:
+        candidates_by_product.setdefault(str(candidate["product_id"]), []).append(candidate)
+
+    evidence_by_product: dict[str, list[Any]] = {}
+    for chunk in sorted(chunks, key=lambda item: item.score, reverse=True):
+        product_id = chunk.product_id
+        if product_id not in candidates_by_product:
+            continue
+        evidence = evidence_by_product.setdefault(product_id, [])
+        if len(evidence) < MAX_EVIDENCE_CHUNKS_PER_PRODUCT:
+            evidence.append(chunk)
+
+    ranked: list[tuple[float, dict[str, Any], list[Any]]] = []
+    for product_id, evidence in evidence_by_product.items():
+        # 첫 근거가 핵심이고, 두 번째 근거는 보조 신호만 제공한다.
+        score = evidence[0].score + sum(chunk.score for chunk in evidence[1:]) * 0.2
+        representative = dict(candidates_by_product[product_id][0])
+        representative["evidence_score"] = score
+        representative["supporting_chunk_ids"] = [chunk.chunk_id for chunk in evidence]
+        ranked.append((score, representative, evidence))
+
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    # 근거가 3개 미만이어도 억지로 채우지 않는다. 최대 5개만 제시한다.
+    selected = ranked[:MAX_RECOMMENDED_PRODUCTS]
+    return (
+        [product for _, product, _ in selected],
+        [chunk for _, _, evidence in selected for chunk in evidence],
+    )
 
 
 def build_grounded_context(chunks: list[dict]) -> tuple[str, list[dict]]:
@@ -178,17 +254,34 @@ def build_grounded_context(chunks: list[dict]) -> tuple[str, list[dict]]:
 def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict[str, Any]:
     """검색 근거가 있을 때만 CLOVA에 최종 자연어 답변을 요청한다."""
     chunks = state.get("retrieved_chunks", [])
+    if state.get("intent") == "PENSION_RECOMMENDATION" and not state.get("recommended_products", []):
+        return no_grounded_context()
     if not chunks:
         return no_grounded_context()
     context, sources = build_grounded_context(chunks)
+    system_prompt = (
+        RECOMMENDATION_RAG_SYSTEM_PROMPT
+        if state.get("intent") == "PENSION_RECOMMENDATION"
+        else INFORMATION_RAG_SYSTEM_PROMPT
+    )
+    user_conditions = {
+        key: value
+        for key, value in state.get("user_conditions", {}).items()
+        if value is not None and value != "" and value != []
+    }
     analysis_context = json.dumps(
         {
             "intent": state.get("intent"),
             "retrieval_sources": state.get("retrieval_sources", []),
-            "user_conditions": state.get("user_conditions", {}),
-            "candidate_products": state.get("candidate_products", []),
+            "user_conditions": user_conditions,
+            "candidate_products": (
+                state.get("recommended_products", [])
+                if state.get("intent") == "PENSION_RECOMMENDATION"
+                else state.get("candidate_products", [])
+            ),
         },
         ensure_ascii=False,
+        default=str,
     )
     user_prompt = (
         f"[사용자 질문]\n{state.get('query', '')}\n\n"
@@ -198,10 +291,10 @@ def generate_clova_answer(state: RagGraphState, client: ClovaChatClient) -> dict
     with observe(
         "answer-generation",
         as_type="generation",
-        input={"system_prompt": RAG_SYSTEM_PROMPT, "user_prompt": user_prompt},
+        input={"system_prompt": system_prompt, "user_prompt": user_prompt},
         metadata={"model_provider": "hyperclova"},
     ) as generation:
-        response = client.generate_rag_answer(system_prompt=RAG_SYSTEM_PROMPT, user_prompt=user_prompt)
+        response = client.generate_rag_answer(system_prompt=system_prompt, user_prompt=user_prompt)
         update_observation(generation, output=response.model_dump(mode="json"))
     return {
         "answer_generation_prompt": user_prompt,

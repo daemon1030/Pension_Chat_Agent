@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from src.products.catalog import risk_grade_range
+
 
 class PostgresPensionRepository:
     """한 PostgreSQL DB 안의 상품 테이블과 RAG 벡터 테이블을 다룬다."""
@@ -19,73 +21,90 @@ class PostgresPensionRepository:
             raise ValueError(f"CLOVA 임베딩은 1024차원이어야 합니다: {len(vector)}")
         return "[" + ",".join(str(float(value)) for value in vector) + "]"
 
-    def upsert_product(self, product: dict[str, Any]) -> None:
+    def upsert_product_class(self, product_class: dict[str, Any]) -> None:
+        """실제 가입 단위인 상품 클래스를 한 행으로 저장한다."""
         self._connection.execute(
             """
-            INSERT INTO pension_products (
-                product_id, product_name, status, min_age, max_age, risk_level,
-                allowed_employment, allowed_risk_preferences, goals, fee_rate,
-                attributes, source_name
+            INSERT INTO product_classes (
+                class_id, class_name, product_id, product_name, risk_grade,
+                asset_type, investment_region, eligible_account_types, sales_channel,
+                capital_protection, redemption_available, redemption_fee_type,
+                total_fee_rate, upfront_fee_rate, status, source_page
             ) VALUES (
-                %(product_id)s, %(product_name)s, %(status)s, %(min_age)s, %(max_age)s, %(risk_level)s,
-                %(allowed_employment)s, %(allowed_risk_preferences)s, %(goals)s, %(fee_rate)s,
-                %(attributes)s::jsonb, %(source_name)s
+                %(class_id)s, %(class_name)s, %(product_id)s, %(product_name)s, %(risk_grade)s,
+                %(asset_type)s, %(investment_region)s, %(eligible_account_types)s, %(sales_channel)s,
+                %(capital_protection)s, %(redemption_available)s, %(redemption_fee_type)s,
+                %(total_fee_rate)s, %(upfront_fee_rate)s, %(status)s, %(source_page)s
             )
-            ON CONFLICT (product_id) DO UPDATE SET
+            ON CONFLICT (class_id) DO UPDATE SET
+                class_name = EXCLUDED.class_name,
+                product_id = EXCLUDED.product_id,
                 product_name = EXCLUDED.product_name,
+                risk_grade = EXCLUDED.risk_grade,
+                asset_type = EXCLUDED.asset_type,
+                investment_region = EXCLUDED.investment_region,
+                eligible_account_types = EXCLUDED.eligible_account_types,
+                sales_channel = EXCLUDED.sales_channel,
+                capital_protection = EXCLUDED.capital_protection,
+                redemption_available = EXCLUDED.redemption_available,
+                redemption_fee_type = EXCLUDED.redemption_fee_type,
+                total_fee_rate = EXCLUDED.total_fee_rate,
+                upfront_fee_rate = EXCLUDED.upfront_fee_rate,
                 status = EXCLUDED.status,
-                min_age = EXCLUDED.min_age,
-                max_age = EXCLUDED.max_age,
-                risk_level = EXCLUDED.risk_level,
-                allowed_employment = EXCLUDED.allowed_employment,
-                allowed_risk_preferences = EXCLUDED.allowed_risk_preferences,
-                goals = EXCLUDED.goals,
-                fee_rate = EXCLUDED.fee_rate,
-                attributes = EXCLUDED.attributes,
-                source_name = EXCLUDED.source_name,
+                source_page = EXCLUDED.source_page,
                 updated_at = NOW()
             """,
             {
-                "product_id": product["product_id"],
-                "product_name": product["product_name"],
-                "status": product.get("status", "INACTIVE"),
-                "min_age": product.get("min_age", 0),
-                "max_age": product.get("max_age"),
-                "risk_level": product.get("risk_level"),
-                "allowed_employment": product.get("allowed_employment", []),
-                "allowed_risk_preferences": product.get("allowed_risk_preferences", []),
-                "goals": product.get("goals", []),
-                "fee_rate": product.get("fee_rate"),
-                "attributes": json.dumps(product.get("attributes", {}), ensure_ascii=False),
-                "source_name": product.get("source_name"),
+                "class_id": product_class["class_id"],
+                "class_name": product_class["class_name"],
+                "product_id": product_class["product_id"],
+                "product_name": product_class["product_name"],
+                "risk_grade": product_class.get("risk_grade"),
+                "asset_type": product_class.get("asset_type", "OTHER"),
+                "investment_region": product_class.get("investment_region", "UNKNOWN"),
+                "eligible_account_types": product_class.get("eligible_account_types", []),
+                "sales_channel": product_class.get("sales_channel", "UNKNOWN"),
+                "capital_protection": product_class.get("capital_protection", "UNKNOWN"),
+                "redemption_available": product_class.get("redemption_available", "UNKNOWN"),
+                "redemption_fee_type": product_class.get("redemption_fee_type", "UNKNOWN"),
+                "total_fee_rate": product_class.get("total_fee_rate"),
+                "upfront_fee_rate": product_class.get("upfront_fee_rate"),
+                "status": product_class.get("status", "UNKNOWN"),
+                "source_page": product_class.get("source_page"),
             },
         )
 
-    def filter_products(self, user_conditions: dict[str, Any]) -> list[dict[str, Any]]:
-        """추천 후보를 벡터 검색 전에 SQL 조건으로 정확히 줄인다."""
+    def filter_product_classes(self, user_conditions: dict[str, Any]) -> list[dict[str, Any]]:
+        """계좌 유형·위험 선호·가입 채널로 가입 가능한 클래스 후보를 줄인다."""
+        min_risk_grade, max_risk_grade = risk_grade_range(user_conditions["risk_preference"])
         rows = self._connection.execute(
             """
-            SELECT product_id, product_name, status, min_age, max_age, risk_level,
-                   allowed_employment, allowed_risk_preferences, goals, fee_rate, attributes
-            FROM pension_products
-            WHERE status = 'ACTIVE'
-              AND min_age <= %(age)s
-              AND (max_age IS NULL OR max_age >= %(age)s)
-              AND %(employment_status)s = ANY(allowed_employment)
-              AND %(risk_preference)s = ANY(allowed_risk_preferences)
-              AND %(goal)s = ANY(goals)
-            ORDER BY product_name
+            SELECT class_id, class_name, product_id, product_name, risk_grade,
+                   asset_type, investment_region, eligible_account_types, sales_channel,
+                   capital_protection, redemption_available, redemption_fee_type,
+                   total_fee_rate, upfront_fee_rate, status, source_page
+            FROM product_classes
+            WHERE status = 'ON_SALE'
+              AND %(account_type)s = ANY(eligible_account_types)
+              AND risk_grade BETWEEN %(min_risk_grade)s AND %(max_risk_grade)s
+              AND (
+                  %(sales_channel)s::text IS NULL
+                  OR sales_channel = %(sales_channel)s::text
+              )
+            ORDER BY risk_grade DESC, total_fee_rate ASC NULLS LAST, product_name, class_name
             """,
             {
-                "age": user_conditions["age"],
-                "employment_status": user_conditions["employment_status"],
-                "risk_preference": user_conditions["risk_preference"],
-                "goal": user_conditions["goal"],
+                "account_type": user_conditions["account_type"],
+                "min_risk_grade": min_risk_grade,
+                "max_risk_grade": max_risk_grade,
+                "sales_channel": user_conditions.get("sales_channel"),
             },
         ).fetchall()
         columns = (
-            "product_id", "product_name", "status", "min_age", "max_age", "risk_level",
-            "allowed_employment", "allowed_risk_preferences", "goals", "fee_rate", "attributes",
+            "class_id", "class_name", "product_id", "product_name", "risk_grade",
+            "asset_type", "investment_region", "eligible_account_types", "sales_channel",
+            "capital_protection", "redemption_available", "redemption_fee_type",
+            "total_fee_rate", "upfront_fee_rate", "status", "source_page",
         )
         return [dict(zip(columns, row)) for row in rows]
 
@@ -146,30 +165,47 @@ class PostgresPensionRepository:
         knowledge_type: str,
         top_k: int = 3,
         allowed_product_ids: list[str] | None = None,
+        per_product_limit: int | None = None,
     ) -> list[dict[str, Any]]:
         """코사인 거리로 RAG Chunk를 찾고, 상품 검색은 후보 ID로 먼저 제한한다."""
         if knowledge_type not in {"POLICY", "PRODUCT"}:
             raise ValueError("knowledge_type은 POLICY 또는 PRODUCT여야 합니다.")
-        if top_k < 1 or (knowledge_type == "PRODUCT" and not allowed_product_ids):
+        if (
+            top_k < 1
+            or (knowledge_type == "PRODUCT" and not allowed_product_ids)
+            or (per_product_limit is not None and per_product_limit < 1)
+        ):
             return []
         rows = self._connection.execute(
             """
+            WITH ranked_chunks AS (
+                SELECT chunk_id, document_id, document_title, section_id, section_title, topic,
+                       content, page_start, page_end, validation_status, product_id,
+                       1 - (embedding <=> %(embedding)s::vector) AS score,
+                       ROW_NUMBER() OVER (
+                           PARTITION BY product_id
+                           ORDER BY embedding <=> %(embedding)s::vector
+                       ) AS product_rank
+                FROM rag_chunks
+                WHERE knowledge_type = %(knowledge_type)s
+                  AND (
+                      %(allowed_product_ids)s::text[] IS NULL
+                      OR product_id = ANY(%(allowed_product_ids)s::text[])
+                  )
+            )
             SELECT chunk_id, document_id, document_title, section_id, section_title, topic,
-                   content, page_start, page_end, validation_status, product_id,
-                   1 - (embedding <=> %(embedding)s::vector) AS score
-            FROM rag_chunks
-            WHERE knowledge_type = %(knowledge_type)s
-              AND (
-                  %(allowed_product_ids)s::text[] IS NULL
-                  OR product_id = ANY(%(allowed_product_ids)s::text[])
-              )
-            ORDER BY embedding <=> %(embedding)s::vector
+                   content, page_start, page_end, validation_status, product_id, score
+            FROM ranked_chunks
+            WHERE %(per_product_limit)s::integer IS NULL
+               OR product_rank <= %(per_product_limit)s::integer
+            ORDER BY score DESC
             LIMIT %(top_k)s
             """,
             {
                 "embedding": self.vector_literal(query_embedding),
                 "knowledge_type": knowledge_type,
                 "allowed_product_ids": allowed_product_ids,
+                "per_product_limit": per_product_limit,
                 "top_k": top_k,
             },
         ).fetchall()

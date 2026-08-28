@@ -33,16 +33,24 @@ class PostgresRagRetriever:
         *,
         top_k: int = 3,
         allowed_product_ids: set[str] | None = None,
+        per_product_limit: int | None = None,
     ) -> list[RagChunk]:
         if not query.strip() or top_k < 1:
             return []
         if self._knowledge_type == "PRODUCT" and allowed_product_ids is not None and not allowed_product_ids:
             return []
+        if per_product_limit is not None and per_product_limit < 1:
+            return []
         allowed_ids = sorted(allowed_product_ids) if allowed_product_ids is not None else None
         with observe(
             f"{self._knowledge_type.lower()}-rag-retrieval",
             as_type="retriever",
-            input={"query": query, "top_k": top_k, "allowed_product_ids": allowed_ids},
+            input={
+                "query": query,
+                "top_k": top_k,
+                "allowed_product_ids": allowed_ids,
+                "per_product_limit": per_product_limit,
+            },
             metadata={"knowledge_type": self._knowledge_type, "store": "pgvector"},
         ) as retrieval:
             rows: list[dict[str, Any]] = self._repository.search_chunks(
@@ -50,6 +58,7 @@ class PostgresRagRetriever:
                 knowledge_type=self._knowledge_type,
                 top_k=top_k,
                 allowed_product_ids=allowed_ids,
+                per_product_limit=per_product_limit,
             )
             update_observation(
                 retrieval,

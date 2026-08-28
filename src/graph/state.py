@@ -9,7 +9,7 @@ from typing import Any, Literal, TypedDict
 
 
 class RagGraphState(TypedDict, total=False):
-    """정형 DB·Rule Engine을 포함하지 않는 최소 상태."""
+    """정형 DB 조회와 RAG를 연결하는 싱글 턴 상태."""
 
     query: str
     top_k: int
@@ -21,6 +21,7 @@ class RagGraphState(TypedDict, total=False):
     user_conditions: dict[str, Any]
     candidate_product_ids: list[str]
     candidate_products: list[dict[str, Any]]
+    recommended_products: list[dict[str, Any]]
 
     scope: Literal["IN_SCOPE", "OUT_OF_SCOPE"]
     retrieved_chunks: list[dict]

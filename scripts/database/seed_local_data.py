@@ -19,23 +19,43 @@ def load_jsonl(path: Path) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="JSONL 임베딩과 상품 카탈로그를 PostgreSQL에 적재")
-    parser.add_argument("--policy", type=Path, default=PROJECT_ROOT / "data/embeddings/rag_embeddings.jsonl")
-    parser.add_argument("--product", type=Path, default=PROJECT_ROOT / "data/embeddings/product_embeddings.jsonl")
-    parser.add_argument("--products", type=Path, default=PROJECT_ROOT / "data/products.json")
+    parser.add_argument(
+        "--policy",
+        type=Path,
+        default=PROJECT_ROOT / "data/embeddings/rag_embeddings.jsonl",
+        help="규정 RAG 임베딩 JSONL 경로",
+    )
+    parser.add_argument(
+        "--product",
+        type=Path,
+        default=PROJECT_ROOT / "data/embeddings/product_embeddings_from_preprocessing.jsonl",
+        help="상품 RAG 임베딩 JSONL 경로",
+    )
+    parser.add_argument(
+        "--products",
+        type=Path,
+        default=PROJECT_ROOT / "data/product_db_ready/product_classes.json",
+        help="상품 필터링 DB용 클래스 JSON 경로",
+    )
     args = parser.parse_args()
 
-    products = json.loads(args.products.read_text(encoding="utf-8")).get("products", [])
+    missing_paths = [path for path in (args.policy, args.product, args.products) if not path.is_file()]
+    if missing_paths:
+        missing = ", ".join(str(path.relative_to(PROJECT_ROOT)) for path in missing_paths)
+        parser.error(f"적재할 파일을 찾을 수 없습니다: {missing}")
+
+    product_classes = json.loads(args.products.read_text(encoding="utf-8")).get("product_classes", [])
     policy_chunks = load_jsonl(args.policy)
     product_chunks = load_jsonl(args.product)
     with connect_from_env() as connection:
         repository = PostgresPensionRepository(connection)
-        for product in products:
-            repository.upsert_product(product)
+        for product_class in product_classes:
+            repository.upsert_product_class(product_class)
         for chunk in policy_chunks:
             repository.upsert_chunk(chunk, knowledge_type="POLICY")
         for chunk in product_chunks:
             repository.upsert_chunk(chunk, knowledge_type="PRODUCT")
-    print(f"적재 완료: 상품 {len(products)}개, 규정 Chunk {len(policy_chunks)}개, 상품 Chunk {len(product_chunks)}개")
+    print(f"적재 완료: 상품 클래스 {len(product_classes)}개, 규정 Chunk {len(policy_chunks)}개, 상품 Chunk {len(product_chunks)}개")
 
 
 if __name__ == "__main__":

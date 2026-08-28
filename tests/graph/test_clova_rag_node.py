@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from src.llm.schemas import RagAnswer
 from src.graph.nodes import generate_clova_answer
 
@@ -30,6 +32,62 @@ def test_clova_answer_receives_rag_context_and_returns_sources():
     assert "만 55세 이후" in client.user_prompt
     assert "근거에 없는" in client.system_prompt
     assert result["sources"][0]["page"] == 3
+
+
+def test_recommendation_uses_its_own_prompt_and_receives_all_non_empty_conditions():
+    client = FakeChatClient()
+    state = {
+        "query": "IRP에서 안전하게 추천해줘",
+        "intent": "PENSION_RECOMMENDATION",
+        "user_conditions": {
+            "age": 30,
+            "annual_income": 50_000_000,
+            "account_type": "IRP",
+            "risk_preference": "CONSERVATIVE",
+            "goal": "RETIREMENT_PREPARATION",
+            "contribution_amount": None,
+        },
+        "recommended_products": [{
+            "class_id": "BV451",
+            "product_id": "PENSION_PRODUCT_DEMO_001",
+            "total_fee_rate": 0.185,
+            "matched_conditions": [{"message": "IRP에서 가입 가능한 클래스입니다."}],
+        }],
+        "retrieved_chunks": [{
+            "document_id": "PRODUCT_001", "section_id": "SEC_001", "content": "채권형 상품입니다.",
+            "page_start": 1,
+        }],
+    }
+
+    generate_clova_answer(state, client)
+
+    assert "candidate_products는 코드가" in client.system_prompt
+    assert '"age": 30' in client.user_prompt
+    assert '"annual_income": 50000000' in client.user_prompt
+    assert '"contribution_amount"' not in client.user_prompt
+    assert "IRP에서 가입 가능한 클래스입니다." in client.user_prompt
+
+
+def test_recommendation_context_serializes_database_decimal_values():
+    client = FakeChatClient()
+    state = {
+        "query": "IRP에서 안전하게 추천해줘",
+        "intent": "PENSION_RECOMMENDATION",
+        "user_conditions": {
+            "account_type": "IRP",
+            "risk_preference": "CONSERVATIVE",
+            "goal": "RETIREMENT_PREPARATION",
+        },
+        "recommended_products": [{"class_id": "BV451", "product_id": "PENSION_PRODUCT_DEMO_001", "total_fee_rate": Decimal("0.185")}],
+        "retrieved_chunks": [{
+            "document_id": "PRODUCT_001", "section_id": "SEC_001", "content": "채권형 상품입니다.",
+            "page_start": 1,
+        }],
+    }
+
+    generate_clova_answer(state, client)
+
+    assert '"total_fee_rate": "0.185"' in client.user_prompt
 
 
 def test_clova_returns_missing_fields_and_follow_up_question():

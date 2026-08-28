@@ -1,31 +1,48 @@
 CREATE EXTENSION IF NOT EXISTS vector;
 
--- 정확한 조건 필터링에 쓰는 일반 관계형 상품 테이블
-CREATE TABLE IF NOT EXISTS pension_products (
-    product_id TEXT PRIMARY KEY,
+-- 사용자가 실제로 가입하는 단위인 상품 클래스를 한 행으로 저장한다.
+-- 상품 공통 정보는 클래스마다 반복해, 추천 필터를 한 번의 조회로 끝낸다.
+CREATE TABLE IF NOT EXISTS product_classes (
+    class_id TEXT PRIMARY KEY,
+    class_name TEXT NOT NULL,
+    product_id TEXT NOT NULL,
     product_name TEXT NOT NULL,
-    status TEXT NOT NULL CHECK (status IN ('ACTIVE', 'INACTIVE')),
-    min_age INTEGER NOT NULL DEFAULT 0 CHECK (min_age >= 0),
-    max_age INTEGER,
-    risk_level TEXT,
-    allowed_employment TEXT[] NOT NULL DEFAULT '{}',
-    allowed_risk_preferences TEXT[] NOT NULL DEFAULT '{}',
-    goals TEXT[] NOT NULL DEFAULT '{}',
-    fee_rate NUMERIC(8, 5),
-    attributes JSONB NOT NULL DEFAULT '{}'::jsonb,
-    source_name TEXT,
+    risk_grade INTEGER CHECK (risk_grade BETWEEN 1 AND 6),
+    asset_type TEXT NOT NULL DEFAULT 'OTHER',
+    investment_region TEXT NOT NULL DEFAULT 'UNKNOWN',
+    eligible_account_types TEXT[] NOT NULL DEFAULT '{}',
+    sales_channel TEXT NOT NULL DEFAULT 'UNKNOWN',
+    capital_protection TEXT NOT NULL DEFAULT 'UNKNOWN',
+    redemption_available TEXT NOT NULL DEFAULT 'UNKNOWN',
+    redemption_fee_type TEXT NOT NULL DEFAULT 'UNKNOWN',
+    total_fee_rate NUMERIC(8, 5),
+    upfront_fee_rate NUMERIC(8, 5),
+    status TEXT NOT NULL DEFAULT 'UNKNOWN',
+    source_page INTEGER,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    CHECK (max_age IS NULL OR max_age >= min_age)
+    CHECK (asset_type IN ('EQUITY', 'BOND', 'MIXED', 'MMF', 'ETF', 'REIT', 'DERIVATIVE', 'OTHER')),
+    CHECK (investment_region IN ('DOMESTIC', 'OVERSEAS', 'GLOBAL', 'MIXED', 'UNKNOWN')),
+    CHECK (sales_channel IN ('ONLINE', 'OFFLINE', 'ONLINE_SUPER', 'INSTITUTIONAL', 'WRAP_TRUST', 'UNKNOWN')),
+    CHECK (capital_protection IN ('TRUE', 'FALSE', 'UNKNOWN')),
+    CHECK (redemption_available IN ('TRUE', 'FALSE', 'CONDITIONAL', 'UNKNOWN')),
+    CHECK (redemption_fee_type IN ('NONE', 'FIXED_RATE', 'CONDITIONAL', 'UNKNOWN')),
+    CHECK (status IN ('ON_SALE', 'SUSPENDED', 'ENDED', 'UNKNOWN'))
 );
 
-CREATE INDEX IF NOT EXISTS pension_products_active_idx
-    ON pension_products (status);
+CREATE INDEX IF NOT EXISTS product_classes_filter_idx
+    ON product_classes (status, risk_grade, sales_channel);
+CREATE INDEX IF NOT EXISTS product_classes_product_id_idx
+    ON product_classes (product_id);
+CREATE INDEX IF NOT EXISTS product_classes_account_types_idx
+    ON product_classes USING gin (eligible_account_types);
 
 -- 규정과 상품 설명을 함께 저장하는 벡터 테이블
 CREATE TABLE IF NOT EXISTS rag_chunks (
     chunk_id TEXT PRIMARY KEY,
     knowledge_type TEXT NOT NULL CHECK (knowledge_type IN ('POLICY', 'PRODUCT')),
-    product_id TEXT REFERENCES pension_products(product_id) ON DELETE CASCADE,
+    -- product_id는 product_classes의 여러 클래스를 묶는 값이므로 FK로 두지 않는다.
+    product_id TEXT,
     document_id TEXT NOT NULL,
     document_title TEXT,
     section_id TEXT NOT NULL,

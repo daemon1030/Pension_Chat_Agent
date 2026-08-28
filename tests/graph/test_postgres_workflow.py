@@ -1,4 +1,5 @@
 from src.graph.workflow import create_postgres_clova_rag_workflow
+from src.graph.nodes import rank_recommended_products, store_candidate_products
 from src.llm.schemas import QueryAnalysis, RagAnswer
 
 
@@ -24,11 +25,13 @@ class FakeRepository:
     def __init__(self) -> None:
         self.search_calls = []
 
-    def filter_products(self, user_conditions):
+    def filter_product_classes(self, user_conditions):
         return [{
+            "class_id": "CLASS_DEMO_001",
+            "class_name": "C-퇴직e",
             "product_id": "PENSION_PRODUCT_DEMO_001",
             "product_name": "안정형 데모 상품",
-            "status": "ACTIVE",
+            "status": "ON_SALE",
         }]
 
     def search_chunks(self, embedding, **kwargs):
@@ -55,8 +58,7 @@ def test_postgres_recommendation_workflow_filters_products_before_product_vector
             intent="PENSION_RECOMMENDATION",
             retrieval_sources=["PRODUCT_DB", "PRODUCT_RAG"],
             user_conditions={
-                "age": 20,
-                "employment_status": "EMPLOYED",
+                "account_type": "IRP",
                 "risk_preference": "CONSERVATIVE",
                 "goal": "RETIREMENT_PREPARATION",
             },
@@ -67,9 +69,35 @@ def test_postgres_recommendation_workflow_filters_products_before_product_vector
     result = workflow.invoke({"query": "안전한 연금상품을 추천해줘"})
 
     assert result["candidate_product_ids"] == ["PENSION_PRODUCT_DEMO_001"]
+    assert result["recommended_products"][0]["product_id"] == "PENSION_PRODUCT_DEMO_001"
     assert result["sources"][0]["document_id"] == "PRODUCT_001"
     assert repository.search_calls[0]["knowledge_type"] == "PRODUCT"
     assert repository.search_calls[0]["allowed_product_ids"] == ["PENSION_PRODUCT_DEMO_001"]
+    assert repository.search_calls[0]["per_product_limit"] == 2
+
+
+def test_recommendation_with_missing_conditions_returns_the_fixed_follow_up():
+    repository = FakeRepository()
+    workflow = create_postgres_clova_rag_workflow(
+        embedding_client=FakeEmbeddingClient(),
+        chat_client=FakeChatClient(QueryAnalysis(
+            is_pension_related=True,
+            intent="PENSION_RECOMMENDATION",
+            retrieval_sources=["PRODUCT_DB", "PRODUCT_RAG"],
+            user_conditions={"risk_preference": "CONSERVATIVE"},
+        )),
+        repository=repository,
+    )
+
+    result = workflow.invoke({"query": "안전한 연금상품을 추천해줘"})
+
+    assert result["status"] == "NEED_MORE_INFO"
+    assert result["missing_fields"] == ["계좌 유형"]
+    assert result["follow_up_question"] == (
+        "어느 계좌에서 운용할 예정인지와 "
+        "안정성·수익성 중 선호하는 방향을 알려주세요."
+    )
+    assert repository.search_calls == []
 
 
 def test_postgres_information_workflow_searches_only_policy_vectors():
@@ -108,3 +136,44 @@ def test_information_workflow_uses_the_product_rag_selected_by_llm():
     assert result["sources"][0]["document_id"] == "PRODUCT_001"
     assert repository.search_calls[0]["knowledge_type"] == "PRODUCT"
     assert repository.search_calls[0]["allowed_product_ids"] is None
+
+
+def test_recommendation_ranking_keeps_one_entry_per_product_and_two_evidence_chunks():
+    class Chunk:
+        def __init__(self, chunk_id, product_id, score):
+            self.chunk_id = chunk_id
+            self.product_id = product_id
+            self.score = score
+
+        def to_dict(self):
+            return {"chunk_id": self.chunk_id, "product_id": self.product_id, "score": self.score}
+
+    candidates = [
+        {"class_id": "A1", "product_id": "A", "product_name": "상품 A"},
+        {"class_id": "A2", "product_id": "A", "product_name": "상품 A"},
+        {"class_id": "B1", "product_id": "B", "product_name": "상품 B"},
+        {"class_id": "C1", "product_id": "C", "product_name": "상품 C"},
+    ]
+    chunks = [
+        Chunk("A-1", "A", 0.90), Chunk("A-2", "A", 0.80), Chunk("A-3", "A", 0.70),
+        Chunk("B-1", "B", 0.85), Chunk("B-2", "B", 0.75),
+        Chunk("C-1", "C", 0.60),
+    ]
+
+    products, evidence = rank_recommended_products(candidates, chunks)
+
+    assert [product["product_id"] for product in products] == ["A", "B", "C"]
+    assert products[0]["supporting_chunk_ids"] == ["A-1", "A-2"]
+    assert [chunk.chunk_id for chunk in evidence] == ["A-1", "A-2", "B-1", "B-2", "C-1"]
+
+
+def test_candidate_storage_limits_the_db_pool_to_twenty_unique_products():
+    candidates = [
+        {"class_id": f"C{index}", "product_id": f"P{index}", "product_name": f"상품 {index}"}
+        for index in range(25)
+    ]
+
+    stored = store_candidate_products(candidates, {"account_type": "IRP"})
+
+    assert len(stored["candidate_product_ids"]) == 20
+    assert stored["candidate_product_ids"] == [f"P{index}" for index in range(20)]

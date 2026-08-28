@@ -76,7 +76,8 @@ class UserConditions(BaseModel):
     risk_preference: Literal["CONSERVATIVE", "BALANCED", "AGGRESSIVE"] | None = None
     goal: str | None = None
     investment_horizon_years: int | None = None
-    account_type: str | None = None
+    account_type: Literal["PENSION_SAVINGS", "IRP", "RETIREMENT_PENSION"] | None = None
+    sales_channel: Literal["ONLINE", "OFFLINE", "ONLINE_SUPER"] | None = None
     contribution_amount: int | None = None
     tax_year: int | None = None
     withdrawal_reason: str | None = None
