@@ -1,5 +1,13 @@
-# dataset
+# Data: 기본적으로 제외하고, 서버 기동에 필요한 배포 산출물만 포함한다.
 /data/**
+!/data/
+!/data/embeddings/
+!/data/embeddings/rag_embeddings.jsonl
+!/data/embeddings/product_embeddings_from_preprocessing.jsonl
+!/data/product_db_ready/
+!/data/product_db_ready/product_classes.json
+
+# Runtime artifacts
 /미래에셋_데이터셋/**
 /config/**
 
@@ -14,6 +22,5 @@ __pycache__/
 .venv/
 
 # Secrets
-.env
 .DS_Store
 .obsidian/*
