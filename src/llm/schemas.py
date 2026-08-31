@@ -3,7 +3,7 @@
 import re
 from typing import Any, Literal
 
-from pydantic import AliasChoices, BaseModel, Field, model_validator
+from pydantic import AliasChoices, BaseModel, Field, field_validator, model_validator
 
 
 RetrievalSource = Literal["PRODUCT_DB", "POLICY_RAG", "PRODUCT_RAG"]
@@ -91,20 +91,50 @@ class QueryAnalysis(BaseModel):
     is_pension_related: bool
     intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
     retrieval_sources: list[RetrievalSource] = Field(default_factory=list)
+    search_queries: list[str] = Field(default_factory=list)
     user_conditions: UserConditions = Field(default_factory=UserConditions)
+
+    @field_validator("search_queries", mode="before")
+    @classmethod
+    def normalize_search_queries(cls, value: Any) -> list[str]:
+        """검색어는 짧은 보정 질의 두 개까지만 허용한다."""
+        if value is None:
+            return []
+        raw_queries = [value] if isinstance(value, str) else value
+        if not isinstance(raw_queries, list):
+            raise ValueError("search_queries는 문자열 목록이어야 합니다.")
+        result: list[str] = []
+        seen: set[str] = set()
+        for raw_query in raw_queries:
+            if not isinstance(raw_query, str):
+                continue
+            query = raw_query.strip()
+            normalized = " ".join(query.lower().split())
+            if query and normalized not in seen:
+                result.append(query)
+                seen.add(normalized)
+            if len(result) == 2:
+                break
+        return result
 
     @model_validator(mode="after")
     def validate_pension_scope(self) -> "QueryAnalysis":
+        # 추천은 DB 후보 필터와 상품 근거 검색을 모두 거쳐야 한다. 모델이 둘 중
+        # 하나를 빠뜨려도 경로 선택만 코드에서 안전하게 보정한다.
+        if self.intent == "PENSION_RECOMMENDATION":
+            self.retrieval_sources = list(dict.fromkeys([
+                "PRODUCT_DB", "PRODUCT_RAG", *self.retrieval_sources,
+            ]))
         if self.is_pension_related and self.intent is None:
             raise ValueError("연금 관련 질문에는 intent가 필요합니다.")
         if self.is_pension_related and not self.retrieval_sources:
             raise ValueError("연금 관련 질문에는 조회할 데이터원이 필요합니다.")
-        if self.intent == "PENSION_RECOMMENDATION" and not {"PRODUCT_DB", "PRODUCT_RAG"}.issubset(self.retrieval_sources):
-            raise ValueError("추천 질문에는 PRODUCT_DB와 PRODUCT_RAG가 필요합니다.")
         if self.intent == "PENSION_INFO" and "PRODUCT_DB" in self.retrieval_sources:
             raise ValueError("일반 정보 질문에는 PRODUCT_DB를 선택하지 않습니다.")
         if not self.is_pension_related and self.intent is not None:
             raise ValueError("연금 무관 질문의 intent는 null이어야 합니다.")
         if not self.is_pension_related and self.retrieval_sources:
             raise ValueError("연금 무관 질문의 retrieval_sources는 빈 목록이어야 합니다.")
+        if not self.is_pension_related and self.search_queries:
+            raise ValueError("연금 무관 질문의 search_queries는 빈 목록이어야 합니다.")
         return self

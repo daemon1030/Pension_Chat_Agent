@@ -1,4 +1,5 @@
 from src.llm.hyperclova import ClovaChatClient, ClovaChatSettings
+from src.llm.schemas import QueryAnalysis
 
 
 class QueryAnalysisClient(ClovaChatClient):
@@ -15,7 +16,7 @@ class QueryAnalysisClient(ClovaChatClient):
 def test_query_analysis_retries_then_returns_a_supported_intent_and_condition_object():
     client = QueryAnalysisClient([
         "분석 결과입니다.",
-        '{"is_pension_related":true,"intent":"PENSION_RECOMMENDATION","retrieval_sources":["PRODUCT_DB","PRODUCT_RAG"],"user_conditions":{"age":20}}',
+        '{"is_pension_related":true,"intent":"PENSION_RECOMMENDATION","retrieval_sources":["PRODUCT_DB","PRODUCT_RAG"],"search_queries":["20대 안정형 연금상품"],"user_conditions":{"age":20}}',
     ])
 
     result = client.generate_query_analysis(system_prompt="원래 분석 지시", user_prompt="원래 질문")
@@ -23,6 +24,19 @@ def test_query_analysis_retries_then_returns_a_supported_intent_and_condition_ob
     assert result.is_pension_related is True
     assert result.intent == "PENSION_RECOMMENDATION"
     assert result.retrieval_sources == ["PRODUCT_DB", "PRODUCT_RAG"]
+    assert result.search_queries == ["20대 안정형 연금상품"]
     assert result.user_conditions.model_dump(exclude_none=True, exclude_defaults=True) == {"age": 20}
     assert len(client.prompts) == 2
-    assert "질문 분석 JSON Schema" in client.prompts[1][0]
+    assert "is_pension_related" in client.prompts[1][0]
+
+
+def test_recommendation_adds_the_missing_product_rag_source():
+    result = QueryAnalysis.model_validate({
+        "is_pension_related": True,
+        "intent": "PENSION_RECOMMENDATION",
+        "retrieval_sources": ["PRODUCT_DB"],
+        "search_queries": ["IRP 안정형 상품 추천"],
+        "user_conditions": {},
+    })
+
+    assert result.retrieval_sources == ["PRODUCT_DB", "PRODUCT_RAG"]

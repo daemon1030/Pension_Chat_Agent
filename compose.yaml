@@ -1,4 +1,33 @@
 services:
+  app:
+    build:
+      context: .
+    environment:
+      CLOVASTUDIO_API_KEY: ${CLOVASTUDIO_API_KEY:?CLOVASTUDIO_API_KEY is required}
+      CLOVASTUDIO_CHAT_MODEL: ${CLOVASTUDIO_CHAT_MODEL:-HCX-DASH-002}
+      CLOVASTUDIO_EMBEDDING_HOST: ${CLOVASTUDIO_EMBEDDING_HOST:-clovastudio.stream.ntruss.com}
+      PENSION_DATABASE_DSN: postgresql://${POSTGRES_USER:-pension_app}:${POSTGRES_PASSWORD:-change-me-for-local-development}@postgres:5432/${POSTGRES_DB:-pension_agent}
+    ports:
+      - "${APP_PORT:-80}:8000"
+    volumes:
+      - ${LOG_DIR:-./data/logs}:/app/data/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  seed:
+    build:
+      context: .
+    profiles: ["seed"]
+    command: ["python", "scripts/database/seed_local_data.py"]
+    environment:
+      PENSION_DATABASE_DSN: postgresql://${POSTGRES_USER:-pension_app}:${POSTGRES_PASSWORD:-change-me-for-local-development}@postgres:5432/${POSTGRES_DB:-pension_agent}
+    volumes:
+      - ${DATA_DIR:-./data}:/app/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: pgvector/pgvector:0.8.6-pg17-bookworm
     container_name: pension-postgres
@@ -6,11 +35,10 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-pension_agent}
       POSTGRES_USER: ${POSTGRES_USER:-pension_app}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-for-local-development}
-    ports:
-      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - pension_postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./data/logs:/app/data/logs
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s

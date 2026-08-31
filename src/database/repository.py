@@ -158,12 +158,22 @@ class PostgresPensionRepository:
             },
         )
 
+    def delete_chunks_by_knowledge_type(self, knowledge_type: str) -> int:
+        """지정 지식 유형의 청크만 삭제해 재색인을 준비한다."""
+        if knowledge_type not in {"POLICY", "PRODUCT"}:
+            raise ValueError("knowledge_type은 POLICY 또는 PRODUCT여야 합니다.")
+        result = self._connection.execute(
+            "DELETE FROM rag_chunks WHERE knowledge_type = %(knowledge_type)s",
+            {"knowledge_type": knowledge_type},
+        )
+        return result.rowcount
+
     def search_chunks(
         self,
         query_embedding: list[float],
         *,
         knowledge_type: str,
-        top_k: int = 3,
+        top_k: int = 5,
         allowed_product_ids: list[str] | None = None,
         per_product_limit: int | None = None,
     ) -> list[dict[str, Any]]:

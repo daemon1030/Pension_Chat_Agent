@@ -18,6 +18,8 @@ class RagGraphState(TypedDict, total=False):
     is_pension_related: bool
     intent: Literal["PENSION_RECOMMENDATION", "PENSION_INFO"] | None
     retrieval_sources: list[Literal["PRODUCT_DB", "POLICY_RAG", "PRODUCT_RAG"]]
+    # 원문 질문과 함께 검색하는, 첫 LLM 호출의 의미 보정 질의(최대 2개).
+    search_queries: list[str]
     user_conditions: dict[str, Any]
     candidate_product_ids: list[str]
     candidate_products: list[dict[str, Any]]

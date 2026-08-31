@@ -21,15 +21,24 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "data/embeddings/rag_embeddings.jsonl")
     parser.add_argument("--delay-seconds", type=float, default=1.1, help="요청 사이 대기 시간 (기본 1.1초)")
     parser.add_argument("--max-retries", type=int, default=8, help="속도 제한 발생 시 최대 재시도 횟수")
+    parser.add_argument(
+        "--replace",
+        action="store_true",
+        help="기존 임베딩을 재사용하지 않고 모든 현재 Chunk를 다시 임베딩합니다.",
+    )
     args = parser.parse_args()
 
     client = ClovaEmbeddingClient.from_env()
     chunks = load_rag_chunks(args.input_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary_path = args.output.with_suffix(args.output.suffix + ".tmp")
+    if args.replace:
+        # 내용은 바뀌었지만 chunk_id가 같을 수 있다. 기존 결과는 성공적으로
+        # 완성된 새 파일로 교체될 때까지 유지하고, 재개용 임시 파일만 비운다.
+        temporary_path.unlink(missing_ok=True)
     progress_path = temporary_path if temporary_path.exists() else args.output
     completed_ids: set[str] = set()
-    if progress_path.exists():
+    if not args.replace and progress_path.exists():
         for line in progress_path.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 completed_ids.add(json.loads(line)["chunk_id"])

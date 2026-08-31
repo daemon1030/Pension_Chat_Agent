@@ -17,7 +17,7 @@ from src.observability import append_chat_log, flush, observe, update_observatio
 def main() -> None:
     parser = argparse.ArgumentParser(description="CLOVA 최종 답변을 포함한 연금 RAG")
     parser.add_argument("query", help="질문")
-    parser.add_argument("--top-k", type=int, default=3)
+    parser.add_argument("--top-k", type=int, default=5)
     args = parser.parse_args()
 
     workflow = create_postgres_clova_rag_workflow()

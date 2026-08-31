@@ -37,25 +37,39 @@ def main() -> None:
         default=PROJECT_ROOT / "data/product_db_ready/product_classes.json",
         help="상품 필터링 DB용 클래스 JSON 경로",
     )
+    parser.add_argument(
+        "--replace-policy",
+        action="store_true",
+        help="기존 POLICY RAG 청크만 삭제한 뒤 --policy 파일을 다시 적재합니다. 상품 데이터는 변경하지 않습니다.",
+    )
     args = parser.parse_args()
 
-    missing_paths = [path for path in (args.policy, args.product, args.products) if not path.is_file()]
+    input_paths = (args.policy,) if args.replace_policy else (args.policy, args.product, args.products)
+    missing_paths = [path for path in input_paths if not path.is_file()]
     if missing_paths:
         missing = ", ".join(str(path.relative_to(PROJECT_ROOT)) for path in missing_paths)
         parser.error(f"적재할 파일을 찾을 수 없습니다: {missing}")
 
-    product_classes = json.loads(args.products.read_text(encoding="utf-8")).get("product_classes", [])
     policy_chunks = load_jsonl(args.policy)
-    product_chunks = load_jsonl(args.product)
     with connect_from_env() as connection:
         repository = PostgresPensionRepository(connection)
-        for product_class in product_classes:
-            repository.upsert_product_class(product_class)
+        if args.replace_policy:
+            deleted_policy_chunks = repository.delete_chunks_by_knowledge_type("POLICY")
+        else:
+            deleted_policy_chunks = 0
+            product_classes = json.loads(args.products.read_text(encoding="utf-8")).get("product_classes", [])
+            product_chunks = load_jsonl(args.product)
+            for product_class in product_classes:
+                repository.upsert_product_class(product_class)
         for chunk in policy_chunks:
             repository.upsert_chunk(chunk, knowledge_type="POLICY")
-        for chunk in product_chunks:
-            repository.upsert_chunk(chunk, knowledge_type="PRODUCT")
-    print(f"적재 완료: 상품 클래스 {len(product_classes)}개, 규정 Chunk {len(policy_chunks)}개, 상품 Chunk {len(product_chunks)}개")
+        if not args.replace_policy:
+            for chunk in product_chunks:
+                repository.upsert_chunk(chunk, knowledge_type="PRODUCT")
+    if args.replace_policy:
+        print(f"정책 RAG 교체 완료: 기존 규정 Chunk {deleted_policy_chunks}개 삭제, 새 규정 Chunk {len(policy_chunks)}개 적재")
+    else:
+        print(f"적재 완료: 상품 클래스 {len(product_classes)}개, 규정 Chunk {len(policy_chunks)}개, 상품 Chunk {len(product_chunks)}개")
 
 
 if __name__ == "__main__":

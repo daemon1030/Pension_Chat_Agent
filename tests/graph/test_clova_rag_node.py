@@ -30,7 +30,7 @@ def test_clova_answer_receives_rag_context_and_returns_sources():
 
     assert result["answer"] == "문서 근거에 따른 답변입니다."
     assert "만 55세 이후" in client.user_prompt
-    assert "근거에 없는" in client.system_prompt
+    assert "근거 밖의" in client.system_prompt
     assert result["sources"][0]["page"] == 3
 
 
@@ -61,7 +61,7 @@ def test_recommendation_uses_its_own_prompt_and_receives_all_non_empty_condition
 
     generate_clova_answer(state, client)
 
-    assert "candidate_products는 코드가" in client.system_prompt
+    assert "candidate_products 밖의" in client.system_prompt
     assert '"age": 30' in client.user_prompt
     assert '"annual_income": 50000000' in client.user_prompt
     assert '"contribution_amount"' not in client.user_prompt

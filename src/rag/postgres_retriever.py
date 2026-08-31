@@ -31,7 +31,7 @@ class PostgresRagRetriever:
         self,
         query: str,
         *,
-        top_k: int = 3,
+        top_k: int = 5,
         allowed_product_ids: set[str] | None = None,
         per_product_limit: int | None = None,
     ) -> list[RagChunk]:

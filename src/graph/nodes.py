@@ -66,15 +66,39 @@ def analyze_query(state: RagGraphState, client: ClovaChatClient) -> dict[str, An
             user_prompt=user_prompt,
         )
         update_observation(generation, output=analysis.model_dump(mode="json"))
+    user_conditions = supplement_explicit_conditions(
+        state.get("query", ""),
+        analysis.user_conditions.model_dump(exclude_none=True, exclude_defaults=True),
+    )
     return {
         "is_pension_related": analysis.is_pension_related,
         "scope": "IN_SCOPE" if analysis.is_pension_related else "OUT_OF_SCOPE",
         "intent": analysis.intent,
         "retrieval_sources": analysis.retrieval_sources,
-        "user_conditions": analysis.user_conditions.model_dump(
-            exclude_none=True, exclude_defaults=True
-        ),
+        "search_queries": analysis.search_queries,
+        "user_conditions": user_conditions,
     }
+
+
+def supplement_explicit_conditions(query: str, user_conditions: dict[str, Any]) -> dict[str, Any]:
+    """질문에 직접 드러난 계좌·위험 표현만 코드로 보완한다."""
+    result = dict(user_conditions)
+    normalized = query.lower().replace(" ", "")
+    if "account_type" not in result:
+        if "irp" in normalized:
+            result["account_type"] = "IRP"
+        elif "연금저축" in normalized:
+            result["account_type"] = "PENSION_SAVINGS"
+        elif "퇴직연금" in normalized:
+            result["account_type"] = "RETIREMENT_PENSION"
+    if "risk_preference" not in result:
+        if any(term in normalized for term in ("안정", "안전", "보수", "손실이싫")):
+            result["risk_preference"] = "CONSERVATIVE"
+        elif any(term in normalized for term in ("공격", "적극", "고수익")):
+            result["risk_preference"] = "AGGRESSIVE"
+        elif any(term in normalized for term in ("균형", "중립")):
+            result["risk_preference"] = "BALANCED"
+    return result
 
 
 def analysis_scope_route(state: RagGraphState) -> str:
@@ -150,27 +174,29 @@ def retrieve_selected_sources(
     policy_retriever: Any,
     product_retriever: Any,
 ) -> dict[str, Any]:
-    """첫 LLM이 선택한 Policy/Product RAG에서 근거를 모은다."""
-    top_k = int(state.get("top_k", 3))
+    """원문과 의미 보정 질의로 선택된 RAG에서 근거를 모은다."""
+    top_k = int(state.get("top_k", 5))
     selected = set(state.get("retrieval_sources", []))
+    search_queries = build_search_queries(state.get("query", ""), state.get("search_queries", []))
     policy_chunks = []
     product_chunks = []
     if "POLICY_RAG" in selected:
-        policy_chunks = policy_retriever.search(state.get("query", ""), top_k=top_k)
+        policy_chunks = search_with_queries(policy_retriever, search_queries, top_k=top_k)
     is_recommendation = state.get("intent") == "PENSION_RECOMMENDATION"
     if "PRODUCT_RAG" in selected or is_recommendation:
         candidate_ids = state.get("candidate_product_ids", [])
         allowed_product_ids = set(candidate_ids) if candidate_ids else None
         if is_recommendation:
-            product_chunks = product_retriever.search(
-                state.get("query", ""),
+            product_chunks = search_with_queries(
+                product_retriever,
+                search_queries,
                 top_k=len(candidate_ids) * MAX_EVIDENCE_CHUNKS_PER_PRODUCT,
                 allowed_product_ids=allowed_product_ids,
                 per_product_limit=MAX_EVIDENCE_CHUNKS_PER_PRODUCT,
             )
         else:
-            product_chunks = product_retriever.search(
-                state.get("query", ""), top_k=top_k, allowed_product_ids=allowed_product_ids
+            product_chunks = search_with_queries(
+                product_retriever, search_queries, top_k=top_k, allowed_product_ids=allowed_product_ids
             )
 
     if is_recommendation:
@@ -191,6 +217,30 @@ def retrieve_selected_sources(
         if len(result) == top_k:
             break
     return {"retrieved_chunks": [chunk.to_dict() for chunk in result]}
+
+
+def build_search_queries(query: str, generated_queries: list[str]) -> list[str]:
+    """원문을 보존하면서 중복 없는 의미 보정 질의를 최대 두 개 더한다."""
+    result: list[str] = []
+    seen: set[str] = set()
+    for raw_query in [query, *generated_queries[:2]]:
+        candidate = raw_query.strip()
+        normalized = " ".join(candidate.lower().split())
+        if candidate and normalized not in seen:
+            result.append(candidate)
+            seen.add(normalized)
+    return result
+
+
+def search_with_queries(retriever: Any, search_queries: list[str], **kwargs: Any) -> list[Any]:
+    """각 질의를 검색하고 같은 청크는 가장 높은 유사도 결과만 남긴다."""
+    by_chunk_id: dict[str, Any] = {}
+    for search_query in search_queries:
+        for chunk in retriever.search(search_query, **kwargs):
+            previous = by_chunk_id.get(chunk.chunk_id)
+            if previous is None or chunk.score > previous.score:
+                by_chunk_id[chunk.chunk_id] = chunk
+    return sorted(by_chunk_id.values(), key=lambda item: item.score, reverse=True)
 
 
 def rank_recommended_products(

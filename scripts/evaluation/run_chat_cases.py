@@ -24,7 +24,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="챗봇 평가 질문을 실행하고 응답을 JSONL로 저장")
     parser.add_argument("--input", type=Path, default=PROJECT_ROOT / "data/evaluation/chat_test_queries.jsonl")
     parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "data/evaluation/chat_test_results.jsonl")
-    parser.add_argument("--top-k", type=int, default=3)
+    parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--delay-seconds", type=float, default=1.0)
     args = parser.parse_args()
 
