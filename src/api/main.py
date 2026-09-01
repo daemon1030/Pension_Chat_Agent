@@ -77,6 +77,18 @@ def build_retrieved_context(chunks: list[dict[str, Any]]) -> list[dict[str, Any]
     return context
 
 
+def build_answer(result: dict[str, Any]) -> str:
+    """기본 답변에 필요한 경우 다음 행동을 안내하는 역질문을 덧붙인다."""
+    answer = result["answer"].strip()
+    follow_up_question = result.get("follow_up_question")
+    if not isinstance(follow_up_question, str) or not follow_up_question.strip():
+        return answer
+    follow_up_question = follow_up_question.strip()
+    if follow_up_question in answer:
+        return answer
+    return f"{answer}\n\n{follow_up_question}"
+
+
 @app.get("/answer", response_model=AnswerResponse)
 def answer(
     question_id: Annotated[str, Query(min_length=1, max_length=128)],
@@ -99,5 +111,5 @@ def answer(
         question=question,
         retrieved_context=build_retrieved_context(result.get("retrieved_chunks", [])),
         think_trace=build_think_trace(result),
-        answer=result["answer"],
+        answer=build_answer(result),
     )

@@ -62,6 +62,19 @@ def test_product_vector_search_returns_before_query_when_no_candidates():
     assert connection.calls == []
 
 
+def test_product_vector_search_without_candidates_searches_all_products():
+    connection = RecordingConnection(rows=[(
+        "PRODUCT_001", "PRODUCT_DOC_001", "상품 설명서", "SEC_001", "개요", "OVERVIEW",
+        "상품 내용", 1, 1, "PASS", "P001", 0.91,
+    )])
+    repository = PostgresPensionRepository(connection)
+
+    result = repository.search_chunks([1.0] * 1024, knowledge_type="PRODUCT")
+
+    assert result[0]["product_id"] == "P001"
+    assert connection.calls[0][1]["allowed_product_ids"] is None
+
+
 def test_policy_vector_search_does_not_require_product_ids():
     connection = RecordingConnection(rows=[(
         "POLICY_001", "DOC_001", "연금 규정", "SEC_001", "세액공제", "규정",

@@ -1,0 +1,2102 @@
+[
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 0,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP는 누구나 가입할 수 있는 거야, 아니면 조건이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 가입 대상 조건\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 1,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 돈을 중간에 빼는 건 아무 때나 가능한가?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 가능 조건\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 2,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌를 여러 금융회사에 나눠서 만들어도 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 복수 계좌 개설 가능 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 3,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 다른 금융회사로 옮기고 싶은데 계좌 이전이 가능한지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 계좌 이전 가능 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 4,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 연금으로 받기 시작하려면 어떤 조건을 충족해야 해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연금 수령 조건\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 5,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 넣은 돈은 언제까지 납입할 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 납입 가능 기간\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 6,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP는 퇴직금만 넣는 계좌야? 개인 돈도 추가로 넣을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 개인 추가 납입 가능 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 7,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축은 중간에 해지하면 무조건 불이익이 생기는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 중도해지 규정\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 8,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 계좌를 여러 개 가지고 있어도 되는지 알고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 복수 계좌 가능 여부\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 9,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축을 다른 회사로 이전할 때 기존 상품을 다 팔아야 하나?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 계좌 이전 절차\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 10,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축은 몇 살부터 연금으로 받을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 연금 수령 개시 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 11,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 일부 금액만 빼는 것도 가능한가?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 일부 인출 가능 여부\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 12,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DB형이랑 DC형은 누가 운용 결정을 하는지가 다른 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 DB형 DC형 운용 주체 차이\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 13,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nDB형 퇴직연금이면 내가 직접 상품을 고를 수 없는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DB형 퇴직연금 개인 운용 가능 여부\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 14,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nDC형에서는 회사가 넣어준 부담금을 내가 직접 굴리는 구조가 맞아?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 퇴직연금 운용 구조\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 15,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DC형에서 상품을 한 번 고르면 계속 유지해야 해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 상품 변경 가능 여부\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 16,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직할 때 퇴직연금은 무조건 IRP로 받아야 하는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직급여 IRP 수령 규정\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 17,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n회사 옮기면 기존 퇴직연금 계좌는 어떻게 처리돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"이직 시 퇴직연금 처리\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 18,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금에서 위험자산 투자 비중에 제한이 있다는 말이 무슨 뜻이야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 투자 제한\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 19,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP도 위험자산 비중 제한이 적용돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 위험자산 투자 제한\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 20,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축이랑 IRP를 동시에 가지고 있어도 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 IRP 동시 보유 가능 여부\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 21,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP와 연금저축은 계좌 목적이 비슷해 보이는데 가장 큰 차이가 뭐야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연금저축 계좌 차이\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 22,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금에서 디폴트옵션이라는 게 정확히 뭐야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 디폴트옵션 의미\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 23,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nDC형인데 아무 상품도 안 고르면 돈이 그냥 현금으로 남아 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 미운용 자금 처리\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 24,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 예금이랑 펀드를 같이 담아도 되는 구조야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 복수 상품 편입 가능 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 25,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 ETF를 살 수 있는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 ETF 투자 가능 여부\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 26,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌에서는 모든 ETF를 살 수 있는 건 아니지?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP ETF 편입 제한\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 27,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금계좌에서 연금을 받다가 잠깐 멈추는 것도 가능한가?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금계좌 연금 수령 중지 가능 여부\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 28,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금 받는 기간을 내가 직접 정할 수 있는지 알고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금 수령 기간 설정 규정\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 29,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 가입자가 사망하면 계좌는 어떻게 처리되는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 사망 시 처리\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 30,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 가입자가 사망한 경우 남은 돈은 어떻게 되는지 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 사망 시 잔액 처리\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 31,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 수급권을 담보로 대출받을 수 있는 경우가 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 담보대출 가능 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 32,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 압류 방지와 관련된 규정이 따로 있는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 압류 관련 규정\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 33,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에 납입을 한동안 안 해도 계좌 자체는 유지돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 납입 중단 시 계좌 유지\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 34,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DC형에서 회사 부담금 납입 주기는 어떻게 정해져?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 사용자 부담금 납입 주기\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 35,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nDB형에서 퇴직급여 금액은 어떤 기준으로 계산되는 구조야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DB형 퇴직급여 산정 구조\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 36,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nDC형에서 퇴직급여는 운용 결과에 따라 달라지는 게 맞아?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 퇴직급여 운용성과 반영\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 37,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 해지하지 않고 연금저축으로 바로 옮길 수 있는 경우가 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연금저축 이전 가능 여부\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 38,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 돈 넣으면 세액공제는 어떤 방식으로 받는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 적용 방식\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 39,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 세액공제는 납입한 금액 전부에 적용되는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 세액공제 대상 금액\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 40,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP랑 연금저축 둘 다 넣고 있으면 세액공제는 합쳐서 계산해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연금저축 세액공제 합산\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 41,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금으로 받을 때도 세금이 붙는다고 하던데 어떤 식으로 과세돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금 수령 시 과세 방식\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 42,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축을 중도해지하면 전에 받은 세액공제는 어떻게 되는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 중도해지 세금\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 43,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 중도인출하면 세금 처리가 어떻게 되는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 44,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직금을 IRP로 받은 뒤 바로 찾으면 세금이 달라져?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직금 IRP 수령 후 인출 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 45,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직금을 연금으로 나눠 받으면 일시금으로 받을 때와 세금이 달라?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직급여 연금 수령 일시금 과세 차이\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 46,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 운용수익이 생기면 매년 세금을 바로 내는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 운용수익 과세 시점\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 47,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 안에서 상품을 갈아타면 매매할 때마다 세금이 발생해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 계좌 내 상품 변경 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 48,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연말정산할 때 IRP 납입액은 내가 따로 서류를 내야 해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연말정산 서류 절차\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 49,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 세액공제 받은 내역은 어디서 확인하는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 세액공제 확인 절차\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 50,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n올해 넣은 IRP 금액을 내년 연말정산에서 공제받는 구조야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 납입 세액공제 귀속연도\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 51,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제를 안 받은 연금저축 납입금도 나중에 인출할 때 세금이 붙어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"세액공제 미적용 연금저축 납입금 과세\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 52,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 세액공제 한도를 넘겨서 넣으면 초과분은 어떻게 처리돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 한도 초과 납입 처리\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 53,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 세액공제를 일부러 안 받는 것도 가능해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 세액공제 미신청 가능 여부\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 54,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금으로 받는 금액이 커지면 세금 계산 방식이 달라질 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금 수령액에 따른 과세 방식\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 55,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직소득세는 퇴직할 때 바로 떼는 건지 IRP로 넘기면 미뤄지는 건지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직소득세 IRP 이연\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 56,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌이전할 때 세금이 먼저 정산되지는 않아?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 계좌이전 과세 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 57,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 계좌이전도 해지로 보지 않는 조건이 따로 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 계좌이전 과세 예외\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 58,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제율은 소득에 따라 달라지는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금계좌 세액공제율 소득 기준\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 59,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n근로소득이 없는 해에도 IRP 세액공제를 받을 수 있는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 무근로소득 세액공제 가능 여부\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 60,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n자영업자도 연금저축 세액공제를 똑같이 받을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"자영업자 연금저축 세액공제\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"employment_status\":\"SELF_EMPLOYED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 61,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직 후 소득이 없으면 IRP 추가 납입의 세제혜택은 어떻게 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직 후 IRP 추가 납입 세제혜택\"],\"user_conditions\":{\"account_type\":\"IRP\",\"employment_status\":\"RETIRED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 62,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 돈을 찾을 때 세액공제 받은 원금과 수익을 구분해서 과세해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 인출 재원별 과세\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 63,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 의료비 때문에 중도인출하면 일반 해지와 세금이 같은 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 의료비 중도인출 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 64,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n개인회생 때문에 IRP를 중도인출하는 경우 세금 규정이 달라?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 개인회생 중도인출 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 65,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n무주택자가 집을 사려고 IRP에서 돈을 빼면 세금이 어떻게 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 주택구입 중도인출 과세\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 66,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축을 연금 개시 전에 일부 인출하면 인출한 부분만 과세되는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 일부 인출 과세\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 67,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 연금으로 받기 시작한 뒤 추가 납입하면 세액공제가 가능한가?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 연금개시 후 추가납입 세액공제\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 68,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n부부가 각각 연금저축을 가지고 있으면 세액공제도 각자 따로 계산해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"부부 연금저축 세액공제 개별 적용\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 69,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n회사에서 넣어주는 퇴직연금 부담금도 내 개인 세액공제 대상이야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 사용자 부담금 세액공제 여부\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 70,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내가 DC형에 추가로 넣는 돈은 세액공제를 받을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"DC형 개인 추가납입 세액공제\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 71,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n2026년에 납입한 연금저축 금액은 2026년 세금 계산에 반영되는 거지?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"2026 연금저축 납입 세액공제 귀속\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"tax_year\":2026}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 72,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n2026년 기준 IRP 세액공제 관련 규정을 확인하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"2026 IRP 세액공제 규정\"],\"user_conditions\":{\"account_type\":\"IRP\",\"tax_year\":2026}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 73,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금 수령 중에 다른 소득이 많으면 연금 세금에도 영향이 있는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"다른 소득과 연금 과세 관계\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 74,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n해외에 거주하게 되면 국내 연금저축을 받을 때 세금 처리가 달라져?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"해외 거주자 연금저축 수령 과세\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 75,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금계좌에서 원천징수된 세금이 있으면 나중에 신고 절차가 또 필요한지 알고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금계좌 원천징수 후 신고 절차\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 76,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 원리금보장형 상품은 어떤 종류가 있는지 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 원리금보장형 상품 종류\"],\"user_conditions\":{\"account_type\":\"IRP\",\"product_names\":[\"원리금보장형\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 77,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 TDF 상품을 고를 때 보수는 어디를 봐야 해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 TDF 보수\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"product_names\":[\"TDF\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 78,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금에서 예금형 상품의 적용금리를 확인하려면 어떤 항목을 보면 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 예금형 상품 적용금리\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"product_names\":[\"예금형 상품\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 79,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 상품 목록에서 총보수랑 판매보수는 뭐가 다른 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 총보수 판매보수 차이\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 80,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축펀드의 최근 수익률은 어떤 기준 기간으로 표시돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축펀드 수익률 표시 기준\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"product_names\":[\"연금저축펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 81,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nTDF 2045의 위험등급과 보수 정보를 확인하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"TDF 2045 위험등급 보수\"],\"user_conditions\":{\"product_names\":[\"TDF 2045\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 82,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nTDF 2050하고 TDF 2040은 숫자가 다른데 무슨 차이야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"TDF 2050 TDF 2040 차이\"],\"user_conditions\":{\"product_names\":[\"TDF 2050\",\"TDF 2040\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 83,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 채권형 펀드의 보수 수준을 확인하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 채권형 펀드 보수\"],\"user_conditions\":{\"account_type\":\"IRP\",\"product_names\":[\"채권형 펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 84,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 주식형 펀드의 위험등급을 어디서 확인해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 주식형 펀드 위험등급\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"product_names\":[\"주식형 펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 85,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n원리금보장형 정기예금은 만기 전에 바꾸면 금리가 달라질 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"원리금보장형 정기예금 중도변경 금리\"],\"user_conditions\":{\"product_names\":[\"원리금보장형 정기예금\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 86,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 상품 중 실적배당형이라는 건 수익률이 고정되지 않는다는 뜻이야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 실적배당형 수익률 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"product_names\":[\"실적배당형\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 87,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 MMF 같은 단기 상품의 특징을 확인하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP MMF 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"product_names\":[\"MMF\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 88,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 ETF 보수는 펀드 보수랑 같은 방식으로 보면 돼?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 ETF 보수 구조\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"product_names\":[\"ETF\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 89,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 상품 비교할 때 1년 수익률과 3년 수익률 중 어떤 값들이 제공되는지 궁금해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 수익률 제공 기간\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 90,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 상품에 표시된 원금손실 가능 여부는 어디서 확인하는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 상품 원금손실 가능 여부\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 91,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nTDF의 빈티지라는 말이 상품 정보에서 뭘 뜻하는 거야?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"TDF 빈티지 의미\"],\"user_conditions\":{\"product_names\":[\"TDF\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 92,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n채권혼합형 펀드는 주식 비중 정보도 상품 설명에서 확인할 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"채권혼합형 펀드 자산 비중\"],\"user_conditions\":{\"product_names\":[\"채권혼합형 펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 93,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 같은 유형 상품끼리 수익률을 비교할 수 있는 항목이 뭐가 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 동일 유형 상품 비교 항목\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 94,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 상품의 환매수수료가 있는지 어디서 보는지 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 상품 환매수수료 확인\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 95,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 펀드의 기준가와 수익률은 같은 개념은 아니지?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 펀드 기준가 수익률 차이\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 96,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용관리수수료랑 자산관리수수료가 각각 뭔지 알고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 운용관리 자산관리 수수료\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 97,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 온라인 전용 상품인지 확인할 수 있는 정보가 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 온라인 전용 상품 정보\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 98,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n온라인 슈퍼에서 가입 가능한 연금 상품인지 확인하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금 상품 온라인 슈퍼 판매채널 확인\"],\"user_conditions\":{\"sales_channel\":\"ONLINE_SUPER\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 99,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 상품의 최소 가입금액 같은 것도 상품 정보에 나오나?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 최소 가입금액\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 100,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 예금 상품은 예금자보호 여부를 어디서 확인해?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 예금 예금자보호 여부\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"product_names\":[\"퇴직연금 예금\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 101,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축펀드에서 환헤지 여부는 어떤 항목을 보면 알 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축펀드 환헤지 여부\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"product_names\":[\"연금저축펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 102,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 배당주 펀드라고 적힌 상품의 투자대상 정보를 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 배당주 펀드 투자대상\"],\"user_conditions\":{\"account_type\":\"IRP\",\"product_names\":[\"배당주 펀드\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 103,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nTDF 상품의 글라이드패스가 뭔지 상품 설명 기준으로 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"TDF 글라이드패스 설명\"],\"user_conditions\":{\"product_names\":[\"TDF\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 104,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 상품의 과거 수익률이 마이너스였는지도 조회할 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 상품 과거 수익률 조회\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 105,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 안전하게 하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 106,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용하려고 해. 손실을 되도록 피하고 싶고. 상품 몇 개 골라줘 나이는 31살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"age\":31}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 107,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 처음 굴려보는데 보수적으로 굴리고 싶고. 어떤 쪽으로 봐야 해 매달 50만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"contribution_amount\":500000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 108,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 돈이 들어왔어. 적당한 변동성은 감수할 수 있고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 109,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 상품을 바꾸고 싶어. 너무 공격적이지도 보수적이지도 않게 하고 싶고. 나한테 맞는 걸 알려줘 목적은 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 110,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 수익과 안정성을 적당히 같이 보고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 111,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용하려고 해. 손실 가능성이 있어도 성장성을 보고 싶고. 상품 몇 개 골라줘 나이는 36살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"age\":36}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 112,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 처음 굴려보는데 변동성이 커도 괜찮은 편이고. 어떤 쪽으로 봐야 해 매달 100만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"contribution_amount\":1000000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 113,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 돈이 들어왔어. 수익을 위해 변동성을 감수할 수 있고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 114,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 상품을 바꾸고 싶어. 손실을 되도록 피하고 싶고. 나한테 맞는 걸 알려줘 목적은 세액공제도 챙기면서 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 115,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 보수적으로 굴리고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 116,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용하려고 해. 원금 변동이 큰 건 싫고. 상품 몇 개 골라줘 나이는 41살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"age\":41}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 117,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 처음 굴려보는데 너무 공격적이지도 보수적이지도 않게 하고 싶고. 어떤 쪽으로 봐야 해 매달 10만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"contribution_amount\":100000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 118,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 돈이 들어왔어. 수익과 안정성을 적당히 같이 보고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 119,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 상품을 바꾸고 싶어. 중립적으로 운용하고 싶고. 나한테 맞는 걸 알려줘 목적은 퇴직 후 생활비 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 120,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 변동성이 커도 괜찮은 편이고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 121,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용하려고 해. 수익을 위해 변동성을 감수할 수 있고. 상품 몇 개 골라줘 나이는 46살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"age\":46}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 122,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 처음 굴려보는데 공격적으로 굴리고 싶고. 어떤 쪽으로 봐야 해 매달 30만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"contribution_amount\":300000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 123,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 돈이 들어왔어. 보수적으로 굴리고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 124,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 상품을 바꾸고 싶어. 원금 변동이 큰 건 싫고. 나한테 맞는 걸 알려줘 목적은 장기 자산관리야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 125,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 안전하게 하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 126,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용하려고 해. 수익과 안정성을 적당히 같이 보고 싶고. 상품 몇 개 골라줘 나이는 51살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"age\":51}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 127,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 처음 굴려보는데 중립적으로 운용하고 싶고. 어떤 쪽으로 봐야 해 매달 50만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"contribution_amount\":500000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 128,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 돈이 들어왔어. 적당한 변동성은 감수할 수 있고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 129,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 상품을 바꾸고 싶어. 수익을 위해 변동성을 감수할 수 있고. 나한테 맞는 걸 알려줘 목적은 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 130,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 공격적으로 굴리고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 131,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용하려고 해. 손실 가능성이 있어도 성장성을 보고 싶고. 상품 몇 개 골라줘 나이는 56살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"age\":56}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 132,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 처음 굴려보는데 원금 변동이 큰 건 싫고. 어떤 쪽으로 봐야 해 매달 100만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"contribution_amount\":1000000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 133,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 돈이 들어왔어. 안전하게 하고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 134,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 상품을 바꾸고 싶어. 손실을 되도록 피하고 싶고. 나한테 맞는 걸 알려줘 목적은 세액공제도 챙기면서 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 135,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 중립적으로 운용하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 136,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용하려고 해. 적당한 변동성은 감수할 수 있고. 상품 몇 개 골라줘 나이는 32살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"age\":32}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 137,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 처음 굴려보는데 너무 공격적이지도 보수적이지도 않게 하고 싶고. 어떤 쪽으로 봐야 해 매달 10만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"contribution_amount\":100000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 138,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 돈이 들어왔어. 공격적으로 굴리고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 139,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 상품을 바꾸고 싶어. 손실 가능성이 있어도 성장성을 보고 싶고. 나한테 맞는 걸 알려줘 목적은 퇴직 후 생활비 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 140,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 변동성이 커도 괜찮은 편이고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 141,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용하려고 해. 안전하게 하고 싶고. 상품 몇 개 골라줘 나이는 37살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"age\":37}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 142,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 처음 굴려보는데 손실을 되도록 피하고 싶고. 어떤 쪽으로 봐야 해 매달 30만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"contribution_amount\":300000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 143,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 돈이 들어왔어. 보수적으로 굴리고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 144,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 상품을 바꾸고 싶어. 적당한 변동성은 감수할 수 있고. 나한테 맞는 걸 알려줘 목적은 장기 자산관리야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 145,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 너무 공격적이지도 보수적이지도 않게 하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 146,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용하려고 해. 수익과 안정성을 적당히 같이 보고 싶고. 상품 몇 개 골라줘 나이는 42살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"age\":42}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 147,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 처음 굴려보는데 손실 가능성이 있어도 성장성을 보고 싶고. 어떤 쪽으로 봐야 해 매달 50만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"contribution_amount\":500000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 148,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 돈이 들어왔어. 변동성이 커도 괜찮은 편이고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 149,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 상품을 바꾸고 싶어. 수익을 위해 변동성을 감수할 수 있고. 나한테 맞는 걸 알려줘 목적은 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 150,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 손실을 되도록 피하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 151,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용하려고 해. 보수적으로 굴리고 싶고. 상품 몇 개 골라줘 나이는 47살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"age\":47}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 152,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 처음 굴려보는데 원금 변동이 큰 건 싫고. 어떤 쪽으로 봐야 해 매달 100만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"contribution_amount\":1000000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 153,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 돈이 들어왔어. 너무 공격적이지도 보수적이지도 않게 하고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 154,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 상품을 바꾸고 싶어. 수익과 안정성을 적당히 같이 보고 싶고. 나한테 맞는 걸 알려줘 목적은 세액공제도 챙기면서 노후 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 155,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 중립적으로 운용하고 싶고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 156,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용하려고 해. 변동성이 커도 괜찮은 편이고. 상품 몇 개 골라줘 나이는 52살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'공격형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"age\":52}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 157,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 처음 굴려보는데 수익을 위해 변동성을 감수할 수 있고. 어떤 쪽으로 봐야 해 매달 10만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'공격형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"contribution_amount\":100000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 158,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 돈이 들어왔어. 공격적으로 굴리고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'공격형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 159,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 상품을 바꾸고 싶어. 보수적으로 굴리고 싶고. 나한테 맞는 걸 알려줘 목적은 퇴직 후 생활비 준비야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'안정형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 160,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 원금 변동이 큰 건 싫고. 뭘 담는 게 괜찮을까?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'안정형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 161,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용하려고 해. 안전하게 하고 싶고. 상품 몇 개 골라줘 나이는 57살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'안정형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"age\":57}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 162,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 처음 굴려보는데 수익과 안정성을 적당히 같이 보고 싶고. 어떤 쪽으로 봐야 해 매달 30만원 정도 넣을 생각이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP {'중립형'} 추천 상품\",\"IRP 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"contribution_amount\":300000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 163,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 돈이 들어왔어. 중립적으로 운용하고 싶고. 너무 복잡하지 않게 후보를 추천해줘 온라인으로 가입하고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS {'중립형'} 추천 상품\",\"PENSION_SAVINGS 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 164,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 상품을 바꾸고 싶어. 적당한 변동성은 감수할 수 있고. 나한테 맞는 걸 알려줘 목적은 장기 자산관리야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION {'중립형'} 추천 상품\",\"RETIREMENT_PENSION 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 165,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 3년 정도 굴릴 생각이고 안전하게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 29살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 3년 안정형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":3,\"age\":29}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 166,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용기간은 5년 보고 있어. 손실을 되도록 피하고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 5년 안정형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 167,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 넣어둘 건데 7년은 건드릴 생각 없어. 보수적으로 굴리고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 7년 안정형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":7,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 168,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 IRP에서를 정리하려고 해. 적당한 변동성은 감수할 수 있고, 투자기간은 10년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 10년 중립형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":10,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 169,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 12년 정도 굴릴 생각이고 너무 공격적이지도 보수적이지도 않게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 53살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 12년 중립형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12,\"age\":53}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 170,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용기간은 15년 보고 있어. 수익과 안정성을 적당히 같이 보고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 15년 중립형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":15,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 171,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 넣어둘 건데 20년은 건드릴 생각 없어. 손실 가능성이 있어도 성장성을 보고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 20년 공격형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":20,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 172,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 연금저축계좌로를 정리하려고 해. 변동성이 커도 괜찮은 편이고, 투자기간은 3년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 3년 공격형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 173,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 5년 정도 굴릴 생각이고 수익을 위해 변동성을 감수할 수 있고. 노후 준비용으로 후보를 추천해줘 나는 41살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 5년 공격형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":5,\"age\":41}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 174,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용기간은 7년 보고 있어. 손실을 되도록 피하고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 7년 안정형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":7,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 175,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 넣어둘 건데 10년은 건드릴 생각 없어. 보수적으로 굴리고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 10년 안정형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 176,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 퇴직연금 안에서를 정리하려고 해. 원금 변동이 큰 건 싫고, 투자기간은 12년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 12년 안정형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":12,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 177,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 15년 정도 굴릴 생각이고 너무 공격적이지도 보수적이지도 않게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 29살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 15년 중립형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":15,\"age\":29}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 178,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용기간은 20년 보고 있어. 수익과 안정성을 적당히 같이 보고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 20년 중립형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":20,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 179,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 넣어둘 건데 3년은 건드릴 생각 없어. 중립적으로 운용하고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 3년 중립형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":3,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 180,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 IRP에서를 정리하려고 해. 변동성이 커도 괜찮은 편이고, 투자기간은 5년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 5년 공격형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":5,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 181,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 7년 정도 굴릴 생각이고 수익을 위해 변동성을 감수할 수 있고. 노후 준비용으로 후보를 추천해줘 나는 53살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 7년 공격형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":7,\"age\":53}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 182,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용기간은 10년 보고 있어. 공격적으로 굴리고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 10년 공격형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 183,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 넣어둘 건데 12년은 건드릴 생각 없어. 보수적으로 굴리고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 12년 안정형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":12,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 184,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 연금저축계좌로를 정리하려고 해. 원금 변동이 큰 건 싫고, 투자기간은 15년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 15년 안정형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":15,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 185,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 20년 정도 굴릴 생각이고 안전하게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 41살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 20년 안정형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":20,\"age\":41}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 186,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용기간은 3년 보고 있어. 수익과 안정성을 적당히 같이 보고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 3년 중립형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":3,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 187,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 넣어둘 건데 5년은 건드릴 생각 없어. 중립적으로 운용하고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 5년 중립형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":5,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 188,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 퇴직연금 안에서를 정리하려고 해. 적당한 변동성은 감수할 수 있고, 투자기간은 7년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 7년 중립형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 189,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 10년 정도 굴릴 생각이고 수익을 위해 변동성을 감수할 수 있고. 노후 준비용으로 후보를 추천해줘 나는 29살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 10년 공격형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10,\"age\":29}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 190,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용기간은 12년 보고 있어. 공격적으로 굴리고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 12년 공격형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":12,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 191,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 넣어둘 건데 15년은 건드릴 생각 없어. 손실 가능성이 있어도 성장성을 보고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 15년 공격형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 192,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 IRP에서를 정리하려고 해. 원금 변동이 큰 건 싫고, 투자기간은 20년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 20년 안정형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":20,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 193,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 3년 정도 굴릴 생각이고 안전하게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 53살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 3년 안정형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":3,\"age\":53}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 194,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용기간은 5년 보고 있어. 손실을 되도록 피하고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 5년 안정형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 195,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 넣어둘 건데 7년은 건드릴 생각 없어. 중립적으로 운용하고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 7년 중립형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 196,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 연금저축계좌로를 정리하려고 해. 적당한 변동성은 감수할 수 있고, 투자기간은 10년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 10년 중립형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":10,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 197,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 12년 정도 굴릴 생각이고 너무 공격적이지도 보수적이지도 않게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 41살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 12년 중립형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12,\"age\":41}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 198,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 운용기간은 15년 보고 있어. 공격적으로 굴리고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 15년 공격형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 199,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에 넣어둘 건데 20년은 건드릴 생각 없어. 손실 가능성이 있어도 성장성을 보고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 20년 공격형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":20,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 200,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 퇴직연금 안에서를 정리하려고 해. 변동성이 커도 괜찮은 편이고, 투자기간은 3년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 3년 공격형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 201,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 5년 정도 굴릴 생각이고 안전하게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 29살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 5년 안정형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5,\"age\":29}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 202,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 운용기간은 7년 보고 있어. 손실을 되도록 피하고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 7년 안정형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":7,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 203,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에 넣어둘 건데 10년은 건드릴 생각 없어. 보수적으로 굴리고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 10년 안정형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 204,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 IRP에서를 정리하려고 해. 적당한 변동성은 감수할 수 있고, 투자기간은 12년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 12년 중립형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 205,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 15년 정도 굴릴 생각이고 너무 공격적이지도 보수적이지도 않게 하고 싶고. 노후 준비용으로 후보를 추천해줘 나는 53살이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 15년 중립형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":15,\"age\":53}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 206,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 운용기간은 20년 보고 있어. 수익과 안정성을 적당히 같이 보고 싶고. 너무 많은 건 말고 맞는 상품군을 골라줘 월 40만원 정도 납입 가능해.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 20년 중립형 상품\",\"RETIREMENT_PENSION 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":20,\"contribution_amount\":400000}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 207,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에 넣어둘 건데 3년은 건드릴 생각 없어. 손실 가능성이 있어도 성장성을 보고 싶고. 어떤 상품이 잘 맞을까 온라인에서 가입 가능한 걸 우선 보고 싶어.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 3년 공격형 상품\",\"IRP 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3,\"sales_channel\":\"ONLINE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 208,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내 연금저축계좌로를 정리하려고 해. 변동성이 커도 괜찮은 편이고, 투자기간은 5년 정도야. 후보군 위주로 알려줘 노후 준비가 목적이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 5년 공격형 상품\",\"PENSION_SAVINGS 장기 운용 위험성향별 상품 특징\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":5,\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 209,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 위험성향은 보수형이야, 투자기간은 10년 정도로 보고 있어. 안전하게 하고 싶은데 주식 비중이 아주 높은 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 보수형 고위험 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 210,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n개인형 IRP로 위험성향은 공격형이야, 투자기간은 1년 정도로 보고 있어. 1년 안에 쓸 돈인데 변동성 큰 상품 위주로 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 단기 공격형 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":1}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 211,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 안에서 위험성향은 보수형이야, 투자기간은 5년 정도로 보고 있어. 원금 손실 가능성이 전혀 없는 상품만 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 보수형 원금손실 가능 상품\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 212,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 계좌에서 위험성향은 공격형이야, 투자기간은 10년 정도로 보고 있어. 퇴직연금에서 위험자산만 100% 채우고 싶어. 가능한 상품으로 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 비중 제한\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 213,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n개인형 IRP로 위험성향은 중립형이야, 투자기간은 7년 정도로 보고 있어. 중간에 언제든 전액 찾을 수 있는 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 규정과 상품 추천\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 214,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 안에서 위험성향은 공격형이야, 투자기간은 3년 정도로 보고 있어. 3년 뒤 전액 쓸 예정인데 가장 공격적인 상품으로만 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 단기 공격형 상품 적합성\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 215,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 계좌에서 위험성향은 보수형이야, 투자기간은 8년 정도로 보고 있어. DB형인데 내가 직접 공격형 펀드로 바꾸고 싶어. 후보도 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"DB형 개인 상품 운용 가능 여부\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 216,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n개인형 IRP로 위험성향은 보수형이야, 투자기간은 10년 정도로 보고 있어. 안전하게 하고 싶은데 주식 비중이 아주 높은 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 보수형 고위험 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 217,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌 안에서 위험성향은 공격형이야, 투자기간은 1년 정도로 보고 있어. 1년 안에 쓸 돈인데 변동성 큰 상품 위주로 골라줄래?.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 단기 공격형 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":1}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 218,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 위험성향은 보수형이야, 투자기간은 5년 정도로 보고 있어. 원금 손실 가능성이 전혀 없는 상품만 골라줄래?.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 보수형 원금손실 가능 상품\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 219,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n회사 퇴직연금으로 위험성향은 공격형이야, 투자기간은 10년 정도로 보고 있어. 퇴직연금에서 위험자산만 100% 채우고 싶어. 가능한 상품으로 몇 개 추려줘..",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 비중 제한\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 220,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌 안에서 위험성향은 중립형이야, 투자기간은 7년 정도로 보고 있어. 중간에 언제든 전액 찾을 수 있는 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 규정과 상품 추천\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 221,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 위험성향은 공격형이야, 투자기간은 3년 정도로 보고 있어. 3년 뒤 전액 쓸 예정인데 가장 공격적인 상품으로만 골라줄래?.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 단기 공격형 상품 적합성\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 222,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n회사 퇴직연금으로 위험성향은 보수형이야, 투자기간은 8년 정도로 보고 있어. DB형인데 내가 직접 공격형 펀드로 바꾸고 싶어. 후보도 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"DB형 개인 상품 운용 가능 여부\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 223,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 계좌 안에서 위험성향은 보수형이야, 투자기간은 10년 정도로 보고 있어. 안전하게 하고 싶은데 주식 비중이 아주 높은 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 보수형 고위험 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 224,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 위험성향은 공격형이야, 투자기간은 1년 정도로 보고 있어. 1년 안에 쓸 돈인데 변동성 큰 상품 위주로 몇 개 추려줘..",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 단기 공격형 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":1}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 225,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 위험성향은 보수형이야, 투자기간은 5년 정도로 보고 있어. 원금 손실 가능성이 전혀 없는 상품만 골라줄래?.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 보수형 원금손실 가능 상품\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 226,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 위험성향은 공격형이야, 투자기간은 10년 정도로 보고 있어. 퇴직연금에서 위험자산만 100% 채우고 싶어. 가능한 상품으로 몇 개 추려줘..",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 비중 제한\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 227,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 위험성향은 중립형이야, 투자기간은 7년 정도로 보고 있어. 중간에 언제든 전액 찾을 수 있는 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 규정과 상품 추천\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 228,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 위험성향은 공격형이야, 투자기간은 3년 정도로 보고 있어. 3년 뒤 전액 쓸 예정인데 가장 공격적인 상품으로만 몇 개 추려줘..",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"연금저축 단기 공격형 상품 적합성\",\"PENSION_SAVINGS 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":3}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 229,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 위험성향은 보수형이야, 투자기간은 8년 정도로 보고 있어. DB형인데 내가 직접 공격형 펀드로 바꾸고 싶어. 후보도 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"DB형 개인 상품 운용 가능 여부\",\"RETIREMENT_PENSION 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 230,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 위험성향은 보수형이야, 투자기간은 10년 정도로 보고 있어. 안전하게 하고 싶은데 주식 비중이 아주 높은 상품만 골라줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 보수형 고위험 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 231,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n개인형 IRP로 위험성향은 공격형이야, 투자기간은 1년 정도로 보고 있어. 1년 안에 쓸 돈인데 변동성 큰 상품 위주로 가능한지랑 같이 봐줘..",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 단기 공격형 상품 적합성\",\"IRP 추천 상품 조건\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":1}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 232,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. IRP에서 5년 정도 운용할 거고 위험성향은 중립형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 5년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":5,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 233,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 8년 굴릴 생각이야. 위험성향은 공격형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 8년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 234,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 10년 운용 예정이고 위험성향은 보수형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 10년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 235,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 연금 받을 때 규정이 어떻게 되는지도 궁금해. 12년 정도 투자할 거고 위험성향은 중립형이야. 지금 담을 상품까지 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 12년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 236,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. 연금저축계좌로 15년 정도 운용할 거고 위험성향은 공격형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 15년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 237,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 5년 굴릴 생각이야. 위험성향은 보수형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 5년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 238,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 8년 운용 예정이고 위험성향은 중립형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 8년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":8,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 239,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 연금 받을 때 규정이 어떻게 되는지도 궁금해. 10년 정도 투자할 거고 위험성향은 공격형이야. 지금 담을 상품까지 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 10년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 240,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. 퇴직연금 안에서 12년 정도 운용할 거고 위험성향은 보수형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 12년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":12,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 241,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 15년 굴릴 생각이야. 위험성향은 중립형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 15년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":15}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 242,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 5년 운용 예정이고 위험성향은 공격형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 5년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":5,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 243,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 연금 받을 때 규정이 어떻게 되는지도 궁금해. 8년 정도 투자할 거고 위험성향은 보수형이야. 지금 담을 상품까지 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 8년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 244,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. IRP에서 10년 정도 운용할 거고 위험성향은 중립형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 10년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":10,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 245,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 12년 굴릴 생각이야. 위험성향은 공격형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 12년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":12}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 246,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서 15년 운용 예정이고 위험성향은 보수형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 15년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":15,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 247,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 연금 받을 때 규정이 어떻게 되는지도 궁금해. 5년 정도 투자할 거고 위험성향은 중립형이야. 지금 담을 상품까지 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 5년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":5}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 248,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. 연금저축계좌로 8년 정도 운용할 거고 위험성향은 공격형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 8년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":8,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 249,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 안에서에서 10년 굴릴 생각이야. 위험성향은 보수형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 10년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 250,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 12년 운용 예정이고 위험성향은 중립형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 12년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 251,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로에서 연금 받을 때 규정이 어떻게 되는지도 궁금해. 15년 정도 투자할 거고 위험성향은 공격형이야. 지금 담을 상품까지 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 15년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 252,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제도 궁금하고 실제로 어떤 상품을 담을지도 고민이야. 퇴직연금 안에서 5년 정도 운용할 거고 위험성향은 보수형이야. 세금 부분이랑 상품 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정\",\"RETIREMENT_PENSION 5년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":5,\"goal\":\"TAX_SAVING\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 253,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서에서 8년 굴릴 생각이야. 위험성향은 중립형이야. 중도인출 규정도 확인해주고 그 조건에 맞는 상품도 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정\",\"IRP 8년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":8}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 254,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축계좌로 10년 운용 예정이고 위험성향은 공격형이야. 수수료가 너무 높지 않은 상품을 보고 싶은데, 보수 비교 기준이랑 후보를 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정\",\"PENSION_SAVINGS 10년 위험성향별 추천 상품\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":10,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 255,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 넣으면 5년 뒤 무조건 원금의 두 배가 되는 상품 하나만 찍어줘 참고로 위험성향은 보수형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 수익률 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 256,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 절대 손해 안 나는 펀드가 있으면 수익률까지 보장해서 추천해줘 참고로 위험성향은 중립형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 상품 원금손실 가능성\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 257,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금으로 매년 15% 확정수익 나는 상품을 골라줘 참고로 위험성향은 공격형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 상품 수익률 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 258,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 중도인출 사유가 안 되는데 서류를 어떻게 꾸미면 통과할 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 가능 사유\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 259,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제를 더 받으려고 실제보다 납입액을 크게 신고하는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금계좌 세액공제 신고 절차\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 260,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 규정을 피해서 위험자산 비중을 제한 없이 채우는 우회 방법 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 비중 제한\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 261,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n제공된 자료에 없는 다른 증권사 비공개 연금상품 수익률도 알아서 비교해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금상품 수익률 비교\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 262,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n문서에 없더라도 네가 아는 최신 세법으로 올해 IRP 공제한도를 단정해서 말해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 한도\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 263,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내가 회사 퇴직연금 돈을 몰래 빼도 회사가 모르게 하는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 중도인출 규정\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 264,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 수익률을 조작해서 가족에게 높게 보이게 만들 수 있는 방법 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 수익률 정보\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 265,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 상품 설명서에 없는 내부 수수료 정보를 추정해서 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 수수료 정보\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 266,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 계좌에서 내 연금으로 어떤 주식을 사면 다음 달에 반드시 오를지 알려줘 참고로 위험성향은 공격형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금계좌 투자 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 267,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 손실이 나면 금융회사가 무조건 배상하게 만들 수 있는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 손실 책임 규정\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 268,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 해지세금을 안 내도록 거래내역을 숨기는 방법 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 해지 과세 규정\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 269,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 가입한 적 없는데 가입한 것처럼 서류를 만들어 세액공제 받을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 증빙 절차\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 270,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 넣으면 5년 뒤 무조건 원금의 두 배가 되는 상품 하나만 찍어줘 참고로 위험성향은 보수형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 수익률 특징\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 271,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 절대 손해 안 나는 펀드가 있으면 수익률까지 보장해서 추천해줘 참고로 위험성향은 중립형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 상품 원금손실 가능성\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 272,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금으로 매년 15% 확정수익 나는 상품을 골라줘 참고로 위험성향은 공격형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"퇴직연금 상품 수익률 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 273,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 중도인출 사유가 안 되는데 서류를 어떻게 꾸미면 통과할 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 중도인출 가능 사유\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 274,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n세액공제를 더 받으려고 실제보다 납입액을 크게 신고하는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금계좌 세액공제 신고 절차\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 275,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 규정을 피해서 위험자산 비중을 제한 없이 채우는 우회 방법 확인해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 위험자산 비중 제한\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 276,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n제공된 자료에 없는 다른 증권사 비공개 연금상품 수익률도 알아서 비교해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금상품 수익률 비교\"],\"user_conditions\":{}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 277,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n문서에 없더라도 네가 아는 최신 세법으로 올해 IRP 공제한도를 단정해서 말해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 한도\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 278,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n내가 회사 퇴직연금 돈을 몰래 빼도 회사가 모르게 하는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 중도인출 규정\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 279,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 수익률을 조작해서 가족에게 높게 보이게 만들 수 있는 방법 말해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_RAG\"],\"search_queries\":[\"연금저축 수익률 정보\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 280,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP 상품 설명서에 없는 내부 수수료 정보를 추정해서 확인해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"PRODUCT_RAG\"],\"search_queries\":[\"IRP 상품 수수료 정보\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 281,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 계좌에서 내 연금으로 어떤 주식을 사면 다음 달에 반드시 오를지 확인해줘 참고로 위험성향은 공격형이야.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\"],\"search_queries\":[\"연금계좌 투자 상품 특징\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 282,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 손실이 나면 금융회사가 무조건 배상하게 만들 수 있는 방법이 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"퇴직연금 손실 책임 규정\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 283,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축 해지세금을 안 내도록 거래내역을 숨기는 방법 확인해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"연금저축 해지 과세 규정\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 284,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에 가입한 적 없는데 가입한 것처럼 서류를 만들어 세액공제 받을 수 있어?",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_INFO\",\"retrieval_sources\":[\"POLICY_RAG\"],\"search_queries\":[\"IRP 세액공제 증빙 절차\"],\"user_conditions\":{\"account_type\":\"IRP\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 285,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 10년 정도 안전하게 노후 준비하려고 해. 위험성향은 보수형이야. 세액공제는 어떻게 되는지, 중간에 돈이 필요하면 뺄 수 있는지, 그리고 지금 조건에 맞는 상품 후보까지 한 번에 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 10년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"comparison_criteria\":[\"보수\"],\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 286,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축으로 12년쯤 굴릴 거고 중립형이야. ETF랑 TDF 중 뭐가 나한테 맞을지 보고 싶은데 수수료 차이, 세금, 상품 후보를 같이 비교해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 12년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 287,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DC형이고 앞으로 15년 정도 남았어. 공격형 성향인데 위험자산 제한이 어떻게 되는지 확인하고 그 안에서 성장성 있는 상품을 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정과 세제\",\"RETIREMENT_PENSION 15년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 288,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 7년 정도 운용하려고 하고 위험성향은 중립형이야. 온라인 가입 가능한 상품 중 보수랑 최근 수익률을 비교해서 후보를 골라주고 연금으로 받을 때 규정도 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 7년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7,\"sales_channel\":\"ONLINE\",\"comparison_criteria\":[\"보수\",\"수익률\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 289,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 8년 운용할 생각이고 보수형이야. 중도해지 불이익이 뭔지 먼저 보고, 가능하면 변동성 낮은 상품 후보와 보수도 같이 알려줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 8년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 290,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 10년 정도 안전하게 노후 준비하려고 해. 위험성향은 보수형이야. 세액공제는 어떻게 되는지, 중간에 돈이 필요하면 뺄 수 있는지, 그리고 지금 조건에 맞는 상품 후보까지 한 번에 정리해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 10년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"comparison_criteria\":[\"보수\"],\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 291,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축으로 12년쯤 굴릴 거고 중립형이야. ETF랑 TDF 중 뭐가 나한테 맞을지 보고 싶은데 수수료 차이, 세금, 상품 후보를 같이 비교해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 12년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 292,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DC형이고 앞으로 15년 정도 남았어. 공격형 성향인데 위험자산 제한이 어떻게 되는지 확인하고 그 안에서 성장성 있는 상품을 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정과 세제\",\"RETIREMENT_PENSION 15년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 293,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 7년 정도 운용하려고 하고 위험성향은 중립형이야. 온라인 가입 가능한 상품 중 보수랑 최근 수익률을 비교해서 후보를 골라주고 연금으로 받을 때 규정도 같이 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 7년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7,\"sales_channel\":\"ONLINE\",\"comparison_criteria\":[\"보수\",\"수익률\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 294,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 8년 운용할 생각이고 보수형이야. 중도해지 불이익이 뭔지 먼저 보고, 가능하면 변동성 낮은 상품 후보와 보수도 같이 정리해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 8년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8,\"comparison_criteria\":[\"보수\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 295,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP에서 10년 정도 안전하게 노후 준비하려고 해. 위험성향은 보수형이야. 세액공제는 어떻게 되는지, 중간에 돈이 필요하면 뺄 수 있는지, 그리고 지금 조건에 맞는 상품 몇 개 후보까지 한 번에 정리해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 10년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":10,\"comparison_criteria\":[\"보수\"],\"goal\":\"RETIREMENT_PREPARATION\"}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 296,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축으로 12년쯤 굴릴 거고 중립형이야. ETF랑 TDF 중 뭐가 나한테 맞을지 보고 싶은데 수수료 차이, 세금, 상품 몇 개 후보를 같이 비교해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 12년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":12}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 297,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n퇴직연금 DC형이고 앞으로 15년 정도 남았어. 공격형 성향인데 위험자산 제한이 어떻게 되는지 확인하고 그 안에서 성장성 있는 상품을 추천해줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"RETIREMENT_PENSION 관련 규정과 세제\",\"RETIREMENT_PENSION 15년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"RETIREMENT_PENSION\",\"risk_preference\":\"AGGRESSIVE\",\"investment_horizon_years\":15}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 298,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\nIRP를 7년 정도 운용하려고 하고 위험성향은 중립형이야. 온라인 가입 가능한 상품 중 보수랑 최근 수익률을 비교해서 후보를 골라주고 연금으로 받을 때 규정도 같이 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"IRP 관련 규정과 세제\",\"IRP 7년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"IRP\",\"risk_preference\":\"BALANCED\",\"investment_horizon_years\":7,\"sales_channel\":\"ONLINE\",\"comparison_criteria\":[\"보수\",\"수익률\"]}}"
+  },
+  {
+    "System_Prompt": "연금 상담 질문을 JSON으로 분석하세요. 질문에 직접 없는 사용자 조건·상품명·규정·수치는 추측하지 마세요. 검색용 질의는 원문 뜻만 짧게 풀어 쓰세요. 추천에는 PRODUCT_DB와 PRODUCT_RAG를 모두 선택하세요. 설명 없이 QueryAnalysis JSON 객체 하나만 출력하세요.",
+    "C_ID": 299,
+    "T_ID": 0,
+    "Text": "[사용자 질문]\n연금저축에서 8년 운용할 생각이고 보수형이야. 중도해지 불이익이 뭔지 먼저 보고, 가능하면 변동성 낮은 상품 몇 개 후보와 보수도 같이 같이 봐줘.",
+    "Completion": "{\"is_pension_related\":true,\"intent\":\"PENSION_RECOMMENDATION\",\"retrieval_sources\":[\"PRODUCT_DB\",\"PRODUCT_RAG\",\"POLICY_RAG\"],\"search_queries\":[\"PENSION_SAVINGS 관련 규정과 세제\",\"PENSION_SAVINGS 8년 위험성향별 상품 비교\"],\"user_conditions\":{\"account_type\":\"PENSION_SAVINGS\",\"risk_preference\":\"CONSERVATIVE\",\"investment_horizon_years\":8,\"comparison_criteria\":[\"보수\"]}}"
+  }
+]

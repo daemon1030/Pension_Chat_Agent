@@ -45,7 +45,7 @@ def scope_route(state: RagGraphState) -> str:
 def out_of_scope_response(_: RagGraphState) -> dict[str, Any]:
     return {
         "status": "OUT_OF_SCOPE",
-        "answer": "현재 서비스는 연금 관련 질문만 안내할 수 있습니다.",
+        "answer": "저는 연금 상담을 돕는 챗봇이에요. IRP, 연금저축, 퇴직연금처럼 연금과 관련된 질문을 남겨주시면 도와드릴게요.",
         "missing_fields": [],
         "follow_up_question": "연금저축, IRP, 퇴직연금 등 연금관련 궁금한 내용을 알려주세요.",
         "sources": [],
@@ -126,12 +126,9 @@ def recommendation_follow_up(state: RagGraphState) -> dict[str, Any]:
     missing_fields = state.get("missing_fields", [])
     return {
         "status": "NEED_MORE_INFO",
-        "answer": "상품 후보를 확인하려면 계좌 유형과 투자 위험 선호가 필요합니다.",
+        "answer": "도와드릴게요. 알맞은 상품을 찾으려면 먼저 어떤 계좌에서 운용할지와 투자 성향을 알아야 해요.",
         "missing_fields": missing_fields,
-        "follow_up_question": (
-            "어느 계좌에서 운용할 예정인지와 "
-            "안정성·수익성 중 선호하는 방향을 알려주세요."
-        ),
+        "follow_up_question": ("IRP와 연금저축 중 어느 계좌를 생각하고 계신가요? 또 안정형·균형형·공격형 중 어떤 운용을 원하시나요?"),
         "sources": [],
     }
 

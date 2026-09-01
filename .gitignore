@@ -8,6 +8,8 @@
 !/data/product_db_ready/product_classes.json
 
 # Runtime artifacts
+/data/logs/
+/tuning_data/.rag_tuning_embedding_cache.json
 /미래에셋_데이터셋/**
 /config/**
 
@@ -22,5 +24,6 @@ __pycache__/
 .venv/
 
 # Secrets
+.env
 .DS_Store
 .obsidian/*

@@ -182,7 +182,9 @@ class PostgresPensionRepository:
             raise ValueError("knowledge_type은 POLICY 또는 PRODUCT여야 합니다.")
         if (
             top_k < 1
-            or (knowledge_type == "PRODUCT" and not allowed_product_ids)
+            # None은 정보형 질문처럼 전체 상품을 검색한다는 뜻이다.
+            # 빈 목록만 추천 후보가 없으므로 검색을 건너뛴다.
+            or (knowledge_type == "PRODUCT" and allowed_product_ids is not None and not allowed_product_ids)
             or (per_product_limit is not None and per_product_limit < 1)
         ):
             return []

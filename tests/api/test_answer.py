@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from src.api.main import app, get_workflow
+from src.api.main import app, build_answer, get_workflow
 
 
 class FakeWorkflow:
@@ -37,3 +37,15 @@ def test_answer_returns_the_question_id_and_grounded_answer():
         "think_trace": "연금 정보 질문으로 분류 → POLICY_RAG 문서 2건 검색 → 근거 기반 답변 생성",
         "answer": "IRP는 개인형 퇴직연금 제도입니다.",
     }
+
+
+def test_build_answer_appends_a_follow_up_question_once():
+    result = {
+        "answer": "상품 후보를 확인하려면 계좌 유형과 투자 위험 선호가 필요합니다.",
+        "follow_up_question": "어느 계좌에서 운용할 예정인지 알려주세요.",
+    }
+
+    assert build_answer(result) == (
+        "상품 후보를 확인하려면 계좌 유형과 투자 위험 선호가 필요합니다.\n\n"
+        "어느 계좌에서 운용할 예정인지 알려주세요."
+    )
