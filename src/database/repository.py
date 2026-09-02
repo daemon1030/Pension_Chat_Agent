@@ -168,6 +168,11 @@ class PostgresPensionRepository:
         )
         return result.rowcount
 
+    def delete_product_classes(self) -> int:
+        """현재 상품 필터용 클래스를 모두 삭제해 전체 재적재를 준비한다."""
+        result = self._connection.execute("DELETE FROM product_classes")
+        return result.rowcount
+
     def search_chunks(
         self,
         query_embedding: list[float],
