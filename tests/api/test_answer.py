@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from src.api.main import app, build_answer, get_workflow
+from src.api.main import RECOMMENDATION_DISCLAIMER, app, build_answer, get_workflow
 
 
 class FakeWorkflow:
@@ -49,3 +49,26 @@ def test_build_answer_appends_a_follow_up_question_once():
         "상품 후보를 확인하려면 계좌 유형과 투자 위험 선호가 필요합니다.\n\n"
         "어느 계좌에서 운용할 예정인지 알려주세요."
     )
+
+
+def test_build_answer_appends_disclaimer_only_to_completed_recommendations():
+    result = {
+        "intent": "PENSION_RECOMMENDATION",
+        "status": "ANSWER",
+        "answer": "입력 조건에 맞는 상품 후보를 확인했습니다.",
+    }
+
+    assert build_answer(result) == (
+        "입력 조건에 맞는 상품 후보를 확인했습니다.\n\n"
+        f"{RECOMMENDATION_DISCLAIMER}"
+    )
+
+
+def test_build_answer_does_not_append_disclaimer_to_recommendation_follow_up():
+    result = {
+        "intent": "PENSION_RECOMMENDATION",
+        "status": "NEED_MORE_INFO",
+        "answer": "계좌 유형을 알려주세요.",
+    }
+
+    assert build_answer(result) == "계좌 유형을 알려주세요."

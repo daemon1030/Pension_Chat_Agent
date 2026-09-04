@@ -18,6 +18,11 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Pension RAG API", version="0.1.0")
 
+RECOMMENDATION_DISCLAIMER = (
+    "이 결과는 제공된 상품 정보와 입력하신 조건을 바탕으로 한 참고용 후보입니다. "
+    "최종 가입·투자 결정 전에는 상품설명서와 수수료, 위험도, 본인의 투자 목적을 직접 확인해 주세요."
+)
+
 
 class AnswerResponse(BaseModel):
     question_id: str
@@ -78,15 +83,23 @@ def build_retrieved_context(chunks: list[dict[str, Any]]) -> list[dict[str, Any]
 
 
 def build_answer(result: dict[str, Any]) -> str:
-    """기본 답변에 필요한 경우 다음 행동을 안내하는 역질문을 덧붙인다."""
+    """역질문과 상품 추천 참고 문구를 응답 상태에 맞게 덧붙인다."""
     answer = result["answer"].strip()
     follow_up_question = result.get("follow_up_question")
-    if not isinstance(follow_up_question, str) or not follow_up_question.strip():
-        return answer
-    follow_up_question = follow_up_question.strip()
-    if follow_up_question in answer:
-        return answer
-    return f"{answer}\n\n{follow_up_question}"
+    if isinstance(follow_up_question, str) and follow_up_question.strip():
+        follow_up_question = follow_up_question.strip()
+        if follow_up_question not in answer:
+            answer = f"{answer}\n\n{follow_up_question}"
+
+    # 추천 후보가 실제로 생성된 정상 답변에만 공통 안내를 붙인다.
+    # 추가 정보 요청·후보 없음 등의 상태에는 불필요한 문구를 추가하지 않는다.
+    if (
+        result.get("intent") == "PENSION_RECOMMENDATION"
+        and result.get("status") == "ANSWER"
+        and RECOMMENDATION_DISCLAIMER not in answer
+    ):
+        answer = f"{answer}\n\n{RECOMMENDATION_DISCLAIMER}"
+    return answer
 
 
 @app.get("/answer", response_model=AnswerResponse)

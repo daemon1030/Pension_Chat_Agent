@@ -11,9 +11,11 @@ class FakeEmbeddingClient:
 class FakeChatClient:
     def __init__(self, analysis: QueryAnalysis) -> None:
         self.analysis = analysis
+        self.analysis_calls = 0
         self.answer_prompts: list[str] = []
 
     def generate_query_analysis(self, **kwargs) -> QueryAnalysis:
+        self.analysis_calls += 1
         return self.analysis
 
     def generate_rag_answer(self, *, user_prompt: str, **kwargs) -> RagAnswer:
@@ -117,6 +119,33 @@ def test_postgres_information_workflow_searches_only_policy_vectors():
     assert result["sources"][0]["document_id"] == "POLICY_001"
     assert repository.search_calls[0]["knowledge_type"] == "POLICY"
     assert repository.search_calls[0]["allowed_product_ids"] is None
+
+
+def test_workflow_uses_separate_clients_for_analysis_and_final_answer():
+    repository = FakeRepository()
+    analysis_client = FakeChatClient(QueryAnalysis(
+        is_pension_related=True,
+        intent="PENSION_INFO",
+        retrieval_sources=["POLICY_RAG"],
+    ))
+    answer_client = FakeChatClient(QueryAnalysis(
+        is_pension_related=False,
+        intent=None,
+    ))
+    workflow = create_postgres_clova_rag_workflow(
+        embedding_client=FakeEmbeddingClient(),
+        analysis_chat_client=analysis_client,
+        answer_chat_client=answer_client,
+        repository=repository,
+    )
+
+    result = workflow.invoke({"query": "연금저축이 뭐야?"})
+
+    assert result["status"] == "ANSWER"
+    assert analysis_client.analysis_calls == 1
+    assert analysis_client.answer_prompts == []
+    assert answer_client.analysis_calls == 0
+    assert len(answer_client.answer_prompts) == 1
 
 
 def test_information_workflow_uses_the_product_rag_selected_by_llm():

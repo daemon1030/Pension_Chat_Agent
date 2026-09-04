@@ -5,6 +5,9 @@ services:
     environment:
       CLOVASTUDIO_API_KEY: ${CLOVASTUDIO_API_KEY:?CLOVASTUDIO_API_KEY is required}
       CLOVASTUDIO_CHAT_MODEL: ${CLOVASTUDIO_CHAT_MODEL:-HCX-DASH-002}
+      # 튜닝 완료 전에는 비워 두면 공통 모델(CLOVASTUDIO_CHAT_MODEL)을 사용한다.
+      CLOVASTUDIO_ANALYSIS_MODEL: ${CLOVASTUDIO_ANALYSIS_MODEL:-}
+      CLOVASTUDIO_ANSWER_MODEL: ${CLOVASTUDIO_ANSWER_MODEL:-}
       CLOVASTUDIO_EMBEDDING_HOST: ${CLOVASTUDIO_EMBEDDING_HOST:-clovastudio.stream.ntruss.com}
       PENSION_DATABASE_DSN: postgresql://${POSTGRES_USER:-pension_app}:${POSTGRES_PASSWORD:-change-me-for-local-development}@postgres:5432/${POSTGRES_DB:-pension_agent}
     ports:

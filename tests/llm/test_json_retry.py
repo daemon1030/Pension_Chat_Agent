@@ -24,3 +24,23 @@ def test_invalid_json_is_retried_with_repair_instruction():
     assert len(client.prompts) == 2
     assert "JSON Schema" in client.prompts[1][0]
     assert "직전 형식 오류 응답" in client.prompts[1][1]
+
+
+def test_stage_model_setting_falls_back_to_the_shared_model(monkeypatch):
+    monkeypatch.setenv("CLOVASTUDIO_API_KEY", "test-key")
+    monkeypatch.setenv("CLOVASTUDIO_CHAT_MODEL", "shared-model")
+    monkeypatch.delenv("CLOVASTUDIO_ANALYSIS_MODEL", raising=False)
+
+    settings = ClovaChatSettings.from_env(model_env_name="CLOVASTUDIO_ANALYSIS_MODEL")
+
+    assert settings.model == "shared-model"
+
+
+def test_stage_model_setting_prefers_its_own_model(monkeypatch):
+    monkeypatch.setenv("CLOVASTUDIO_API_KEY", "test-key")
+    monkeypatch.setenv("CLOVASTUDIO_CHAT_MODEL", "shared-model")
+    monkeypatch.setenv("CLOVASTUDIO_ANSWER_MODEL", "answer-model")
+
+    settings = ClovaChatSettings.from_env(model_env_name="CLOVASTUDIO_ANSWER_MODEL")
+
+    assert settings.model == "answer-model"

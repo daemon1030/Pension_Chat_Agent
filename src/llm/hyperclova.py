@@ -37,7 +37,12 @@ class ClovaChatSettings:
     json_retry_count: int = 1
 
     @classmethod
-    def from_env(cls) -> "ClovaChatSettings":
+    def from_env(cls, *, model_env_name: str = "CLOVASTUDIO_CHAT_MODEL") -> "ClovaChatSettings":
+        """모델 환경변수를 선택해 설정을 만든다.
+
+        단계별 튜닝 모델을 아직 지정하지 않은 환경에서는 기존 공통 모델
+        환경변수와 기본 모델로 차례로 폴백한다.
+        """
         load_local_env()
         api_key = os.getenv("CLOVASTUDIO_API_KEY")
         if not api_key:
@@ -50,7 +55,11 @@ class ClovaChatSettings:
             raise ClovaChatApiError("CLOVASTUDIO_JSON_RETRY_COUNT는 0 이상의 정수여야 합니다.") from error
         return cls(
             api_key=api_key,
-            model=os.getenv("CLOVASTUDIO_CHAT_MODEL", DEFAULT_MODEL),
+            model=(
+                os.getenv(model_env_name)
+                or os.getenv("CLOVASTUDIO_CHAT_MODEL")
+                or DEFAULT_MODEL
+            ),
             host=os.getenv("CLOVASTUDIO_CHAT_HOST", DEFAULT_HOST),
             json_retry_count=json_retry_count,
         )
@@ -63,8 +72,8 @@ class ClovaChatClient:
         self._settings = settings
 
     @classmethod
-    def from_env(cls) -> "ClovaChatClient":
-        return cls(ClovaChatSettings.from_env())
+    def from_env(cls, *, model_env_name: str = "CLOVASTUDIO_CHAT_MODEL") -> "ClovaChatClient":
+        return cls(ClovaChatSettings.from_env(model_env_name=model_env_name))
 
     def generate(self, *, system_prompt: str, user_prompt: str) -> str:
         body = {
