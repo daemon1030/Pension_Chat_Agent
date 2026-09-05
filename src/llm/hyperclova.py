@@ -53,10 +53,20 @@ class ClovaChatSettings:
             json_retry_count = max(0, int(os.getenv("CLOVASTUDIO_JSON_RETRY_COUNT", "1")))
         except ValueError as error:
             raise ClovaChatApiError("CLOVASTUDIO_JSON_RETRY_COUNT는 0 이상의 정수여야 합니다.") from error
+        configured_model = os.getenv(model_env_name)
+        is_tuned_stage = model_env_name in {
+            "CLOVASTUDIO_ANALYSIS_MODEL",
+            "CLOVASTUDIO_ANSWER_MODEL",
+        }
+        if configured_model and is_tuned_stage:
+            # CLOVA REST API의 튜닝 경로는 ft: 접두사 없는 Task ID를 요구한다.
+            # 내부적으로만 ft:를 붙여 _request_path가 튜닝 경로를 선택하게 한다.
+            configured_model = f"ft:{configured_model.removeprefix('ft:')}"
+
         return cls(
             api_key=api_key,
             model=(
-                os.getenv(model_env_name)
+                configured_model
                 or os.getenv("CLOVASTUDIO_CHAT_MODEL")
                 or DEFAULT_MODEL
             ),

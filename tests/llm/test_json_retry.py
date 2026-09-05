@@ -45,4 +45,4 @@ def test_stage_model_setting_prefers_its_own_model(monkeypatch):
 
     settings = ClovaChatSettings.from_env(model_env_name="CLOVASTUDIO_ANSWER_MODEL")
 
-    assert settings.model == "answer-model"
+    assert settings.model == "ft:answer-model"
