@@ -88,10 +88,11 @@ class ClovaChatClient:
             "repetitionPenalty": 1.1,
             "stop": [],
         }
+        request_path = self._request_path()
         connection = http.client.HTTPSConnection(self._settings.host, timeout=self._settings.timeout_seconds)
         try:
             connection.request(
-                "POST", f"/v3/chat-completions/{self._settings.model}",
+                "POST", request_path,
                 body=json.dumps(body, ensure_ascii=False).encode("utf-8"),
                 headers={"Content-Type": "application/json; charset=utf-8", "Authorization": self._settings.api_key, "X-NCP-CLOVASTUDIO-REQUEST-ID": str(uuid4())},
             )
@@ -110,6 +111,16 @@ class ClovaChatClient:
         if not isinstance(content, str) or not content.strip():
             raise ClovaChatApiError("CLOVA Chat API 응답에 생성된 답변이 없습니다.")
         return content.strip()
+
+    def _request_path(self) -> str:
+        """기본 모델과 튜닝 작업의 Chat Completions v3 경로를 구분한다."""
+        model = self._settings.model
+        if model.startswith("ft:"):
+            task_id = model.removeprefix("ft:").strip()
+            if not task_id:
+                raise ClovaChatApiError("튜닝 모델 ID가 비어 있습니다.")
+            return f"/v3/tasks/{task_id}/chat-completions"
+        return f"/v3/chat-completions/{model}"
 
     def generate_rag_answer(self, *, system_prompt: str, user_prompt: str) -> RagAnswer:
         """JSON 검증 실패 시 직전 출력과 함께 한 번 더 형식 교정을 요청한다."""
