@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# 질문 분석용 HyperCLOVA 튜닝 작업을 생성합니다.
+# 질문 답변용 HyperCLOVA 튜닝 작업을 생성합니다.
 # 키를 환경변수에 넣지 않았다면 실행 중에 숨김 입력으로 받습니다.
 
 set -euo pipefail
@@ -22,7 +22,7 @@ fi
 
 REQUEST_ID="${REQUEST_ID:-$(uuidgen)}"
 TUNING_BUCKET="${TUNING_BUCKET:-tuningdata1}"
-TUNING_FILE_PATH="${TUNING_FILE_PATH:-query_analysis_train_300_single_turn.jsonl}"
+TUNING_FILE_PATH="${TUNING_FILE_PATH:-hyperclova_answer_train_457.jsonl}"
 TUNING_MODEL="${TUNING_MODEL:-HCX-DASH-002}"
 
 curl --fail-with-body --location --request POST \
@@ -32,7 +32,7 @@ curl --fail-with-body --location --request POST \
   --header "X-NCP-CLOVASTUDIO-REQUEST-ID: ${REQUEST_ID}" \
   --data @- <<JSON
 {
-  "name": "pension-query-analysis-v1",
+  "name": "pension-query-answer-v1",
   "model": "${TUNING_MODEL}",
   "tuningType": "PEFT",
   "trainEpochs": "4",

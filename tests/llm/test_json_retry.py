@@ -27,6 +27,7 @@ def test_invalid_json_is_retried_with_repair_instruction():
 
 
 def test_stage_model_setting_falls_back_to_the_shared_model(monkeypatch):
+    monkeypatch.setattr("src.llm.hyperclova.load_local_env", lambda: None)
     monkeypatch.setenv("CLOVASTUDIO_API_KEY", "test-key")
     monkeypatch.setenv("CLOVASTUDIO_CHAT_MODEL", "shared-model")
     monkeypatch.delenv("CLOVASTUDIO_ANALYSIS_MODEL", raising=False)
@@ -37,6 +38,7 @@ def test_stage_model_setting_falls_back_to_the_shared_model(monkeypatch):
 
 
 def test_stage_model_setting_prefers_its_own_model(monkeypatch):
+    monkeypatch.setattr("src.llm.hyperclova.load_local_env", lambda: None)
     monkeypatch.setenv("CLOVASTUDIO_API_KEY", "test-key")
     monkeypatch.setenv("CLOVASTUDIO_CHAT_MODEL", "shared-model")
     monkeypatch.setenv("CLOVASTUDIO_ANSWER_MODEL", "answer-model")

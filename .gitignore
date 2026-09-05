@@ -12,6 +12,7 @@
 /tuning_data/.rag_tuning_embedding_cache.json
 /미래에셋_데이터셋/**
 /config/**
+/docs/**
 
 # macOS
 .DS_Store
